@@ -1,0 +1,103 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  img: {
+    height: 0,
+    paddingTop: '56.25%',
+  },
+  card: {
+    padding: '0',
+  },
+  cardPrice: {
+    fontSize: '24px',
+  },
+  cardName: {
+    fontSize: '16px',
+  },
+  cardSku: {
+    fontSize: '13px',
+  },
+  corssedText: {
+    textDecoration: 'line-through',
+    fontSize: '16px',
+  },
+  cardSale: {
+    color: '#ff7270',
+  },
+  priceGap: {
+    height: '23.750px',
+  },
+  salePercent: {
+    backgroundColor: '#ff7270',
+    color: '#ffffff',
+    padding: '5px',
+    position: 'absolute',
+    right: '0px',
+    fontSize: '16px',
+    fontFamily: 'TruenoBold!important',
+    fontWeight: 'bold',
+    top: '20px',
+  },
+}));
+
+function ProductCard ({ item }) {
+
+  const classes = useStyles();
+  return (
+    <Grid item xs={3}>
+      <Card>
+        <CardContent className={classes.card}>
+          <CardActionArea>
+            <CardContent>
+              {item.sale ? (
+                <>
+                  <Typography className={`lightText ${classes.cardPrice} ${classes.cardSale}`}>
+                    ${(Math.round((item.price - (item.price / 100 * item.sale)) * 100) / 100).toFixed(2)}
+                  </Typography>
+                  <span className={classes.salePercent}>-{item.sale}%</span>
+                </>
+              ) : (
+                <></>
+              )}
+              <Typography className={`lightText ${classes.cardPrice} ${item.sale ? classes.corssedText : ''}`} color="textSecondary">
+                ${item.price}
+              </Typography>
+              {item.sale ? (
+                <></>
+              ) : (
+                <div className={classes.priceGap} />
+              )}
+            </CardContent>
+            <CardMedia className={classes.img} image={item.img} title={item.name} />
+            <CardContent>
+              <Typography className={`boldText ${classes.cardName}`} color="textSecondary">
+                {item.sex}
+              </Typography>
+              <Typography className={`lightText ${classes.cardName}`} color="textSecondary">
+                {item.name}
+              </Typography>
+              <Typography className={`lightText ${classes.cardSku}`} color="textSecondary">
+                #{item.sku}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </CardContent>
+      </Card>
+    </Grid>
+  );
+}
+
+ProductCard.propTypes = {
+  item: PropTypes.any.isRequired,
+};
+
+export default ProductCard;

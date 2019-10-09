@@ -1,0 +1,64 @@
+body {
+  margin: 0px;
+}
+body {
+  font-family: 'TruenoRegular';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.boldText {
+  font-family: 'TruenoUltraBlack'!important;
+  font-weight: 999!important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.boldText span {
+  font-family: 'TruenoUltraBlack'!important;
+  font-weight: 999!important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lightText {
+  font-family: 'TruenoLight'!important;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lightText span{
+  font-family: 'TruenoLight'!important;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.headerText {
+  color: #482423;
+}
+
+.activeText {
+  color: #ff7270;
+}
+
+.middleText {
+  font-size: 30px!important;
+}
+
+.middleText span {
+  font-size: 30px!important;
+}
+
+.MuiTabs-indicator {
+  background-color: #ff7270!important;
+}
+
+.Mui-selected span{
+  color: #482423;
+  font-family: 'TruenoUltraBlack'!important;
+  font-weight: 999!important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
