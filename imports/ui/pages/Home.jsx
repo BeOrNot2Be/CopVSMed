@@ -6,6 +6,7 @@ import TechnologiesTab from '../components/TechnologiesTab.jsx';
 import HelpInquiry from '../components/HelpInquiry.jsx';
 import PostCards from '../components/PostCards.jsx';
 import NewsPlates from '../components/NewsPlates.jsx';
+import ReviesTab from '../components/ReviesTab.jsx';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +23,7 @@ export default function HomePage() {
       <PostCards />
       <ProductsTabWidget />
       <TechnologiesTab />
+      <ReviesTab />
       <NewsPlates />
       <HelpInquiry />
     </div>
