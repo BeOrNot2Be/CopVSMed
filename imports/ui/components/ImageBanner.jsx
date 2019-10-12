@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Parallax } from 'react-scroll-parallax';
+import Plx from 'react-plx';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
@@ -24,9 +24,16 @@ const useStyles = makeStyles((theme) => ({
   },
   itemDesc: {
     fontSize: '16px',
+    maxWidth: '400px',
+    paddingBottom: '16px',
   },
   imageParallox: {
     margin: '0',
+  },
+  spacing: {
+    height: '70px',
+    backgroundColor: '#ffffff',
+    zIndex: '100000',
   },
 }));
 
@@ -35,41 +42,61 @@ const item = {
   img: 'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570005911/84247_PCHS_qrjynz.png',
   name: 'CM v1',
   fact: '8 varients',
-  shortdesc: 'Made with love to them whom we love more than world',
+  shortdesc: 'Since this is our favorite sneaker, we’re bringing you 50 variants to suit everyone’s needs.',
 };
+
+const parallaxData = [
+  {
+    start: 0,
+    end: 500,
+    properties: [
+      {
+        startValue: -10,
+        endValue: 100,
+        property: "translateY",
+      },
+    ],
+  },
+];
 
 export default function Component() {
   const classes = useStyles();
 
   return (
-    <div className={classes.mainContainer}>
-      <Grid container direction="row" justify="space-around" alignItems="center">
-        <Grid item>
-          <Parallax className={classes.imageParallox} y={[-30, 20]}>
-            <img src={item.img} alt="" />
-          </Parallax>
-        </Grid>
-        <Grid item>
-          <Box>
-            <Typography className="lightText headerText middleText">
-              From $ 
-              {' '}
-              {item.price}
-            </Typography>
-            <Typography className={`boldText headerText ${classes.itemName}`}>
-              {item.name}
-            </Typography>
-            <Typography className={`boldText activeText ${classes.itemFact}`}>
-              {item.fact}
-            </Typography>
-            <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-              {item.shortdesc}
-            </Typography>
+    <>
+      <div className={classes.mainContainer}>
+        <Grid container direction="row" justify="space-around" alignItems="center">
+          <Grid item>
+            <Plx
+              className="MyAwesomeParallax"
+              parallaxData={parallaxData}
+            >
+              <img src={item.img} alt="" />
+            </Plx>
+          </Grid>
+          <Grid item>
+            <Box>
+              <Typography className="lightText headerText middleText">
+                From $ 
+                {' '}
+                {item.price}
+              </Typography>
+              <Typography className={`boldText headerText ${classes.itemName}`}>
+                {item.name}
+              </Typography>
+              <Typography className={`boldText activeText ${classes.itemFact}`}>
+                {item.fact}
+              </Typography>
+              <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
+                {item.shortdesc}
+              </Typography>
 
-            <Button className={classes.activeButton}>Browese Variants</Button>
-          </Box>
+              <Button href="/products/" className={classes.activeButton}>Browese Variants</Button>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+      <div className={classes.spacing} />
+    </>
   );
 }

@@ -9,16 +9,34 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   post: {
-    maxWidth: '280px',
-    marginTop: '30%',
+    maxWidth: '300px',
     padding: '16px!important',
+    paddingTop: '40%!important',
   },
   card: {
     padding: '0!important',
-    backgroundColor: 'rgba(98, 50, 50, 0.7)',
+    backgroundColor: 'rgba(98, 50, 50, 0.8)',
   },
   plate: {
     borderRadius: '0',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  },
+  newsDate: {
+    color: '#ffffff',
+  },
+  newsName: {
+    color: '#ffffff',
+  },
+  newsComments: {
+    color: '#ff7270',
+    fontSize: '13px',
+    padding: '5px',
+  },
+  newsCommentsText: {
+    position: 'absolute',
+    display: 'inline',
   },
 });
 
@@ -30,19 +48,24 @@ export default function NewsCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.plate} style={{backgroundImage:`url(${post.img})`}} >
+    <Card className={classes.plate} style={{ backgroundImage: `url(${post.img})` }}>
       <CardContent className={classes.card}>
-        <CardActionArea>
+        <CardActionArea href={`/news/${post.id}`}>
           <CardContent className={classes.post}>
-            <Typography>
+            <Typography className={`${classes.newsDate} lightboldText`}>
               {post.date}
             </Typography>
-            <Typography>
+            <Typography className={`${classes.newsName} lightText`}>
               {post.name}
             </Typography>
-            <Typography >
-              <QuestionAnswerIcon /> {post.commentsNum}
-            </Typography>
+            <div className={`${classes.newsComments} lightText`}>
+              <QuestionAnswerIcon style={{ paddingRight: '5px' }} />
+              <Typography className={`${classes.newsCommentsText} lightText`}>
+                {post.commentsNum}
+                {' '}
+                {(post.commentsNum === 1) ? 'Comment' : 'Comments'}
+              </Typography>
+            </div>
           </CardContent>
         </CardActionArea>
       </CardContent>

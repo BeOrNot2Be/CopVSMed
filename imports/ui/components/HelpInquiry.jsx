@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import MailSharpIcon from '@material-ui/icons/MailSharp';
 import Typography from '@material-ui/core/Typography';
+import { links } from '../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
   helpInquiry: {
@@ -14,6 +15,23 @@ const useStyles = makeStyles((theme) => ({
   helpButton: {
     backgroundColor: '#623232',
     borderRadius: '0',
+    color: '#ffffff',
+    padding: '10px 16px',
+  },
+  HelpIcon: {
+    color: '#ffffff',
+    fontSize: '65px',
+  },
+  header: {
+    color: '#ffffff',
+    fontSize: '30px',
+  },
+  subheader: {
+    color: '#ffffff',
+  },
+  container: {
+    paddingBottom: '60px',
+    paddingTop: '60px',
   },
 }));
 
@@ -23,7 +41,7 @@ export default function helpInquiry() {
   return (
     <div className={classes.helpInquiry}>
       <Box>
-        <Container>
+        <Container className={classes.container}>
           <Grid
             container
             direction="row"
@@ -36,22 +54,24 @@ export default function helpInquiry() {
                 direction="row"
                 justify="center"
                 alignItems="center"
+                spacing={5}
               >
                 <Grid item>
-                  <MailSharpIcon />
+                  <MailSharpIcon className={classes.HelpIcon} />
                 </Grid>
                 <Grid item>
-                  <Typography>
+                  <Typography className={`${classes.header} lightboldText`}>
                     Looking for help?
                   </Typography>
-                  <Typography>
+                  <Typography className={`${classes.subheader} lightText`}>
                     Have any questions or need help with order? Let us know!
                   </Typography>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item>
-              <Button className={classes.helpButton}>
+              
+              <Button href={links.brands.url} className={`${classes.helpButton} lightboldText`}>
                 MAKE AN INQUIRY
               </Button>
             </Grid>

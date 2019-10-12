@@ -1,0 +1,35 @@
+/* eslint-disable import/prefer-default-export */
+
+const changeLang = (str) => str;
+
+export const links = {
+  login: { url: '#', name: changeLang('Login') },
+  register: { url: '#', name: changeLang('Register') },
+  arrivals: { url: '#', name: changeLang('New Arrivals') },
+  popular: { url: '#', name: changeLang('Most Popular') },
+  top_pics: { url: '#', name: changeLang('Top Pics') },
+  outlet: { url: '#', name: changeLang('Outlet') },
+  support: { url: '#', name: changeLang('Support') },
+  delevery: { url: '#', name: changeLang('Delivery') },
+  ship_diliver: { url: '#', name: changeLang('Shipping & Dilivery') },
+  return_policy: { url: '#', name: changeLang('Return Policy') },
+  service_terms: { url: '#', name: changeLang('Terms of Service') },
+  privacy: { url: '#', name: changeLang('Privacy Policy') },
+  contacts: { url: '#', name: changeLang('Contact Us') },
+  legal: { url: '#', name: changeLang('Legal') },
+  home: { url: '#', name: changeLang('Home') },
+  about_us: { url: '#', name: changeLang('About Us') },
+  latest_news: { url: '#', name: changeLang('Latest News') },
+  reviewes: { url: '#', name: changeLang('Reviewes') },
+  brands: { url: '#', name: changeLang('Our Brands') },
+  sales: { url: '#', name: changeLang('Sales') },
+  men: { url: '#', name: changeLang('Men') },
+  women: { url: '#', name: changeLang('Women') },
+  kids: { url: '#', name: changeLang('Children') },
+  baby: { url: '#', name: changeLang('Baby') },
+  accessories: { url: '#', name: changeLang('Accessories') },
+  youtube: { url: '#', name: changeLang('YoutTube') },
+  facebook: { url: '#', name: changeLang('FaceBook') },
+  pinterest: { url: '#', name: changeLang('Pinterest') },
+  twitter: { url: '#', name: changeLang('Twitter') },
+};

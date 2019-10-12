@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     padding: '0',
+    paddingBottom: '0!important',
   },
   cardPrice: {
     fontSize: '24px',
@@ -54,9 +55,9 @@ function ProductCard ({ item }) {
   const classes = useStyles();
   return (
     <Grid item xs={3}>
-      <Card>
+      <Card style={{ borderRadius: '0px' }}>
         <CardContent className={classes.card}>
-          <CardActionArea>
+          <CardActionArea href={`/products/${item.id}`}>
             <CardContent>
               {item.sale ? (
                 <>

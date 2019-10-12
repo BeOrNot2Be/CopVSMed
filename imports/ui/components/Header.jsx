@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import ShoppingBasketRoundedIcon from '@material-ui/icons/ShoppingBasketRounded';
 import Button from '@material-ui/core/Button';
+import { links } from '../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
   headerTop: {
@@ -29,23 +30,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1.5),
   },
 }));
-
-const changeLang = (str) => str;
-
-const links = {
-  login: { url: '#', name: changeLang('Login') },
-  register: { url: '#', name: changeLang('Register') },
-  support: { url: '#', name: changeLang('Support') },
-  delevery: { url: '#', name: changeLang('Delivery') },
-  legal: { url: '#', name: changeLang('Legal') },
-  about_us: { url: '#', name: changeLang('About Us') },
-  home: { url: '#', name: changeLang('Home') },
-  men: { url: '#', name: changeLang('Men') },
-  women: { url: '#', name: changeLang('Women') },
-  kids: { url: '#', name: changeLang('Kids') },
-  brands: { url: '#', name: changeLang('Our Brands') },
-  sales: { url: '#', name: changeLang('Sales') }, 
-};
 
 const usr = {
   cart: {
@@ -133,7 +117,7 @@ export default function Header() {
               className={classes.headerNav}
             >
               <Grid item className={classes.brandName}>
-                Some Logo-Text
+                <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
               </Grid>
               <Grid item>
                 <Grid container spacing={4}>

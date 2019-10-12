@@ -3,18 +3,23 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Container } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
 
 const useStyles = makeStyles({
-    root: {
-        backgroundColor: 'rgba(98, 50, 50, 0.7)',
-    },
-  });
-
+  root: {
+  },
+  card: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    padding: '16px',
+    borderRadius: '0',
+  },
+  ReviewText: {
+    color: '#ffffff',
+  },
+});
 
 
 function CommentTab(props) {
@@ -34,26 +39,21 @@ function CommentTab(props) {
     >
       <Box p={3} className={classes.root}>
         <Container>
-            <Card >
-                <CardContent >
-                    <CardActionArea>
-                    <CardContent >
-                        <Typography>
-                            {review.name}
-                        </Typography>
-                        <Typography>
-                            {review.img}
-                        </Typography>
-                        <Typography >
-                            <Rating value={review.stars} readOnly />
-                        </Typography>
-                        <Typography >
-                            {review.text}
-                        </Typography>
-                    </CardContent>
-                    </CardActionArea>
-                </CardContent>
-            </Card>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={4}
+          >
+            <Grid item>
+              <Paper className={classes.card}>
+                <Typography className={`${classes.ReviewText} lightText `}>
+                  {review.text}
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </Typography>

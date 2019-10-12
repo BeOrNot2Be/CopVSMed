@@ -7,6 +7,20 @@ body {
   font-style: normal;
 }
 
+.lightboldText {
+  font-family: 'TruenoBold'!important;
+  font-weight: 999!important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lightboldText span {
+  font-family: 'TruenoBold'!important;
+  font-weight: 999!important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .boldText {
   font-family: 'TruenoUltraBlack'!important;
   font-weight: 999!important;
@@ -22,6 +36,13 @@ body {
 }
 
 .lightText {
+  font-family: 'TruenoLight'!important;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lightText p {
   font-family: 'TruenoLight'!important;
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
@@ -55,10 +76,15 @@ body {
   background-color: #ff7270!important;
 }
 
-.Mui-selected span{
+
+.Mui-selected-main span{
   color: #482423;
   font-family: 'TruenoUltraBlack'!important;
   font-weight: 999!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: transparent!important;
 }

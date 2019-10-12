@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
 //import { makeStyles } from '@material-ui/core/styles';
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const itemsNew = [
   {
+    id: 'sm1',
     price: '80.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v1',
@@ -40,6 +41,7 @@ const itemsNew = [
     sale: 0,
   },
   {
+    id: 'sm2',
     price: '84.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v4',
@@ -48,6 +50,7 @@ const itemsNew = [
     sale: 20,
   },
   {
+    id: 'sm3',
     price: '80.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v1',
@@ -56,6 +59,7 @@ const itemsNew = [
     sale: 0,
   },
   {
+    id: 'sm4',
     price: '84.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v4',
@@ -64,6 +68,7 @@ const itemsNew = [
     sale: 20,
   },
   {
+    id: 'sm5',
     price: '80.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v1',
@@ -72,6 +77,7 @@ const itemsNew = [
     sale: 0,
   },
   {
+    id: 'sm6',
     price: '84.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v4',
@@ -83,6 +89,7 @@ const itemsNew = [
 
 const itemsTop = [
   {
+    id: 'sm7',
     price: '80.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v1',
@@ -91,6 +98,7 @@ const itemsTop = [
     sale: 0,
   },
   {
+    id: 'sm8',
     price: '84.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v4',
@@ -99,6 +107,7 @@ const itemsTop = [
     sale: 20,
   },
   {
+    id: 'sm9',
     price: '20.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v23',
@@ -110,6 +119,7 @@ const itemsTop = [
 
 const itemsPopular = [
   {
+    id: 'sm10',
     price: '80.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v1',
@@ -118,6 +128,7 @@ const itemsPopular = [
     sale: 0,
   },
   {
+    id: 'sm11',
     price: '84.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v4',
@@ -126,6 +137,7 @@ const itemsPopular = [
     sale: 20,
   },
   {
+    id: 'sm12',
     price: '20.00',
     img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
     name: 'CM v23',
@@ -134,6 +146,7 @@ const itemsPopular = [
     sale: 0,
   },
 ];
+
 
 export default function SimpleTabs() {
   const classes = useStyles();
@@ -147,9 +160,9 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.tabHeader}>
         <Tabs value={value} onChange={handleChange} centered aria-label="simple tabs example" className={classes.tab}>
-          <Tab className="lightText middleText" label="New" {...a11yProps(0)} />
-          <Tab className="lightText middleText" label="Popular" {...a11yProps(1)} />
-          <Tab className="lightText middleText" label="Top Picks" {...a11yProps(2)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className="lightText middleText" label="New" {...a11yProps(0)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className="lightText middleText" label="Popular" {...a11yProps(1)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className="lightText middleText" label="Top Picks" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <ProductTab value={value} tabIndex={0} items={itemsNew} />

@@ -8,23 +8,34 @@ import NewsPlate from './NewsPlate.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    paddingTop: '70px',
+    paddingBottom: '70px',
+  },
+  header: {
+    color: '#623232',
+    fontSize: '30px',
+    textAlign: 'center',
+    paddingBottom: '30px',
   },
 }));
 
 const news = [
   {
+    id: 'someid1',
     date: 'DEC 27, 2017',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP',
     commentsNum: 24,
     name: 'Lorem ipsum dolor sit amet consectetur adipisicing elit',
   },
   {
+    id: 'someid2',
     date: 'DEC 27, 2017',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP',
     commentsNum: 24,
     name: 'Lorem ipsum dolor sit amet consectetur adipisicing elit',
   },
   {
+    id: 'someid2',
     date: 'DEC 27, 2017',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP',
     commentsNum: 24,
@@ -37,7 +48,7 @@ export default function NewsPlates() {
 
   return (
     <div className={classes.root}>
-      <Typography>
+      <Typography className={`${classes.header} boldText`}>
         LATEST NEWS
       </Typography>
       <Box>
@@ -47,16 +58,16 @@ export default function NewsPlates() {
             direction="row"
             justify="center"
             alignItems="center"
-            spacing={4}
+            spacing={5}
           >
             <Grid item>
               <NewsPlate post={news[0]} />
             </Grid>
             <Grid item>
-              <NewsPlate post={news[0]} />
+              <NewsPlate post={news[1]} />
             </Grid>
             <Grid item>
-              <NewsPlate post={news[0]} />
+              <NewsPlate post={news[2]} />
             </Grid>
           </Grid>
         </Container>

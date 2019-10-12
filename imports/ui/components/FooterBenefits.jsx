@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   icon: {
-    fontSize: '60px',
+    fontSize: '45px',
     color: '#ff7270',
   },
   footerText: {
@@ -62,6 +62,6 @@ export default function FooterBenefits() {
   ];
 
   return (
-    <IconsList cells={benefits} textClass={classes.footerText} />
+    <IconsList cells={benefits} textClass={`${classes.footerText} lightText`} />
   );
 }
