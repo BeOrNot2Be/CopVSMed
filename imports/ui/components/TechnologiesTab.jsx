@@ -19,12 +19,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   imageIcon: {
-    height: '100%',
+    width: '100%',
+    height: 'auto',
   },
   iconRoot: {
     textAlign: 'center',
-    minHeight: '220px',
-    minWidth: '220px',
+    width: '100%',
+    height: 'auto',
   },
 }));
 

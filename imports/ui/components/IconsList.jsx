@@ -34,9 +34,9 @@ export default function IconsList(props) {
     <div>
       <Box p={3}>
         <Container>
-          <Grid container direction="row" justify="center" alignItems="center" spacing={6}>
+          <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
             {cells.map((element, key) => (
-              <Grid className={classes.iconCell} item xs={2} key={key}>
+              <Grid className={classes.iconCell} item md={2} sm={4} xs={4} key={key}>
                 {element.text ? (
                   <>
                     {element.icon}

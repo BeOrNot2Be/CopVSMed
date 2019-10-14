@@ -6,11 +6,16 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Rating from '@material-ui/lab/Rating';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import Hidden from '@material-ui/core/Hidden';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@material-ui/core/Grid';
 
 import PropTypes from 'prop-types';
 // import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import CommentTab from './CommentTab.jsx';
 
 function a11yProps(index) {
@@ -105,17 +110,51 @@ export default function ReviesTab() {
   return (
     <div className={classes.root}>
       <div className={classes.color}>
-        <AppBar position="static" className={classes.tabHeader}>
-          <Tabs TabIndicatorProps={{ className: classes.indicator }} value={value} onChange={handleChange} centered aria-label="simple tabs example">
-            {Reviwes.map((element, index) => (
-              <StyledTab
-                selected
-                key={index}
-                className="lightText middleText"
-                icon={(
-                  <>
-                    <Avatar className={classes.avater} src={element.img} alt={element.name} />
+        <Hidden smDown>
+          <AppBar position="static" className={classes.tabHeader} >
+            <Tabs TabIndicatorProps={{ className: classes.indicator }} value={value} onChange={handleChange} centered aria-label="simple tabs example">
+              {Reviwes.map((element, index) => (
+                <StyledTab
+                  selected
+                  key={index}
+                  className="lightText middleText"
+                  icon={(
+                    <>
+                      <Avatar className={classes.avater} src={element.img} alt={element.name} />
+                      <Typography className={`${classes.reviewerName} lightboldText`}>{element.name}</Typography>
+                      <StyledRating
+                        name={element.name}
+                        value={element.stars}
+                        getLabelText={getLabelText}
+                        precision={0.5}
+                        emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                        readOnly
+                      />
+                    </>
+                      )}
+                  {...a11yProps(index)}
+                />
+              ))}
+            </Tabs>
+          </AppBar>
+          {Reviwes.map((element, index) => (
+            <CommentTab value={value} tabIndex={index} key={index} review={element} />
+          ))}
+        </Hidden>
+        <Hidden mdUp>
+          {Reviwes.map((element, index) => (
+            <ExpansionPanel key={index}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${index + 1}a-content`}
+                id={`panel${index + 1}a-header`}
+              >
+                <Avatar className={classes.avater} src={element.img} alt={element.name} />
+                <Grid container>
+                  <Grid item sm={12} xs={12}>
                     <Typography className={`${classes.reviewerName} lightboldText`}>{element.name}</Typography>
+                  </Grid>
+                  <Grid item sm={12} xs={12}>
                     <StyledRating
                       name={element.name}
                       value={element.stars}
@@ -124,16 +163,17 @@ export default function ReviesTab() {
                       emptyIcon={<StarBorderIcon fontSize="inherit" />}
                       readOnly
                     />
-                  </>
-                    )}
-                {...a11yProps(index)}
-              />
-            ))}
-          </Tabs>
-        </AppBar>
-        {Reviwes.map((element, index) => (
-          <CommentTab value={value} tabIndex={index} key={index} review={element} />
-        ))}
+                  </Grid>
+                </Grid>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>
+                  {element.text}
+                </Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          ))}
+        </Hidden>
       </div>
     </div>
   );

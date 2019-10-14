@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import MailSharpIcon from '@material-ui/icons/MailSharp';
 import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 import { links } from '../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0',
     color: '#ffffff',
     padding: '10px 16px',
+    width: '100%',
   },
   HelpIcon: {
     color: '#ffffff',
@@ -33,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '60px',
     paddingTop: '60px',
   },
+  helpButtonCell: {
+    textAlign: 'center',
+  },
 }));
 
 export default function helpInquiry() {
@@ -48,7 +53,7 @@ export default function helpInquiry() {
             justify="space-between"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item md={9} sm={12} xs={12}>
               <Grid
                 container
                 direction="row"
@@ -69,8 +74,10 @@ export default function helpInquiry() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item>
-              
+            <Hidden mdUp>
+              <Grid item sm={12} xs={12} style={{ height: '50px' }} />
+            </Hidden>
+            <Grid item md={3} sm={12} xs={12} className={classes.helpButtonCell}>
               <Button href={links.brands.url} className={`${classes.helpButton} lightboldText`}>
                 MAKE AN INQUIRY
               </Button>
