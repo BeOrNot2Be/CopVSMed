@@ -12,6 +12,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+
 
 import PropTypes from 'prop-types';
 // import { makeStyles } from '@material-ui/core/styles';
@@ -53,6 +55,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'linear-gradient(rgba(98, 50, 50, 0.9) 10%, rgba(98, 50, 50, 1))',
     paddingTop: '70px',
     paddingBottom: '70px',
+  },
+  panel: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  arrowIcon: {
+    color: '#ffffff',
+  },
+  ReviewText: {
+    color: '#ffffff',
+  },
+  avaterSmall: {
+    border: '2px solid #ffffff',
+    width: '60px',
+    height: '60px',
   },
 }));
 
@@ -142,37 +158,43 @@ export default function ReviesTab() {
           ))}
         </Hidden>
         <Hidden mdUp>
-          {Reviwes.map((element, index) => (
-            <ExpansionPanel key={index}>
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${index + 1}a-content`}
-                id={`panel${index + 1}a-header`}
-              >
-                <Avatar className={classes.avater} src={element.img} alt={element.name} />
-                <Grid container>
-                  <Grid item sm={12} xs={12}>
-                    <Typography className={`${classes.reviewerName} lightboldText`}>{element.name}</Typography>
+          <Container>
+            {Reviwes.map((element, index) => (
+              <ExpansionPanel key={index} className={classes.panel} >
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon className={classes.arrowIcon} />}
+                  aria-controls={`panel${index + 1}a-content`}
+                  id={`panel${index + 1}a-header`}
+                >
+                  <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
+                    <Grid item sm={4} xs={4}>
+                      <Avatar className={classes.avaterSmall} src={element.img} alt={element.name} />
+                    </Grid>
+                    <Grid container item sm={6} xs={6}>
+                      <Grid item>
+                        <Typography className={`${classes.reviewerName} lightboldText`}>{element.name}</Typography>
+                      </Grid>
+                      <Grid item sm={12} xs={12}>
+                        <StyledRating
+                          name={element.name}
+                          value={element.stars}
+                          getLabelText={getLabelText}
+                          precision={0.5}
+                          emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                          readOnly
+                        />
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item sm={12} xs={12}>
-                    <StyledRating
-                      name={element.name}
-                      value={element.stars}
-                      getLabelText={getLabelText}
-                      precision={0.5}
-                      emptyIcon={<StarBorderIcon fontSize="inherit" />}
-                      readOnly
-                    />
-                  </Grid>
-                </Grid>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography>
-                  {element.text}
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          ))}
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Typography className={`${classes.ReviewText} lightText `}>
+                    {element.text}
+                  </Typography>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            ))}
+          </Container>
         </Hidden>
       </div>
     </div>

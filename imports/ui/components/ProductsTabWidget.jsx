@@ -28,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
   tabHeader: {
     boxShadow: 'none',
   },
+  tabMobile: {
+    fontSize: '30px',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: "21px!important",
+    },
+    [theme.breakpoints.up('xs')]: {
+      fontSize: "21px!important",
+    },
+  }
 }));
 
 const itemsNew = [
@@ -150,7 +159,7 @@ const itemsPopular = [
 
 export default function SimpleTabs() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -160,9 +169,9 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.tabHeader}>
         <Tabs value={value} onChange={handleChange} centered aria-label="simple tabs example" className={classes.tab}>
-          <Tab classes={{ selected: 'Mui-selected-main' }} className="lightText middleText" label="New" {...a11yProps(0)} />
-          <Tab classes={{ selected: 'Mui-selected-main' }} className="lightText middleText" label="Popular" {...a11yProps(1)} />
-          <Tab classes={{ selected: 'Mui-selected-main' }} className="lightText middleText" label="Top Picks" {...a11yProps(2)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="New" {...a11yProps(0)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="Popular" {...a11yProps(1)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="Top Picks" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <ProductTab value={value} tabIndex={0} items={itemsNew} />
