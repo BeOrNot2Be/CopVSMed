@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import ProductCard from './ProductCard.jsx';
 import { Container } from '@material-ui/core';
+import withWidth from '@material-ui/core/withWidth';
+import ProductCard from './ProductCard.jsx';
 
 function TabPanel(props) {
   const {
@@ -23,7 +24,9 @@ function TabPanel(props) {
       <Box p={3}>
         <Container>
           <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
-            {items.map((element, index) => <ProductCard item={element} key={index} />)}
+            {(props.width === 'sm') || (props.width === 'xs')
+              ? (items.slice(0, 4).map((element, index) => <ProductCard item={element} key={index} />))
+              : (items.map((element, index) => <ProductCard item={element} key={index} />))}
           </Grid>
         </Container>
       </Box>
@@ -37,4 +40,4 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-export default TabPanel;
+export default withWidth()(TabPanel);

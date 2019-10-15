@@ -54,7 +54,7 @@ function ProductCard ({ item }) {
 
   const classes = useStyles();
   return (
-    <Grid item xs={3}>
+    <Grid item md={3} sm={12} xs={12}>
       <Card style={{ borderRadius: '0px' }}>
         <CardContent className={classes.card}>
           <CardActionArea href={`/products/${item.id}`}>
