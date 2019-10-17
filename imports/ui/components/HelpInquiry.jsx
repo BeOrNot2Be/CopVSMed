@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   helpButtonCell: {
     textAlign: 'center',
   },
+  TextBox: {
+    paddingLeft: '32px!important',
+  },
 }));
 
 export default function helpInquiry() {
@@ -59,12 +62,12 @@ export default function helpInquiry() {
                 direction="row"
                 justify="center"
                 alignItems="center"
-                spacing={5}
+                spacing={2}
               >
-                <Grid item>
+                <Grid item md={2} sm={2} xs={2}>
                   <MailSharpIcon className={classes.HelpIcon} />
                 </Grid>
-                <Grid item>
+                <Grid item md={7} sm={9} xs={9} className={classes.TextBox}>
                   <Typography className={`${classes.header} lightboldText`}>
                     Looking for help?
                   </Typography>

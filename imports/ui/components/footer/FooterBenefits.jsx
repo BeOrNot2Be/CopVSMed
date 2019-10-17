@@ -6,7 +6,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import RedeemIcon from '@material-ui/icons/Redeem';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import IconsList from './IconsList.jsx';
+import IconsList from '../IconsList.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {

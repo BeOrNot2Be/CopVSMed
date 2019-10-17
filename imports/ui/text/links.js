@@ -4,6 +4,7 @@ const changeLang = (str) => str;
 
 export const links = {
   login: { url: '#', name: changeLang('Login') },
+  account: { url: '#', name: changeLang('Account') },
   register: { url: '#', name: changeLang('Register') },
   arrivals: { url: '#', name: changeLang('New Arrivals') },
   popular: { url: '#', name: changeLang('Most Popular') },
@@ -11,7 +12,7 @@ export const links = {
   outlet: { url: '#', name: changeLang('Outlet') },
   support: { url: '#', name: changeLang('Support') },
   delevery: { url: '#', name: changeLang('Delivery') },
-  ship_diliver: { url: '#', name: changeLang('Shipping & Dilivery') },
+  ship_diliver: { url: '#', name: changeLang('Shipping & Delivery') },
   return_policy: { url: '#', name: changeLang('Return Policy') },
   service_terms: { url: '#', name: changeLang('Terms of Service') },
   privacy: { url: '#', name: changeLang('Privacy Policy') },
@@ -20,7 +21,7 @@ export const links = {
   home: { url: '#', name: changeLang('Home') },
   about_us: { url: '#', name: changeLang('About Us') },
   latest_news: { url: '#', name: changeLang('Latest News') },
-  reviewes: { url: '#', name: changeLang('Reviewes') },
+  reviewes: { url: '#', name: changeLang('Reviews') },
   brands: { url: '#', name: changeLang('Our Brands') },
   sales: { url: '#', name: changeLang('Sales') },
   men: { url: '#', name: changeLang('Men') },

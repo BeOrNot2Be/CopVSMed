@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FooterBenefits from './FooterBenefits.jsx';
 import FooterMap from './FooterMap.jsx';
 import FooterNav from './FooterNav.jsx';
-import GapBar from './GapBar.jsx';
+import GapBar from '../GapBar.jsx';
 
 
 const useStyles = makeStyles((theme) => ({

@@ -29,7 +29,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import { links } from '../text/links.js';
+import { links } from '../../text/links.js';
+import MobileHeader from './MobileHeader.jsx';
 
 const useStyles = makeStyles((theme) => ({
   headerTop: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
   fullList: {
-    width: 'auto',
+    width: '100wh',
   },
 }));
 
@@ -114,72 +115,7 @@ export default function Header() {
   };
 
 
-  const fullList = side => (
-    <div
-      className={classes.fullList}
-      role="presentation"
-      // onClick={toggleDrawer(side, false)}
-      // onKeyDown={toggleDrawer(side, false)}
-    >
-      <List>
-        <ListItem button href={links.home.url}>
-          <ListItemIcon><HomeRoundedIcon /></ListItemIcon>
-          <ListItemText primary={links.home.name} />
-        </ListItem>
-        <Divider />
-        <ListItem button onClick={handleClick}>
-          <ListItemIcon><StoreIcon /></ListItemIcon>
-          <ListItemText primary="Clothe" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openStore} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button href={links.men.url}>
-              <ListItemText primary={links.men.name} />
-            </ListItem>
-            <ListItem button href={links.women.url}>
-              <ListItemText primary={links.women.name} />
-            </ListItem>
-            <ListItem button href={links.kids.url}>
-              <ListItemText primary={links.kids.name} />
-            </ListItem>
-            <ListItem button href={links.sales.url}>
-              <ListItemText primary={links.sales.name} />
-            </ListItem>
-          </List>
-        </Collapse>
-        <Divider />
-        <ListItem button href={links.brands.url}>
-          <ListItemIcon><StorefrontIcon /></ListItemIcon>
-          <ListItemText primary={links.brands.name} />
-        </ListItem>
-        <Divider />
-        <ListItem button href={links.support.url}>
-          <ListItemIcon><HelpIcon /></ListItemIcon>
-          <ListItemText primary={links.support.name} />
-        </ListItem>
-        <Divider />
-        <ListItem button onClick={() => setOpenTherms(!openTherms)}>
-          <ListItemIcon><DescriptionIcon /></ListItemIcon>
-          <ListItemText primary="Therms" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openTherms} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button href={links.delevery.url}>
-              <ListItemText primary={links.delevery.name} />
-            </ListItem>
-            <ListItem button href={links.about_us.url}>
-              <ListItemText primary={links.about_us.name} />
-            </ListItem>
-            <ListItem button href={links.legal.url}>
-              <ListItemText primary={links.legal.name} />
-            </ListItem>
-          </List>
-        </Collapse>
-      </List>
-    </div>
-  );
+  
 
 
   return (
@@ -301,52 +237,7 @@ export default function Header() {
           </Box>
         </div>
       </Hidden>
-      <Hidden mdUp>
-        <AppBar position="static" className={classes.headerTop}>
-          <Toolbar>
-            <IconButton onClick={toggleDrawer('top', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Drawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)}>
-              {fullList('top')}
-            </Drawer>
-            <Box className={classes.brandName}>
-              <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
-            </Box>
-            {auth && (
-              <div>
-                <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            )}
-          </Toolbar>
-        </AppBar>
-      </Hidden>
+      <MobileHeader />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { YouTube, Twitter, Facebook, Pinterest } from '@material-ui/icons';
-import { links } from '../text/links.js';
+import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
   footerNav: {
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   licenseText: {
     fontSize: '16px',
     color: '#ffffff',
+    textAlign: 'center',
   },
 }));
 
@@ -35,17 +36,18 @@ export default function FooterNav() {
             justify="space-between"
             alignItems="center"
             className={classes.footerNav}
+            spacing={3}
           >
-            <Grid item>
+            <Grid item md={4} sm={12} xs={12}>
               <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
             </Grid>
-            <Grid item>
+            <Grid item md={4} sm={12} xs={12}>
               <Typography className={`lightText ${classes.licenseText}`}>
                 © 2019 Sportshold. All rights reserved.
               </Typography>
             </Grid>
-            <Grid item>
-              <Grid container>
+            <Grid item md={4} sm={12} xs={12}>
+              <Grid container justify="center">
                 <Grid item>
                   <Button href={links.twitter.url} className={classes.link}>
                     <Twitter />

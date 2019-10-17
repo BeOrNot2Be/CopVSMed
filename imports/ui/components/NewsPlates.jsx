@@ -58,7 +58,7 @@ export default function NewsPlates() {
             direction="row"
             justify="center"
             alignItems="center"
-            spacing={5}
+            spacing={4}
           >
             <Grid item>
               <NewsPlate post={news[0]} />

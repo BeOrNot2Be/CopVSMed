@@ -11,7 +11,7 @@ import Container from '@material-ui/core/Container';
 import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
 import MailSharpIcon from '@material-ui/icons/MailSharp';
 import RoomIcon from '@material-ui/icons/Room';
-import { links } from '../text/links.js';
+import { links } from '../../text/links.js';
 import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,9 +54,8 @@ export default function FooterMap() {
           direction="row"
           justify="space-between"
           alignItems="flex-start"
-          spacing={10}
         >
-          <Grid item>
+          <Grid item md={2} sm={12} xs={12}>
             <List>
               <ListItem>
                 <ListItemAvatar>
@@ -84,7 +83,7 @@ export default function FooterMap() {
               </ListItem>
             </List>
           </Grid>
-          <Grid item>
+          <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="Navigation" />
@@ -106,7 +105,7 @@ export default function FooterMap() {
               </ListItem>
             </List>
           </Grid>
-          <Grid item>
+          <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="Categories" />
@@ -128,7 +127,7 @@ export default function FooterMap() {
               </ListItem>
             </List>
           </Grid>
-          <Grid item>
+          <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="Sales" />
@@ -147,7 +146,7 @@ export default function FooterMap() {
               </ListItem>
             </List>
           </Grid>
-          <Grid item>
+          <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="SUPPORT" />

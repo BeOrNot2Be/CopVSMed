@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Plx from 'react-plx';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import withWidth from '@material-ui/core/withWidth';
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#ffffff',
     zIndex: '100000',
   },
+  mainimg: {
+    maxWidth: '100%',
+  },
 }));
 
 const item = {
@@ -59,7 +62,21 @@ const parallaxData = [
   },
 ];
 
-export default function Component() {
+const mobileParallaxData = [
+  {
+    start: 0,
+    end: 500,
+    properties: [
+      {
+        startValue: 0,
+        endValue: 90,
+        property: "translateY",
+      },
+    ],
+  },
+];
+
+function Component(props) {
   const classes = useStyles();
 
   return (
@@ -69,9 +86,9 @@ export default function Component() {
           <Grid item>
             <Plx
               className="MyAwesomeParallax"
-              parallaxData={parallaxData}
+              parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
             >
-              <img src={item.img} alt="" />
+              <img className={classes.mainimg} src={item.img} alt="" />
             </Plx>
           </Grid>
           <Grid item>
@@ -100,3 +117,5 @@ export default function Component() {
     </>
   );
 }
+
+export default withWidth()(Component);
