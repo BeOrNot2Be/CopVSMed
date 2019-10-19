@@ -1,39 +1,13 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Row, Col } from 'react-grid-system';
-import Button from '@material-ui/core/Button';
-import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import {
+  Button, Hidden, Typography, MobileStepper,
+} from '@material-ui/core';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import SwipeableViews from 'react-swipeable-views';
-import MobileStepper from '@material-ui/core/MobileStepper';
 import { autoPlay } from 'react-swipeable-views-utils';
 
-const lastPosts = {
-  1: [
-    {
-      img: 'http://digital-photography-school.com/wp-content/uploads/2012/10/image1.jpg',
-      link: 'google',
-    },
-    {
-      img: 'https://cdn-ep19.pressidium.com/wp-content/uploads/2018/07/Aspect-ratio-photography-ras-ul-had-beach-Oman-1.jpg',
-      link: 'google.com',
-    },
-  ],
-  2: [
-    {
-      img: 'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
-      link: 'google.com',
-    },
-  ],
-  4: [
-    {
-      img: 'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
-      link: 'google.com',
-    },
-  ],
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -122,21 +96,46 @@ const tutorialSteps = [
   },
 ];
 
-function PostCards () {
+const lastPosts = {
+  1: [
+    {
+      img: 'http://digital-photography-school.com/wp-content/uploads/2012/10/image1.jpg',
+      link: 'google',
+    },
+    {
+      img: 'https://cdn-ep19.pressidium.com/wp-content/uploads/2018/07/Aspect-ratio-photography-ras-ul-had-beach-Oman-1.jpg',
+      link: 'google.com',
+    },
+  ],
+  2: [
+    {
+      img: 'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
+      link: 'google.com',
+    },
+  ],
+  4: [
+    {
+      img: 'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
+      link: 'google.com',
+    },
+  ],
+};
+
+const PostCards = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tutorialSteps.length;
 
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStepChange = step => {
+  const handleStepChange = (step) => {
     setActiveStep(step);
   };
 
@@ -197,22 +196,25 @@ function PostCards () {
           position="static"
           variant="dots"
           activeStep={activeStep}
-          classes={{ dot: classes.ProgressBar, dotActive: classes.ProgressBarActive, root: classes.SwitcherBar }}
-          nextButton={
+          classes={{
+            dot: classes.ProgressBar,
+            dotActive: classes.ProgressBarActive,
+            root: classes.SwitcherBar,
+          }}
+          nextButton={(
             <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
               {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
             </Button>
-          }
-          backButton={
+          )}
+          backButton={(
             <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
               {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             </Button>
-          }
+          )}
         />
       </Hidden>
     </>
   );
-}
-
+};
 
 export default PostCards;

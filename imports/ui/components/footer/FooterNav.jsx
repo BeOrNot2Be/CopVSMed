@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { YouTube, Twitter, Facebook, Pinterest } from '@material-ui/icons';
+import {
+  Container, Grid, Box, Button, Typography,
+} from '@material-ui/core';
+import {
+  YouTube, Twitter, Facebook, Pinterest,
+} from '@material-ui/icons';
 import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FooterNav() {
+const FooterNav = () => {
   const classes = useStyles();
 
   return (
@@ -75,4 +75,6 @@ export default function FooterNav() {
       </Box>
     </div>
   );
-}
+};
+
+export default FooterNav;

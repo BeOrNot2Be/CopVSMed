@@ -1,18 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import { blue, red } from '@material-ui/core/colors';
+import { Icon } from '@material-ui/core';
 import IconsList from './IconsList.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > svg': {
       margin: theme.spacing(2),
-    },
-  },
-  iconHover: {
-    '&:hover': {
-      color: red[800],
     },
   },
   iconCell: {
@@ -29,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HomePage() {
+const TechnologiesTab = () => {
   const classes = useStyles();
 
   const techs = [
@@ -86,4 +80,6 @@ export default function HomePage() {
   return (
     <IconsList cells={techs} textClass="" />
   );
-}
+};
+
+export default TechnologiesTab;

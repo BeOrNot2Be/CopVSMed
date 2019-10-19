@@ -1,18 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
-import MailSharpIcon from '@material-ui/icons/MailSharp';
-import RoomIcon from '@material-ui/icons/Room';
+import { Room, MailSharp, PhoneInTalk } from '@material-ui/icons';
+import {
+  Button, Container, Box, Grid, Avatar, ListItemAvatar,
+  ListItemText, ListItem, List,
+} from '@material-ui/core';
 import { links } from '../../text/links.js';
-import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   FooterIcon: {
@@ -43,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function FooterMap() {
+const FooterMap = () => {
   const classes = useStyles();
 
   return (
@@ -60,7 +53,7 @@ export default function FooterMap() {
               <ListItem>
                 <ListItemAvatar>
                   <Avatar className={classes.FooterIcon}>
-                    <PhoneInTalkIcon />
+                    <PhoneInTalk />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="CALL US" secondary="0 (1234) 567 890" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
@@ -68,7 +61,7 @@ export default function FooterMap() {
               <ListItem>
                 <ListItemAvatar>
                   <Avatar className={classes.FooterIcon}>
-                    <MailSharpIcon />
+                    <MailSharp />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="EMAIL US" secondary="hello@sportshold.com" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
@@ -76,7 +69,7 @@ export default function FooterMap() {
               <ListItem>
                 <ListItemAvatar>
                   <Avatar className={classes.FooterIcon}>
-                    <RoomIcon />
+                    <Room />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText className={`${classes.primary} lightboldText`} primary="ADDRESS" secondary="40 Baria Sreet 133/2, NY, US" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
@@ -172,4 +165,6 @@ export default function FooterMap() {
       </Container>
     </Box>
   );
-}
+};
+
+export default FooterMap;

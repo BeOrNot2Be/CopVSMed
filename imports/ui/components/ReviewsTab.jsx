@@ -1,23 +1,14 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
+import {
+  Hidden, AppBar, Tabs, Tab, Container, Grid, Typography,
+  Avatar, ExpansionPanel, ExpansionPanelSummary,
+  ExpansionPanelDetails,
+} from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import Hidden from '@material-ui/core/Hidden';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
-
-import PropTypes from 'prop-types';
-// import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import {
+  StarBorder, ExpandMore,
+} from '@material-ui/icons';
 import CommentTab from './CommentTab.jsx';
 
 function a11yProps(index) {
@@ -72,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Reviwes = [
+const Reviews = [
   {
     stars: 4,
     img: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg',
@@ -111,11 +102,9 @@ const StyledTab = withStyles({
   },
 })(Tab);
 
-function getLabelText(value) {
-  return `${value} Star${value !== 1 ? 's' : ''}`;
-}
+const getLabelText = (value) => `${value} Star${value !== 1 ? 's' : ''}`;
 
-export default function ReviesTab() {
+const ReviewsTab = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -129,7 +118,7 @@ export default function ReviesTab() {
         <Hidden smDown>
           <AppBar position="static" className={classes.tabHeader} >
             <Tabs TabIndicatorProps={{ className: classes.indicator }} value={value} onChange={handleChange} centered aria-label="simple tabs example">
-              {Reviwes.map((element, index) => (
+              {Reviews.map((element, index) => (
                 <StyledTab
                   selected
                   key={index}
@@ -143,7 +132,7 @@ export default function ReviesTab() {
                         value={element.stars}
                         getLabelText={getLabelText}
                         precision={0.5}
-                        emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                        emptyIcon={<StarBorder fontSize="inherit" />}
                         readOnly
                       />
                     </>
@@ -153,16 +142,16 @@ export default function ReviesTab() {
               ))}
             </Tabs>
           </AppBar>
-          {Reviwes.map((element, index) => (
+          {Reviews.map((element, index) => (
             <CommentTab value={value} tabIndex={index} key={index} review={element} />
           ))}
         </Hidden>
         <Hidden mdUp>
           <Container>
-            {Reviwes.map((element, index) => (
+            {Reviews.map((element, index) => (
               <ExpansionPanel key={index} className={classes.panel} >
                 <ExpansionPanelSummary
-                  expandIcon={<ExpandMoreIcon className={classes.arrowIcon} />}
+                  expandIcon={<ExpandMore className={classes.arrowIcon} />}
                   aria-controls={`panel${index + 1}a-content`}
                   id={`panel${index + 1}a-header`}
                 >
@@ -180,7 +169,7 @@ export default function ReviesTab() {
                           value={element.stars}
                           getLabelText={getLabelText}
                           precision={0.5}
-                          emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                          emptyIcon={<StarBorder fontSize="inherit" />}
                           readOnly
                         />
                       </Grid>
@@ -199,4 +188,6 @@ export default function ReviesTab() {
       </div>
     </div>
   );
-}
+};
+
+export default ReviewsTab;

@@ -1,11 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Plx from 'react-plx';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { Box } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import withWidth from '@material-ui/core/withWidth';
+import {
+  Grid, Box, Button, Typography, withWidth,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -35,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#ffffff',
     zIndex: '100000',
   },
-  mainimg: {
+  minImg: {
     maxWidth: '100%',
   },
 }));
@@ -45,7 +43,7 @@ const item = {
   img: 'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570005911/84247_PCHS_qrjynz.png',
   name: 'CM v1',
   fact: '8 varients',
-  shortdesc: 'Since this is our favorite sneaker, we’re bringing you 50 variants to suit everyone’s needs.',
+  shortDesc: 'Since this is our favorite sneaker, we’re bringing you 50 variants to suit everyone’s needs.',
 };
 
 const parallaxData = [
@@ -56,7 +54,7 @@ const parallaxData = [
       {
         startValue: -10,
         endValue: 100,
-        property: "translateY",
+        property: 'translateY',
       },
     ],
   },
@@ -70,13 +68,13 @@ const mobileParallaxData = [
       {
         startValue: 0,
         endValue: 90,
-        property: "translateY",
+        property: 'translateY',
       },
     ],
   },
 ];
 
-function Component(props) {
+const ProductParallaxBanner = (props) => {
   const classes = useStyles();
 
   return (
@@ -88,13 +86,13 @@ function Component(props) {
               className="MyAwesomeParallax"
               parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
             >
-              <img className={classes.mainimg} src={item.img} alt="" />
+              <img className={classes.minImg} src={item.img} alt="" />
             </Plx>
           </Grid>
           <Grid item>
             <Box>
               <Typography className="lightText headerText middleText">
-                From $ 
+                From $
                 {' '}
                 {item.price}
               </Typography>
@@ -105,7 +103,7 @@ function Component(props) {
                 {item.fact}
               </Typography>
               <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-                {item.shortdesc}
+                {item.shortDesc}
               </Typography>
 
               <Button href="/products/" className={classes.activeButton}>Browese Variants</Button>
@@ -116,6 +114,6 @@ function Component(props) {
       <div className={classes.spacing} />
     </>
   );
-}
+};
 
-export default withWidth()(Component);
+export default withWidth()(ProductParallaxBanner);

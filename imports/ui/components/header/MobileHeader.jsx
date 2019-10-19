@@ -1,34 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Collapse from '@material-ui/core/Collapse';
-import Badge from '@material-ui/core/Badge';
-import DescriptionIcon from '@material-ui/icons/Description';
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import StoreIcon from '@material-ui/icons/Store';
-import HelpIcon from '@material-ui/icons/Help';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import CloseIcon from '@material-ui/icons/Close';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import StarBorder from '@material-ui/icons/StarBorder';
-import Box from '@material-ui/core/Box';
-import Avatar from '@material-ui/core/Avatar';
+import {
+  AppBar, Toolbar, IconButton,
+  Drawer, List, Divider, ListItem, ListItemIcon, ListItemText,
+  ListItemAvatar, Collapse, Badge, Box, Avatar,
+} from '@material-ui/core';
+import {
+  Description, HomeRounded, Store, Help,
+  Storefront, Close, ExpandMore, ExpandLess,
+  Menu, AccountCircle,
+} from '@material-ui/icons';
 import { links } from '../../text/links.js';
 
 
@@ -62,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MobileHeader() {
+const MobileHeader = () => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [openStore, setOpenStore] = React.useState(false);
@@ -108,7 +89,7 @@ export default function MobileHeader() {
       <List>
         <ListItem className={classes.closeButtonListItem}>
           <IconButton aria-label="exit" className={classes.closeButton} onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
-            <CloseIcon className={classes.icons} />
+            <Close className={classes.icons} />
           </IconButton>
         </ListItem>
         <ListItem button href={auth ? links.account.url : links.login.url}>
@@ -129,12 +110,12 @@ export default function MobileHeader() {
           )}
         </ListItem>
         <ListItem button href={links.home.url}>
-          <ListItemIcon><HomeRoundedIcon className={classes.icons} /></ListItemIcon>
+          <ListItemIcon><HomeRounded className={classes.icons} /></ListItemIcon>
           <ListItemText primary={links.home.name} />
         </ListItem>
         <Divider />
         <ListItem button onClick={handleClick}>
-          <ListItemIcon><StoreIcon className={classes.icons} /></ListItemIcon>
+          <ListItemIcon><Store className={classes.icons} /></ListItemIcon>
           <ListItemText primary="Clothe" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -160,17 +141,17 @@ export default function MobileHeader() {
         </Collapse>
         <Divider />
         <ListItem button href={links.brands.url}>
-          <ListItemIcon><StorefrontIcon className={classes.icons} /></ListItemIcon>
+          <ListItemIcon><Storefront className={classes.icons} /></ListItemIcon>
           <ListItemText primary={links.brands.name} />
         </ListItem>
         <Divider />
         <ListItem button href={links.support.url}>
-          <ListItemIcon><HelpIcon className={classes.icons} /></ListItemIcon>
+          <ListItemIcon><Help className={classes.icons} /></ListItemIcon>
           <ListItemText primary={links.support.name} />
         </ListItem>
         <Divider />
         <ListItem button onClick={() => setOpenTherms(!openTherms)}>
-          <ListItemIcon><DescriptionIcon className={classes.icons} /></ListItemIcon>
+          <ListItemIcon><Description className={classes.icons} /></ListItemIcon>
           <ListItemText primary="Therms" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -195,20 +176,20 @@ export default function MobileHeader() {
   );
 
   return (
-    <Hidden mdUp>
-      <AppBar position="static" className={classes.headerTop}>
-        <Toolbar>
-          <Box className={classes.brandName}>
-            <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
-          </Box>
-          <IconButton onClick={toggleDrawer('top', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Drawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)}>
-            {fullList('top')}
-          </Drawer>
-        </Toolbar>
-      </AppBar>
-    </Hidden>
+    <AppBar position="static" className={classes.headerTop}>
+      <Toolbar>
+        <Box className={classes.brandName}>
+          <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
+        </Box>
+        <IconButton onClick={toggleDrawer('top', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <Menu />
+        </IconButton>
+        <Drawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)}>
+          {fullList('top')}
+        </Drawer>
+      </Toolbar>
+    </AppBar>
   );
-}
+};
+
+export default MobileHeader;

@@ -1,4 +1,4 @@
-# CopVSMed
+# CopVSMed [Demo](https://copvsmed.herokuapp.com/).
 [**CopVSMed**](https://github.com/BeOrNot2Be/CopVSMed) project started from my desire to make something in react for portfolio and this PSD template:
 
 ![Image alt text](/Sportshold.png)

@@ -1,12 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import MailSharpIcon from '@material-ui/icons/MailSharp';
-import Typography from '@material-ui/core/Typography';
-import Hidden from '@material-ui/core/Hidden';
+import {
+  Container, Grid, Box, Button, Typography, Hidden,
+} from '@material-ui/core';
+import { MailSharp } from '@material-ui/icons';
 import { links } from '../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#ffffff',
     fontSize: '30px',
   },
-  subheader: {
+  subHeader: {
     color: '#ffffff',
   },
   container: {
@@ -43,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function helpInquiry() {
+const helpInquiry = () => {
   const classes = useStyles();
 
   return (
@@ -65,13 +62,13 @@ export default function helpInquiry() {
                 spacing={2}
               >
                 <Grid item md={2} sm={2} xs={2}>
-                  <MailSharpIcon className={classes.HelpIcon} />
+                  <MailSharp className={classes.HelpIcon} />
                 </Grid>
                 <Grid item md={7} sm={9} xs={9} className={classes.TextBox}>
                   <Typography className={`${classes.header} lightboldText`}>
                     Looking for help?
                   </Typography>
-                  <Typography className={`${classes.subheader} lightText`}>
+                  <Typography className={`${classes.subHeader} lightText`}>
                     Have any questions or need help with order? Let us know!
                   </Typography>
                 </Grid>
@@ -90,4 +87,6 @@ export default function helpInquiry() {
       </Box>
     </div>
   );
-}
+};
+
+export default helpInquiry;

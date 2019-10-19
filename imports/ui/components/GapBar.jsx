@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+import { Box, Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   footerGap: {
@@ -9,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GapBar() {
+const GapBar = () => {
   const classes = useStyles();
 
   return (
@@ -21,4 +20,6 @@ export default function GapBar() {
       </Box>
     </div>
   );
-}
+};
+
+export default GapBar;

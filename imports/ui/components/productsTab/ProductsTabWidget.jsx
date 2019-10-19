@@ -1,14 +1,10 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-
-import PropTypes from 'prop-types';
-//import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import {
+  AppBar, Tabs, Tab,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ProductTab from './ProductTab.jsx';
+
 
 function a11yProps(index) {
   return {
@@ -31,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
   tabMobile: {
     fontSize: '30px',
     [theme.breakpoints.up('sm')]: {
-      fontSize: "21px!important",
+      fontSize: '21px!important',
     },
     [theme.breakpoints.up('xs')]: {
-      fontSize: "21px!important",
+      fontSize: '21px!important',
     },
-  }
+  },
 }));
 
 const itemsNew = [
@@ -157,7 +153,7 @@ const itemsPopular = [
 ];
 
 
-export default function SimpleTabs() {
+const SimpleTabs = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(1);
 
@@ -179,4 +175,6 @@ export default function SimpleTabs() {
       <ProductTab value={value} tabIndex={2} items={itemsTop} />
     </div>
   );
-}
+};
+
+export default SimpleTabs;

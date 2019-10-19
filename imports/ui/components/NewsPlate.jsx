@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import Typography from '@material-ui/core/Typography';
+import {
+  Card, CardActionArea, CardContent, Typography,
+} from '@material-ui/core';
+import { QuestionAnswer } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   post: {
@@ -40,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NewsCard(props) {
+const NewsPlate = (props) => {
   const {
     post, ...other
   } = props;
@@ -59,7 +58,7 @@ export default function NewsCard(props) {
               {post.name}
             </Typography>
             <div className={`${classes.newsComments} lightText`}>
-              <QuestionAnswerIcon style={{ paddingRight: '5px' }} />
+              <QuestionAnswer style={{ paddingRight: '5px' }} />
               <Typography className={`${classes.newsCommentsText} lightText`}>
                 {post.commentsNum}
                 {' '}
@@ -73,6 +72,8 @@ export default function NewsCard(props) {
   );
 }
 
-NewsCard.propTypes = {
+NewsPlate.propTypes = {
   post: PropTypes.any.isRequired,
 };
+
+export default NewsPlate;

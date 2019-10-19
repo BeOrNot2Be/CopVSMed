@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import {
+  Container, Grid, Box, Typography,
+} from '@material-ui/core';
 import NewsPlate from './NewsPlate.jsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +42,7 @@ const news = [
   },
 ];
 
-export default function NewsPlates() {
+const NewsPlates = () => {
   const classes = useStyles();
 
   return (
@@ -74,4 +73,6 @@ export default function NewsPlates() {
       </Box>
     </div>
   );
-}
+};
+
+export default NewsPlates;

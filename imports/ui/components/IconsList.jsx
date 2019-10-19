@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import {
+  Grid, Box, Container, Typography,
+} from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function IconsList(props) {
+const IconsList = (props) => {
   const {
     cells, textClass, ...other
   } = props;
@@ -56,10 +55,12 @@ export default function IconsList(props) {
       </Box>
     </div>
   );
-}
+};
 
 
 IconsList.propTypes = {
   cells: PropTypes.any.isRequired,
   textClass: PropTypes.any.isRequired,
 };
+
+export default IconsList;
