@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     padding: '0px!important',
+    width: '100%',
+    height: 'auto',
   },
   img: {
     width: '100%',

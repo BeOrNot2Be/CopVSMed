@@ -46,14 +46,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProductCard ({ item }) {
+const lang = 'en';
 
+const ProductCard = ({ item }) => {
   const classes = useStyles();
+
   return (
     <Grid item md={3} sm={12} xs={12}>
       <Card style={{ borderRadius: '0px' }}>
         <CardContent className={classes.card}>
-          <CardActionArea href={`/products/${item.id}`}>
+          <CardActionArea href={`/products/${item._id}`}>
             <CardContent>
               {item.sale ? (
                 <>
@@ -74,16 +76,16 @@ function ProductCard ({ item }) {
                 <div className={classes.priceGap} />
               )}
             </CardContent>
-            <CardMedia className={classes.img} image={item.img} title={item.name} />
+            <CardMedia className={classes.img} image={item.img} title={item.name[lang]} />
             <CardContent>
               <Typography className={`boldText ${classes.cardName}`} color="textSecondary">
-                {item.sex}
+                {item.gender[lang]}
               </Typography>
               <Typography className={`lightText ${classes.cardName}`} color="textSecondary">
-                {item.name}
+                {item.name[lang]}
               </Typography>
               <Typography className={`lightText ${classes.cardSku}`} color="textSecondary">
-                #{item.sku}
+                #{item.skuNum}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -91,7 +93,7 @@ function ProductCard ({ item }) {
       </Card>
     </Grid>
   );
-}
+};
 
 ProductCard.propTypes = {
   item: PropTypes.any.isRequired,

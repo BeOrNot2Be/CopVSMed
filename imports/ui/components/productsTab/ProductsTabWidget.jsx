@@ -1,8 +1,11 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import {
   AppBar, Tabs, Tab,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Products } from '../../../api/schemas';
 import ProductTab from './ProductTab.jsx';
 
 
@@ -35,125 +38,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const itemsNew = [
-  {
-    id: 'sm1',
-    price: '80.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v1',
-    sex: 'men',
-    sku: '2343234',
-    sale: 0,
-  },
-  {
-    id: 'sm2',
-    price: '84.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v4',
-    sex: 'women',
-    sku: '2343134',
-    sale: 20,
-  },
-  {
-    id: 'sm3',
-    price: '80.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v1',
-    sex: 'men',
-    sku: '2343234',
-    sale: 0,
-  },
-  {
-    id: 'sm4',
-    price: '84.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v4',
-    sex: 'women',
-    sku: '2343134',
-    sale: 20,
-  },
-  {
-    id: 'sm5',
-    price: '80.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v1',
-    sex: 'men',
-    sku: '2343234',
-    sale: 0,
-  },
-  {
-    id: 'sm6',
-    price: '84.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v4',
-    sex: 'women',
-    sku: '2343134',
-    sale: 20,
-  },
-];
 
-const itemsTop = [
-  {
-    id: 'sm7',
-    price: '80.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v1',
-    sex: 'men',
-    sku: '2343234',
-    sale: 0,
-  },
-  {
-    id: 'sm8',
-    price: '84.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v4',
-    sex: 'women',
-    sku: '2343134',
-    sale: 20,
-  },
-  {
-    id: 'sm9',
-    price: '20.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v23',
-    sex: 'men/women',
-    sku: '2311335',
-    sale: 0,
-  },
-];
-
-const itemsPopular = [
-  {
-    id: 'sm10',
-    price: '80.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v1',
-    sex: 'men',
-    sku: '2343234',
-    sale: 0,
-  },
-  {
-    id: 'sm11',
-    price: '84.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v4',
-    sex: 'women',
-    sku: '2343134',
-    sale: 20,
-  },
-  {
-    id: 'sm12',
-    price: '20.00',
-    img: 'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-    name: 'CM v23',
-    sex: 'men/women',
-    sku: '2311335',
-    sale: 0,
-  },
-];
-
-
-const SimpleTabs = () => {
+const ProductsTabs = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(1);
 
@@ -170,11 +56,22 @@ const SimpleTabs = () => {
           <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="Top Picks" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <ProductTab value={value} tabIndex={0} items={itemsNew} />
-      <ProductTab value={value} tabIndex={1} items={itemsPopular} />
-      <ProductTab value={value} tabIndex={2} items={itemsTop} />
+      <ProductTab value={value} tabIndex={0} items={props.reviewsNew} />
+      <ProductTab value={value} tabIndex={1} items={props.reviewsPopular} />
+      <ProductTab value={value} tabIndex={2} items={props.reviewsTop} />
     </div>
   );
 };
 
-export default SimpleTabs;
+export default withTracker((props) => {
+  // Do all your reactive data access in this method.
+  // Note that this subscription will get cleaned up when your component is unmounted
+  const handle = Meteor.subscribe('products');
+  return {
+    // currentUser: Meteor.user(),
+    listLoading: !handle.ready(),
+    reviewsNew: Products.find({}, { limit: 8 }).fetch(),
+    reviewsPopular: Products.find({}, { limit: 8 }).fetch(),
+    reviewsTop: Products.find({}, { limit: 8 }).fetch(),
+  };
+})(ProductsTabs);

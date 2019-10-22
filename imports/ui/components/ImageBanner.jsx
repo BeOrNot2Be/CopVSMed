@@ -4,6 +4,7 @@ import Plx from 'react-plx';
 import {
   Grid, Box, Button, Typography, withWidth,
 } from '@material-ui/core';
+import { links } from '../text/links';
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '50px',
   },
   itemDesc: {
-    fontSize: '16px',
+    fontSize: '16px', //font size
     maxWidth: '400px',
     paddingBottom: '16px',
   },
@@ -105,8 +106,7 @@ const ProductParallaxBanner = (props) => {
               <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
                 {item.shortDesc}
               </Typography>
-
-              <Button href="/products/" className={classes.activeButton}>Browese Variants</Button>
+              <Button href={links.products.url} className={classes.activeButton}>{links.products.name}</Button>
             </Box>
           </Grid>
         </Grid>

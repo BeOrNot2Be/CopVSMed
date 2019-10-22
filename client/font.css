@@ -1,0 +1,351 @@
+@font-face {
+    font-family: 'TruenoBlack';
+        src: url('font/TruenoBlk.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBlackItalic';
+        src: url('font/TruenoBlkIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBlackOutline';
+        src: url('font/TruenoBlkOl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBlackOutlineItalic';
+        src: url('font/TruenoBlkOlIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBold';
+        src: url('font/TruenoBd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBoldItalic';
+        src: url('font/TruenoBdIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBoldOutline';
+        src: url('font/TruenoBdOl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoBoldOutlineItalic';
+        src: url('font/TruenoBdOlIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoExtraBold';
+        src: url('font/TruenoExBd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoExtraBoldItalic';
+        src: url('font/TruenoExBdIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoExtraBoldOutline';
+        src: url('font/TruenoExBdOl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoExtraBoldOutlineItalic';
+        src: url('font/TruenoExBdOlIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoLight';
+        src: url('font/TruenoLt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoLightItalic';
+        src: url('font/TruenoLtIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoRegular';
+        src: url('font/TruenoRg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoRegularItalic';
+        src: url('font/TruenoRgIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoSemiBold';
+        src: url('font/TruenoSbd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoSemiBoldItalic';
+        src: url('font/TruenoSbdIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoUltraBlack';
+        src: url('font/TruenoUltBlk.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoUltraBlackItalic';
+        src: url('font/TruenoUltBlkIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoUltraLight';
+        src: url('font/TruenoUltLt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'TruenoUltraLightItalic';
+        src: url('font/TruenoUltLtIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+ /* The following rules are deprecated. */ 
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBlk.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBlkIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBlkOl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBlkOlIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBdIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBdOl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoBdOlIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoExBd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoExBdIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoExBdOl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoExBdOlIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoLt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoLtIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoRg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoRgIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoSbd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoSbdIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoUltBlk.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoUltBlkIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoUltLt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+
+
+@font-face {
+    font-family: 'Trueno';
+        src: url('font/TruenoUltLtIt.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+      }

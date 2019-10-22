@@ -10,7 +10,7 @@ import ReviewsTab from '../components/ReviewsTab.jsx';
 
 const HomePage = () => (
   <div>
-    <ProductParallaxBanner scrollAxis="vertical" />
+    <ProductParallaxBanner />
     <PostCards />
     <ProductsTabWidget />
     <TechnologiesTab />

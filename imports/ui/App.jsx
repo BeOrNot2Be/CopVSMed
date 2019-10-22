@@ -4,6 +4,7 @@ import Header from './components/header/Header.jsx';
 import Footer from './components/footer/Footer.jsx';
 import HomePage from './pages/Home.jsx';
 
+
 const App = () => (
   <>
     <Header />

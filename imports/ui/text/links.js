@@ -11,6 +11,7 @@ export const links = {
   top_pics: { url: '#', name: changeLang('Top Pics') },
   outlet: { url: '#', name: changeLang('Outlet') },
   support: { url: '#', name: changeLang('Support') },
+  products: { url: '#', name: changeLang('Browser More') },
   delevery: { url: '#', name: changeLang('Delivery') },
   ship_diliver: { url: '#', name: changeLang('Shipping & Delivery') },
   return_policy: { url: '#', name: changeLang('Return Policy') },

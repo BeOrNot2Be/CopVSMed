@@ -39,11 +39,12 @@ const useStyles = makeStyles({
   },
 });
 
+const lang = 'en';
+
 const NewsPlate = (props) => {
   const {
     post, ...other
   } = props;
-
   const classes = useStyles();
 
   return (
@@ -55,7 +56,7 @@ const NewsPlate = (props) => {
               {post.date}
             </Typography>
             <Typography className={`${classes.newsName} lightText`}>
-              {post.name}
+              {post.name[lang]}
             </Typography>
             <div className={`${classes.newsComments} lightText`}>
               <QuestionAnswer style={{ paddingRight: '5px' }} />

@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
+const lang = 'en';
 
 const CommentTab = (props) => {
   const classes = useStyles();
@@ -47,7 +48,7 @@ const CommentTab = (props) => {
             <Grid item>
               <Paper className={classes.card}>
                 <Typography className={`${classes.ReviewText} lightText `}>
-                  {review.text}
+                  {review}
                 </Typography>
               </Paper>
             </Grid>

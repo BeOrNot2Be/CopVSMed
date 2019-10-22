@@ -1,4 +1,6 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Hidden, AppBar, Tabs, Tab, Container, Grid, Typography,
@@ -10,6 +12,7 @@ import {
   StarBorder, ExpandMore,
 } from '@material-ui/icons';
 import CommentTab from './CommentTab.jsx';
+import { Reviews } from '../../api/schemas';
 
 function a11yProps(index) {
   return {
@@ -63,27 +66,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Reviews = [
-  {
-    stars: 4,
-    img: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg',
-    name: 'Tadjaoki Nabukagava',
-    text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio dicta commodi ea tempora voluptatibus provident reprehenderit nulla beatae aspernatur eaque magnam dolores tenetur quis temporibus quia aliquam, nobis repudiandae quam?',
-  },
-  {
-    stars: 5,
-    img: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg',
-    name: 'Tadjaoki Nabukagava',
-    text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio dicta commodi ea tempora voluptatibus provident reprehenderit nulla beatae aspernatur eaque magnam dolores tenetur quis temporibus quia aliquam, nobis repudiandae quam?',
-  },
-  {
-    stars: 4,
-    img: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg',
-    name: 'Tadjaoki Nabukagava',
-    text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio dicta commodi ea tempora voluptatibus provident reprehenderit nulla beatae aspernatur eaque magnam dolores tenetur quis temporibus quia aliquam, nobis repudiandae quam?',
-  },
-];
-
 const StyledRating = withStyles({
   iconFilled: {
     color: '#ff7270',
@@ -104,7 +86,9 @@ const StyledTab = withStyles({
 
 const getLabelText = (value) => `${value} Star${value !== 1 ? 's' : ''}`;
 
-const ReviewsTab = () => {
+const lang = 'en';
+
+const ReviewsTab = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -118,18 +102,18 @@ const ReviewsTab = () => {
         <Hidden smDown>
           <AppBar position="static" className={classes.tabHeader} >
             <Tabs TabIndicatorProps={{ className: classes.indicator }} value={value} onChange={handleChange} centered aria-label="simple tabs example">
-              {Reviews.map((element, index) => (
+              {props.reviews.map((review, index) => (
                 <StyledTab
                   selected
-                  key={index}
+                  key={review._id}
                   className="lightText middleText"
                   icon={(
                     <>
-                      <Avatar className={classes.avater} src={element.img} alt={element.name} />
-                      <Typography className={`${classes.reviewerName} lightboldText`}>{element.name}</Typography>
+                      <Avatar className={classes.avater} src={review.img} alt={review.name[lang]} />
+                      <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[lang]}</Typography>
                       <StyledRating
-                        name={element.name}
-                        value={element.stars}
+                        name={review.name[lang]}
+                        value={review.starsNum}
                         getLabelText={getLabelText}
                         precision={0.5}
                         emptyIcon={<StarBorder fontSize="inherit" />}
@@ -142,14 +126,14 @@ const ReviewsTab = () => {
               ))}
             </Tabs>
           </AppBar>
-          {Reviews.map((element, index) => (
-            <CommentTab value={value} tabIndex={index} key={index} review={element} />
+          {props.reviews.map((review, index) => (
+            <CommentTab value={value} tabIndex={index} key={review._id} review={review.text[lang]} />
           ))}
         </Hidden>
         <Hidden mdUp>
           <Container>
-            {Reviews.map((element, index) => (
-              <ExpansionPanel key={index} className={classes.panel} >
+            {props.reviews.map((review, index) => (
+              <ExpansionPanel key={review._id} className={classes.panel} >
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMore className={classes.arrowIcon} />}
                   aria-controls={`panel${index + 1}a-content`}
@@ -157,16 +141,16 @@ const ReviewsTab = () => {
                 >
                   <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
                     <Grid item sm={4} xs={4}>
-                      <Avatar className={classes.avaterSmall} src={element.img} alt={element.name} />
+                      <Avatar className={classes.avaterSmall} src={review.img} alt={review.name[lang]} />
                     </Grid>
                     <Grid container item sm={6} xs={6}>
                       <Grid item>
-                        <Typography className={`${classes.reviewerName} lightboldText`}>{element.name}</Typography>
+                        <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[lang]}</Typography>
                       </Grid>
                       <Grid item sm={12} xs={12}>
                         <StyledRating
-                          name={element.name}
-                          value={element.stars}
+                          name={review.name[lang]}
+                          value={review.starsNum}
                           getLabelText={getLabelText}
                           precision={0.5}
                           emptyIcon={<StarBorder fontSize="inherit" />}
@@ -178,7 +162,7 @@ const ReviewsTab = () => {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                   <Typography className={`${classes.ReviewText} lightText `}>
-                    {element.text}
+                    {review.text[lang]}
                   </Typography>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
@@ -190,4 +174,14 @@ const ReviewsTab = () => {
   );
 };
 
-export default ReviewsTab;
+export default withTracker((props) => {
+  // Do all your reactive data access in this method.
+  // Note that this subscription will get cleaned up when your component is unmounted
+  const handle = Meteor.subscribe('reviews');
+
+  return {
+    // currentUser: Meteor.user(),
+    listLoading: !handle.ready(),
+    reviews: Reviews.find({}, { limit: 3 }).fetch(),
+  };
+})(ReviewsTab);
