@@ -96,6 +96,11 @@ const PostsSchema = new SimpleSchema({
     type: Object,
     blackbox: true,
   },
+  'name.en': {
+    label: 'Title',
+    type: String,
+    blackbox: true,
+  },
   img: {
     label: 'Image Link',
     type: Object,
@@ -103,7 +108,40 @@ const PostsSchema = new SimpleSchema({
   },
 });
 
+const BannersSchema = new SimpleSchema({
+  buttonText: {
+    label: 'Call to action text',
+    type: Object,
+    blackbox: true,
+  },
+  desc: {
+    label: 'small desc of product',
+    type: Object,
+    blackbox: true,
+  },
+  firstHeader: {
+    label: 'Main Header',
+    type: Object,
+    blackbox: true,
+  },
+  secondHeader: {
+    label: 'Second Header',
+    type: Object,
+    blackbox: true,
+  },
+  thirdHeader: {
+    label: 'Third Header',
+    type: Object,
+    blackbox: true,
+  },
+  img: {
+    label: 'Image Link',
+    type: String,
+  },
+});
+
 News.attachSchema(NewsSchema);
 Reviews.attachSchema(ReviewsSchema);
 Products.attachSchema(ProductsSchema);
 Posts.attachSchema(PostsSchema);
+Banners.attachSchema(BannersSchema);

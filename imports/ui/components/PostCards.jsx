@@ -1,4 +1,6 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Row, Col } from 'react-grid-system';
 import {
@@ -7,6 +9,7 @@ import {
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { Posts } from '../../api/schemas';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -98,36 +101,13 @@ const tutorialSteps = [
   },
 ];
 
-const lastPosts = {
-  1: [
-    {
-      img: 'http://digital-photography-school.com/wp-content/uploads/2012/10/image1.jpg',
-      link: 'google',
-    },
-    {
-      img: 'https://cdn-ep19.pressidium.com/wp-content/uploads/2018/07/Aspect-ratio-photography-ras-ul-had-beach-Oman-1.jpg',
-      link: 'google.com',
-    },
-  ],
-  2: [
-    {
-      img: 'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
-      link: 'google.com',
-    },
-  ],
-  4: [
-    {
-      img: 'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
-      link: 'google.com',
-    },
-  ],
-};
+const lang = 'en';
 
-const PostCards = () => {
+const PostCards = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  const maxSteps = 4;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -143,80 +123,94 @@ const PostCards = () => {
 
   return (
     <>
-      <Hidden smDown className={classes.root}>
-        <Container>
-          <Row>
-            <Col md={6} className={classes.postImgCellBig}>
-              <Button variant="contained" href={`/posts/${lastPosts[4][0].link}`} className={classes.button}>
-                <img className={classes.postImg} src={lastPosts[4][0].img} alt="" />
-              </Button>
-            </Col>
-            <Col sm={6}>
-              <Container>
-                <Row>
-                  <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
-                    <Button variant="contained" href={`/posts/${lastPosts[2][0].link}`} className={classes.button}>
-                      <img className={classes.postImg} src={lastPosts[2][0].img} alt="" />
+      {(props.posts.length === 4) ? (
+        <>
+          <Hidden smDown className={classes.root}>
+            <Container>
+              <Row>
+                <Col md={6} className={classes.postImgCellBig}>
+                  <Button variant="contained" href={`/posts/${props.posts[0].name[lang]}`} className={classes.button}>
+                    <img className={classes.postImg} src={props.posts[0].img[4]} alt="" />
+                  </Button>
+                </Col>
+                <Col sm={6}>
+                  <Container>
+                    <Row>
+                      <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
+                        <Button variant="contained" href={`/posts/${props.posts[1].name[lang]}`} className={classes.button}>
+                          <img className={classes.postImg} src={props.posts[1].img[2]} alt="" />
+                        </Button>
+                      </Col>
+                      <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
+                        <Button variant="contained" href={`/posts/${props.posts[2].name[lang]}`} className={classes.button}>
+                          <img className={classes.postImg} src={props.posts[2].img[1]} alt="" />
+                        </Button>
+                      </Col>
+                      <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
+                        <Button variant="contained" href={`/posts/${props.posts[3].name[lang]}`} className={classes.button}>
+                          <img className={classes.postImg} src={props.posts[3].img[1]} alt="" />
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Col>
+              </Row>
+            </Container>
+          </Hidden>
+          <Hidden mdUp>
+            <Typography className={`${classes.header} boldText`}> Posts </Typography>
+            <AutoPlaySwipeableViews
+              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+              index={activeStep}
+              onChangeIndex={handleStepChange}
+              enableMouseEvents
+            >
+              {props.posts.map((post, index) => (
+                <div key={post.name[lang]}>
+                  {Math.abs(activeStep - index) <= 2 ? (
+                    <Button variant="contained" href={`/posts/${post.name[lang]}`} className={classes.button}>
+                      <img className={classes.img} src={post.img.mob} alt={post.name[lang]} />
                     </Button>
-                  </Col>
-                  <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
-                    <Button variant="contained" href={`/posts/${lastPosts[1][0].link}`} className={classes.button}>
-                      <img className={classes.postImg} src={lastPosts[1][0].img} alt="" />
-                    </Button>
-                  </Col>
-                  <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
-                    <Button variant="contained" href={`/posts/${lastPosts[1][1].link}`} className={classes.button}>
-                      <img className={classes.postImg} src={lastPosts[1][1].img} alt="" />
-                    </Button>
-                  </Col>
-                </Row>
-              </Container>
-            </Col>
-          </Row>
-        </Container>
-      </Hidden>
-      <Hidden mdUp>
-        <Typography className={`${classes.header} boldText`}> Posts </Typography>
-        <AutoPlaySwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
-          {tutorialSteps.map((step, index) => (
-            <div key={step.label}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Button variant="contained" href={`/posts/${step.link}`} className={classes.button}>
-                  <img className={classes.img} src={step.imgPath} alt={step.label} />
+                  ) : null}
+                </div>
+              ))}
+            </AutoPlaySwipeableViews>
+            <MobileStepper
+              steps={maxSteps}
+              position="static"
+              variant="dots"
+              activeStep={activeStep}
+              classes={{
+                dot: classes.ProgressBar,
+                dotActive: classes.ProgressBarActive,
+                root: classes.SwitcherBar,
+              }}
+              nextButton={(
+                <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                  {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                 </Button>
-              ) : null}
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
-        <MobileStepper
-          steps={maxSteps}
-          position="static"
-          variant="dots"
-          activeStep={activeStep}
-          classes={{
-            dot: classes.ProgressBar,
-            dotActive: classes.ProgressBarActive,
-            root: classes.SwitcherBar,
-          }}
-          nextButton={(
-            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </Button>
-          )}
-          backButton={(
-            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            </Button>
-          )}
-        />
-      </Hidden>
+              )}
+              backButton={(
+                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                  {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                </Button>
+              )}
+            />
+          </Hidden>
+        </>
+      ) : (
+        'loading'
+      )}
     </>
   );
 };
 
-export default PostCards;
+export default withTracker((props) => {
+  const handle = Meteor.subscribe('posts');
+  //console.log(Posts.find({ img: { $exists: true } }).fetch());
+  return {
+    // currentUser: Meteor.user(),
+    listLoading: !handle.ready(), //make nice sort and etc
+    posts: Posts.find({ }, { limit: 4 }).fetch(),
+  };
+})(PostCards);

@@ -1,10 +1,13 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import { makeStyles } from '@material-ui/core/styles';
 import Plx from 'react-plx';
 import {
   Grid, Box, Button, Typography, withWidth,
 } from '@material-ui/core';
 import { links } from '../text/links';
+import { Banners } from '../../api/schemas';
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -75,45 +78,63 @@ const mobileParallaxData = [
   },
 ];
 
+const lang = 'en';
+
 const ProductParallaxBanner = (props) => {
   const classes = useStyles();
-
+  console.log(props);
   return (
     <>
-      <div className={classes.mainContainer}>
-        <Grid container direction="row" justify="space-around" alignItems="center">
-          <Grid item>
-            <Plx
-              className="MyAwesomeParallax"
-              parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
-            >
-              <img className={classes.minImg} src={item.img} alt="" />
-            </Plx>
-          </Grid>
-          <Grid item>
-            <Box>
-              <Typography className="lightText headerText middleText">
-                From $
-                {' '}
-                {item.price}
-              </Typography>
-              <Typography className={`boldText headerText ${classes.itemName}`}>
-                {item.name}
-              </Typography>
-              <Typography className={`boldText activeText ${classes.itemFact}`}>
-                {item.fact}
-              </Typography>
-              <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-                {item.shortDesc}
-              </Typography>
-              <Button href={links.products.url} className={classes.activeButton}>{links.products.name}</Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </div>
-      <div className={classes.spacing} />
+      {
+        props.banner.length > 0?
+        (
+          <>
+            <div className={classes.mainContainer}>
+              <Grid container direction="row" justify="space-around" alignItems="center">
+                <Grid item>
+                  <Plx
+                    className="MyAwesomeParallax"
+                    parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
+                  >
+                    <img className={classes.minImg} src={props.banner[0].img} alt="" />
+                  </Plx>
+                </Grid>
+                <Grid item>
+                  <Box>
+                    <Typography className="lightText headerText middleText">
+                      {props.banner[0].thirdHeader[lang]}
+                    </Typography>
+                    <Typography className={`boldText headerText ${classes.itemName}`}>
+                      {props.banner[0].firstHeader[lang]}                
+                    </Typography>
+                    <Typography className={`boldText activeText ${classes.itemFact}`}>
+                      {props.banner[0].secondHeader[lang]}
+                    </Typography>
+                    <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
+                      {props.banner[0].desc[lang]}
+                    </Typography>
+                    <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[lang]}</Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </div>
+            <div className={classes.spacing} />
+          </>
+          ):(
+            "loading"
+          )
+      }
+      
     </>
   );
 };
 
-export default withWidth()(ProductParallaxBanner);
+export default withTracker((props) => {
+  const handle = Meteor.subscribe('banners');
+
+  return {
+    // currentUser: Meteor.user(),
+    listLoading: !handle.ready(),
+    banner: Banners.find({}, { limit: 1 }).fetch(), //random from relevant 
+  };
+})(withWidth()(ProductParallaxBanner));

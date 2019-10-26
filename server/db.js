@@ -25,12 +25,19 @@ export const InsertReviews = (name, text, starsNum, img) => {
 };
 
 export const UpdatePostImage = (id, img, size) => {
-  Reviews.update({ _id: id }, {});
+  const imgSize = `img.${size}`;
+  Posts.update({ _id: id }, { $set: { imgSize: img } });
 };
 
-export const InsertPosts = (name, img) => {
-  const newReview = { img: { 1: img }, ...langWrapper({ name }) };
-  Reviews.insert(newReview);
+export const TestUpdatePostImage = (name, img, size) => {
+  let postImg = Posts.findOne({ name: { en: name } }).img;
+  postImg[size] = img;
+  Posts.update({ name: { en: name } }, { $set: { img: postImg } });
+};
+
+export const InsertPosts = (name, img1, mob) => {
+  const newPost = { img: { 1: img1, mob }, ...langWrapper({ name }) };
+  Posts.insert(newPost);
 };
 
 export const InsertProduct = (name, price, sale, skuNum, gender, img) => {
@@ -42,6 +49,21 @@ export const InsertProduct = (name, price, sale, skuNum, gender, img) => {
     ...langWrapper({ name, gender }),
   };
   Products.insert(newProduct);
+};
+
+export const InsertBanner = (firstHeader, secondHeader, thirdHeader, desc, buttonText, img) => {
+  const newBanner = {
+    img,
+    ...langWrapper({
+      firstHeader,
+      secondHeader,
+      thirdHeader,
+      desc,
+      buttonText,
+    }),
+  };
+
+  Banners.insert(newBanner);
 };
 
 export const InsertLanguage = (sign) => {
