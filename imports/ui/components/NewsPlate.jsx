@@ -5,6 +5,7 @@ import {
   Card, CardActionArea, CardContent, Typography,
 } from '@material-ui/core';
 import { QuestionAnswer } from '@material-ui/icons';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
   post: {
@@ -39,31 +40,25 @@ const useStyles = makeStyles({
   },
 });
 
-const lang = 'en';
-
-const NewsPlate = (props) => {
-  const {
-    post, ...other
-  } = props;
+const NewsPlateComponent = (props) => {
   const classes = useStyles();
-
   return (
-    <Card className={classes.plate} style={{ backgroundImage: `url(${post.img})` }}>
+    <Card className={classes.plate} style={{ backgroundImage: `url(${props.post.img})` }}>
       <CardContent className={classes.card}>
-        <CardActionArea href={`/news/${post.id}`}>
+        <CardActionArea href={`/news/${props.post.id}`}>
           <CardContent className={classes.post}>
             <Typography className={`${classes.newsDate} lightboldText`}>
-              {post.date}
+              {props.post.date} {/*translate*/}
             </Typography>
             <Typography className={`${classes.newsName} lightText`}>
-              {post.name[lang]}
+              {props.post.name[props.lang]}
             </Typography>
             <div className={`${classes.newsComments} lightText`}>
               <QuestionAnswer style={{ paddingRight: '5px' }} />
               <Typography className={`${classes.newsCommentsText} lightText`}>
-                {post.commentsNum}
+                {props.post.commentsNum}
                 {' '}
-                {(post.commentsNum === 1) ? 'Comment' : 'Comments'}
+                {(props.post.commentsNum === 1) ? 'Comment' : 'Comments'} {/*translate*/}
               </Typography>
             </div>
           </CardContent>
@@ -73,8 +68,21 @@ const NewsPlate = (props) => {
   );
 }
 
-NewsPlate.propTypes = {
+NewsPlateComponent.propTypes = {
   post: PropTypes.any.isRequired,
+  lang: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    lang: state.general.lang,
+    post: ownProps.post,
+  };
+};
+
+const NewsPlate = connect(
+  mapStateToProps,
+)(NewsPlateComponent);
+
 
 export default NewsPlate;

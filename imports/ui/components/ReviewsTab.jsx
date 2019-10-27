@@ -177,10 +177,8 @@ const ReviewsTab = (props) => {
 export default withTracker((props) => {
   // Do all your reactive data access in this method.
   // Note that this subscription will get cleaned up when your component is unmounted
-  const handle = Meteor.subscribe('reviews');
-
+  const handle = Meteor.subscribe('reviewsAll');
   return {
-    // currentUser: Meteor.user(),
     listLoading: !handle.ready(),
     reviews: Reviews.find({}, { limit: 3 }).fetch(),
   };

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import {
   News, Banners, Reviews, Products, Languages, Posts,
 } from '../imports/api/schemas';
-
+import '../imports/startups/publish';
 import {
   InsertNews, InsertLanguage, InsertReviews, InsertProduct,
   InsertPosts, TestUpdatePostImage, InsertBanner,

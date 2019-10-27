@@ -66,7 +66,7 @@ const ProductsTabs = (props) => {
 export default withTracker((props) => {
   // Do all your reactive data access in this method.
   // Note that this subscription will get cleaned up when your component is unmounted
-  const handle = Meteor.subscribe('products');
+  const handle = Meteor.subscribe('productsAll');
   return {
     // currentUser: Meteor.user(),
     listLoading: !handle.ready(),

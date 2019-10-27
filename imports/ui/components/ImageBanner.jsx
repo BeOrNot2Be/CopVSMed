@@ -82,7 +82,6 @@ const lang = 'en';
 
 const ProductParallaxBanner = (props) => {
   const classes = useStyles();
-  console.log(props);
   return (
     <>
       {
@@ -130,7 +129,7 @@ const ProductParallaxBanner = (props) => {
 };
 
 export default withTracker((props) => {
-  const handle = Meteor.subscribe('banners');
+  const handle = Meteor.subscribe('bannersAll');
 
   return {
     // currentUser: Meteor.user(),

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container, Grid, Box, Typography,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
 import NewsPlate from './NewsPlate.jsx';
-import { News } from '../../api/schemas';
+import { getNews } from '../actions/news';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,13 +21,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const NewsPlates = (props) => {
+const NewsPlatesComponent = (props) => {
   const classes = useStyles();
+  React.useEffect(() => {
+    props.getNews();
+  }, []);
 
   return (
     <div className={classes.root}>
       <Typography className={`${classes.header} boldText`}>
-        LATEST NEWS
+        LATEST NEWS {/*translate */}
       </Typography>
       <Box>
         <Container>
@@ -39,11 +41,17 @@ const NewsPlates = (props) => {
             alignItems="center"
             spacing={4}
           >
-            {props.news.map((plate) => (
-              <Grid item key={plate._id}>
-                <NewsPlate post={plate} />
-              </Grid>
-            ))}
+            {(props.news.length === 3) ? (
+              <>
+                {props.news.map((plate) => (
+                  <Grid item key={plate._id}>
+                    <NewsPlate post={plate} />
+                  </Grid>
+                ))}
+              </>
+            ) : (
+              'loading'
+            )}
           </Grid>
         </Container>
       </Box>
@@ -52,14 +60,22 @@ const NewsPlates = (props) => {
 };
 
 
-export default withTracker((props) => {
-  // Do all your reactive data access in this method.
-  // Note that this subscription will get cleaned up when your component is unmounted
-  const handle = Meteor.subscribe('news');
-
+const mapStateToProps = (state) => {
   return {
-    // currentUser: Meteor.user(),
-    listLoading: !handle.ready(),
-    news: News.find({}, { limit: 3 }).fetch(),
+    news: state.newsElement.news,
   };
-})(NewsPlates);
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getNews: () => getNews()(dispatch),
+  };
+};
+
+const NewsPlates = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(NewsPlatesComponent);
+
+
+export default NewsPlates;
