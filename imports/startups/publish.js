@@ -24,12 +24,42 @@ if (Meteor.isServer) {
     return Banners.find({});
   });
 
+  Meteor.publish('bannersAuth', function (auth) {
+    // switch
+    return Banners.find({});
+  });
+
+  Meteor.publish('bannersGuest', function () {
+    // switch
+    return Banners.find({});
+  });
+
   Meteor.publish('reviewsAll', function () {
     // switch
     return Reviews.find({});
   });
 
+  Meteor.publish('reviewsAuth', function (auth) {
+    // switch
+    return Reviews.find({});
+  });
+
+  Meteor.publish('reviewsGuest', function () {
+    // switch
+    return Reviews.find({});
+  });
+
   Meteor.publish('productsAll', function () {
+    // switch
+    return Products.find({});
+  });
+
+  Meteor.publish('productsAuth', function (auth) {
+    // switch
+    return Products.find({});
+  });
+
+  Meteor.publish('productsGuest', function () {
     // switch
     return Products.find({});
   });

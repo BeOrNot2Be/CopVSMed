@@ -1,6 +1,4 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   Hidden, AppBar, Tabs, Tab, Container, Grid, Typography,
@@ -11,8 +9,9 @@ import Rating from '@material-ui/lab/Rating';
 import {
   StarBorder, ExpandMore,
 } from '@material-ui/icons';
+import { connect } from 'react-redux';
 import CommentTab from './CommentTab.jsx';
-import { Reviews } from '../../api/schemas';
+import { getReviews } from '../actions/reviews';
 
 function a11yProps(index) {
   return {
@@ -88,13 +87,17 @@ const getLabelText = (value) => `${value} Star${value !== 1 ? 's' : ''}`;
 
 const lang = 'en';
 
-const ReviewsTab = (props) => {
+const ReviewsTabComponent = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  React.useEffect(() => {
+    props.getReviews();
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -174,12 +177,24 @@ const ReviewsTab = (props) => {
   );
 };
 
-export default withTracker((props) => {
-  // Do all your reactive data access in this method.
-  // Note that this subscription will get cleaned up when your component is unmounted
-  const handle = Meteor.subscribe('reviewsAll');
+
+const mapStateToProps = (state) => {
   return {
-    listLoading: !handle.ready(),
-    reviews: Reviews.find({}, { limit: 3 }).fetch(),
+    lang: state.general.lang,
+    reviews: state.reviewsElement.reviews,
   };
-})(ReviewsTab);
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getReviews: () => getReviews()(dispatch),
+  };
+};
+
+const ReviewsTab = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ReviewsTabComponent);
+
+
+export default ReviewsTab;

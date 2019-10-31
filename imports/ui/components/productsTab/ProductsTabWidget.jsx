@@ -5,8 +5,9 @@ import {
   AppBar, Tabs, Tab,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Products } from '../../../api/schemas';
+import { connect } from 'react-redux';
 import ProductTab from './ProductTab.jsx';
+import { getProducts } from '../../actions/products';
 
 
 function a11yProps(index) {
@@ -39,13 +40,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ProductsTabs = (props) => {
+const ProductsTabsComponent = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  React.useEffect(() => {
+    props.getProducts();
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -63,15 +68,24 @@ const ProductsTabs = (props) => {
   );
 };
 
-export default withTracker((props) => {
-  // Do all your reactive data access in this method.
-  // Note that this subscription will get cleaned up when your component is unmounted
-  const handle = Meteor.subscribe('productsAll');
+
+const mapStateToProps = (state) => {
   return {
-    // currentUser: Meteor.user(),
-    listLoading: !handle.ready(),
-    reviewsNew: Products.find({}, { limit: 8 }).fetch(),
-    reviewsPopular: Products.find({}, { limit: 8 }).fetch(),
-    reviewsTop: Products.find({}, { limit: 8 }).fetch(),
+    lang: state.general.lang,
+    ...state.productsElement.products,
   };
-})(ProductsTabs);
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => getProducts()(dispatch),
+  };
+};
+
+const ProductsTabs = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProductsTabsComponent);
+
+
+export default ProductsTabs;

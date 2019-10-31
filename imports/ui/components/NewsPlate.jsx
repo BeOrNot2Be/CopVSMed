@@ -66,7 +66,7 @@ const NewsPlateComponent = (props) => {
       </CardContent>
     </Card>
   );
-}
+};
 
 NewsPlateComponent.propTypes = {
   post: PropTypes.any.isRequired,

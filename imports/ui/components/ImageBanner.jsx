@@ -6,8 +6,9 @@ import Plx from 'react-plx';
 import {
   Grid, Box, Button, Typography, withWidth,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
 import { links } from '../text/links';
-import { Banners } from '../../api/schemas';
+import { getBanners } from '../actions/banners';
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -42,14 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const item = {
-  price: '80.00',
-  img: 'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570005911/84247_PCHS_qrjynz.png',
-  name: 'CM v1',
-  fact: '8 varients',
-  shortDesc: 'Since this is our favorite sneaker, we’re bringing you 50 variants to suit everyone’s needs.',
-};
-
 const parallaxData = [
   {
     start: 0,
@@ -78,62 +71,76 @@ const mobileParallaxData = [
   },
 ];
 
-const lang = 'en';
 
 const ProductParallaxBanner = (props) => {
   const classes = useStyles();
+
+  React.useEffect(() => {
+    props.getBanners();
+  }, []);
+
   return (
     <>
       {
-        props.banner.length > 0?
-        (
-          <>
-            <div className={classes.mainContainer}>
-              <Grid container direction="row" justify="space-around" alignItems="center">
-                <Grid item>
-                  <Plx
-                    className="MyAwesomeParallax"
-                    parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
-                  >
-                    <img className={classes.minImg} src={props.banner[0].img} alt="" />
-                  </Plx>
+        (props.banner.length !== 0) ?
+          (
+            <>
+              <div className={classes.mainContainer}>
+                <Grid container direction="row" justify="space-around" alignItems="center">
+                  <Grid item>
+                    <Plx
+                      className="MyAwesomeParallax"
+                      parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
+                    >
+                      <img className={classes.minImg} src={props.banner[0].img} alt="" />
+                    </Plx>
+                  </Grid>
+                  <Grid item>
+                    <Box>
+                      <Typography className="lightText headerText middleText">
+                        {props.banner[0].thirdHeader[props.lang]}
+                      </Typography>
+                      <Typography className={`boldText headerText ${classes.itemName}`}>
+                        {props.banner[0].firstHeader[props.lang]}                
+                      </Typography>
+                      <Typography className={`boldText activeText ${classes.itemFact}`}>
+                        {props.banner[0].secondHeader[props.lang]}
+                      </Typography>
+                      <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
+                        {props.banner[0].desc[props.lang]}
+                      </Typography>
+                      <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[props.lang]}</Button>
+                    </Box>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Box>
-                    <Typography className="lightText headerText middleText">
-                      {props.banner[0].thirdHeader[lang]}
-                    </Typography>
-                    <Typography className={`boldText headerText ${classes.itemName}`}>
-                      {props.banner[0].firstHeader[lang]}                
-                    </Typography>
-                    <Typography className={`boldText activeText ${classes.itemFact}`}>
-                      {props.banner[0].secondHeader[lang]}
-                    </Typography>
-                    <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-                      {props.banner[0].desc[lang]}
-                    </Typography>
-                    <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[lang]}</Button>
-                  </Box>
-                </Grid>
-              </Grid>
-            </div>
-            <div className={classes.spacing} />
-          </>
-          ):(
+              </div>
+              <div className={classes.spacing} />
+            </>
+          ) : (
             "loading"
           )
       }
-      
     </>
   );
 };
 
-export default withTracker((props) => {
-  const handle = Meteor.subscribe('bannersAll');
-
+const mapStateToProps = (state) => {
   return {
-    // currentUser: Meteor.user(),
-    listLoading: !handle.ready(),
-    banner: Banners.find({}, { limit: 1 }).fetch(), //random from relevant 
+    lang: state.general.lang,
+    banner: state.bannersElement.parallaxMainBanner,
   };
-})(withWidth()(ProductParallaxBanner));
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getBanners: () => getBanners()(dispatch),
+  };
+};
+
+const Banner = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProductParallaxBanner);
+
+
+export default Banner;
