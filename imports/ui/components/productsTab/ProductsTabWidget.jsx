@@ -1,10 +1,10 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 import {
-  AppBar, Tabs, Tab,
+  AppBar, Tabs, Tab, Box, Container, Grid, Card, CardContent
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
 import ProductTab from './ProductTab.jsx';
 import { getProducts } from '../../actions/products';
@@ -37,11 +37,58 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '21px!important',
     },
   },
+  mediaSkeleton: {
+    height: '0',
+    paddingTop: '56.25%',
+    margin: '0px',
+  },
+  card: {
+    padding: '0',
+    paddingBottom: '0!important',
+  },
+  skeleton: {
+    margin: '3px',
+  },
 }));
 
+function useWidth() {
+  const theme = useTheme();
+  const keys = [...theme.breakpoints.keys].reverse();
+  return (
+    keys.reduce((output, key) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return !output && matches ? key : output;
+    }, null) || 'xs'
+  );
+}
+
+const ProductSkeleton = (props) => {
+  const classes = useStyles();
+
+  return (
+    <Grid item md={3} sm={12} xs={12}>
+      <Card style={{ borderRadius: '0px' }}>
+        <CardContent className={classes.card}>
+          <CardContent>
+            <Skeleton width={40} height={30} className={classes.skeleton} />
+          </CardContent>
+          <Skeleton className={classes.mediaSkeleton} />
+          <CardContent>
+            <Skeleton width={40} height={24} className={classes.skeleton} />
+            <Skeleton width={65} height={24} className={classes.skeleton} />
+            <Skeleton width={85} height={19} className={classes.skeleton} />
+          </CardContent>
+        </CardContent>
+      </Card>
+    </Grid>
+  );
+}
 
 const ProductsTabsComponent = (props) => {
   const classes = useStyles();
+  const width = useWidth();
+
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
@@ -61,17 +108,31 @@ const ProductsTabsComponent = (props) => {
           <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="Top Picks" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <ProductTab value={value} tabIndex={0} items={props.reviewsNew} />
-      <ProductTab value={value} tabIndex={1} items={props.reviewsPopular} />
-      <ProductTab value={value} tabIndex={2} items={props.reviewsTop} />
+      {props.loaded ? (
+        <>
+          <ProductTab value={value} tabIndex={0} items={props.reviewsNew} />
+          <ProductTab value={value} tabIndex={1} items={props.reviewsPopular} />
+          <ProductTab value={value} tabIndex={2} items={props.reviewsTop} />
+        </>
+      ) : (
+        <Box p={3}>
+          <Container>
+            <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
+              {(width === 'sm') || (width === 'xs')
+                ? ([...Array(3)].map((element, index) => <ProductSkeleton key={index} />))
+                : ([...Array(8)].map((element, index) => <ProductSkeleton key={index} />))}
+            </Grid>
+          </Container>
+        </Box>
+      )}
     </div>
   );
 };
 
-
 const mapStateToProps = (state) => {
   return {
     lang: state.general.lang,
+    loaded: ((state.productsElement.products.reviewsNew.length === 8) && (state.productsElement.products.reviewsPopular.length === 8) && (state.productsElement.products.reviewsTop.length === 8)),
     ...state.productsElement.products,
   };
 };

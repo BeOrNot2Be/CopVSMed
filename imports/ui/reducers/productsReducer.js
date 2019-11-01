@@ -5,7 +5,11 @@ import {
 import { Products } from '../../api/schemas';
 
 const productsInitState = {
-  products: {},
+  products: {
+    reviewsNew: [],
+    reviewsPopular: [],
+    reviewsTop: [],
+  },
 };
 
 const productsReducer = (state = productsInitState, action) => {
