@@ -5,6 +5,7 @@ import {
   Button, Hidden, Typography, MobileStepper,
 } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { Skeleton } from '@material-ui/lab';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { connect } from 'react-redux';
@@ -62,6 +63,24 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     paddingBottom: '30px',
   },
+  card: {
+    margin: '0px',
+  },
+  cardMobPhoto: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: '0',
+    margin: '0px',
+  },
+  cardMobPhotoContainer: {
+    position: 'relative',
+    width: '100%',
+    paddingBottom: '60%',
+    float: 'left',
+    height: '0',
+    margin: '25px 0px',
+  },
 }));
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -89,42 +108,58 @@ const PostCardsComponent = (props) => {
 
   return (
     <>
-      {(props.posts.length === 4) ? (
-        <>
-          <Hidden smDown className={classes.root}>
-            <Container>
-              <Row>
-                <Col md={6} className={classes.postImgCellBig}>
-                  <Button variant="contained" href={`/posts/${props.posts[0].name[props.lang]}`} className={classes.button}>
-                    <img className={classes.postImg} src={props.posts[0].img[4]} alt="" />
-                  </Button>
-                </Col>
-                <Col sm={6}>
-                  <Container>
-                    <Row>
-                      <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
-                        <Button variant="contained" href={`/posts/${props.posts[1].name[props.lang]}`} className={classes.button}>
-                          <img className={classes.postImg} src={props.posts[1].img[2]} alt="" />
-                        </Button>
-                      </Col>
-                      <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
-                        <Button variant="contained" href={`/posts/${props.posts[2].name[props.lang]}`} className={classes.button}>
-                          <img className={classes.postImg} src={props.posts[2].img[1]} alt="" />
-                        </Button>
-                      </Col>
-                      <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
-                        <Button variant="contained" href={`/posts/${props.posts[3].name[props.lang]}`} className={classes.button}>
-                          <img className={classes.postImg} src={props.posts[3].img[1]} alt="" />
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </Col>
-              </Row>
-            </Container>
-          </Hidden>
-          <Hidden mdUp>
-            <Typography className={`${classes.header} boldText`}> Posts </Typography>
+      <Hidden smDown className={classes.root}>
+        <Container>
+          <Row>
+            <Col md={6} className={classes.postImgCellBig}>
+              {props.loaded ? (
+                <Button variant="contained" href={`/posts/${props.posts[0].name[props.lang]}`} className={classes.button}>
+                  <img className={classes.postImg} src={props.posts[0].img[4]} alt="" />
+                </Button>
+              ) : (
+                <Skeleton height={555} className={classes.card} />
+              )}
+            </Col>
+            <Col sm={6}>
+              <Container>
+                <Row>
+                  <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
+                    {props.loaded ? (
+                      <Button variant="contained" href={`/posts/${props.posts[1].name[props.lang]}`} className={classes.button}>
+                        <img className={classes.postImg} src={props.posts[1].img[2]} alt="" />
+                      </Button>
+                    ) : (
+                      <Skeleton height={270} className={classes.card} />
+                    )}
+                  </Col>
+                  <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
+                    {props.loaded ? (
+                      <Button variant="contained" href={`/posts/${props.posts[2].name[props.lang]}`} className={classes.button}>
+                        <img className={classes.postImg} src={props.posts[2].img[1]} alt="" />
+                      </Button>
+                    ) : (
+                      <Skeleton height={255} className={classes.card} />
+                    )}
+                  </Col>
+                  <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
+                    {props.loaded ? (
+                      <Button variant="contained" href={`/posts/${props.posts[3].name[props.lang]}`} className={classes.button}>
+                        <img className={classes.postImg} src={props.posts[3].img[1]} alt="" />
+                      </Button>
+                    ) : (
+                      <Skeleton height={255} className={classes.card} />
+                    )}
+                  </Col>
+                </Row>
+              </Container>
+            </Col>
+          </Row>
+        </Container>
+      </Hidden>
+      <Hidden mdUp>
+        <Typography className={`${classes.header} boldText`}> Posts </Typography>
+        {props.loaded ? (
+          <>
             <AutoPlaySwipeableViews
               axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
               index={activeStep}
@@ -162,27 +197,26 @@ const PostCardsComponent = (props) => {
                 </Button>
               )}
             />
-          </Hidden>
-        </>
-      ) : (
-        'loading'
-      )}
+          </>
+        ) : (
+          <div className={classes.cardMobPhotoContainer}>
+            <Skeleton className={classes.cardMobPhoto} />
+          </div>
+        )}
+      </Hidden>
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    lang: state.general.lang,
-    posts: state.postsElement.posts,
-  };
-};
+const mapStateToProps = (state) => ({
+  lang: state.general.lang,
+  posts: state.postsElement.posts,
+  loaded: (state.postsElement.posts.length === 4),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getPosts: () => getPosts()(dispatch),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getPosts: () => getPosts()(dispatch),
+});
 
 const PostCards = connect(
   mapStateToProps,

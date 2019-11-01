@@ -1,11 +1,10 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 import { makeStyles } from '@material-ui/core/styles';
 import Plx from 'react-plx';
 import {
   Grid, Box, Button, Typography, withWidth,
 } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
 import { links } from '../text/links';
 import { getBanners } from '../actions/banners';
@@ -40,6 +39,20 @@ const useStyles = makeStyles((theme) => ({
   },
   minImg: {
     maxWidth: '100%',
+  },
+  ImageSkeleton: {
+    margin: '1em',
+  },
+  TextSkeletons: {
+    width: '100%',
+    minWidth: '600px',
+    textAlign: 'center',
+  },
+  TextSkeleton: {
+    margin: '1em',
+    marginTop: '2em',
+    marginBottom: '2em',
+    maxWidth: '80%',
   },
 }));
 
@@ -81,45 +94,53 @@ const ProductParallaxBanner = (props) => {
 
   return (
     <>
-      {
-        (props.banner.length !== 0) ?
-          (
-            <>
-              <div className={classes.mainContainer}>
-                <Grid container direction="row" justify="space-around" alignItems="center">
-                  <Grid item>
-                    <Plx
-                      className="MyAwesomeParallax"
-                      parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
-                    >
-                      <img className={classes.minImg} src={props.banner[0].img} alt="" />
-                    </Plx>
-                  </Grid>
-                  <Grid item>
-                    <Box>
-                      <Typography className="lightText headerText middleText">
-                        {props.banner[0].thirdHeader[props.lang]}
-                      </Typography>
-                      <Typography className={`boldText headerText ${classes.itemName}`}>
-                        {props.banner[0].firstHeader[props.lang]}                
-                      </Typography>
-                      <Typography className={`boldText activeText ${classes.itemFact}`}>
-                        {props.banner[0].secondHeader[props.lang]}
-                      </Typography>
-                      <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-                        {props.banner[0].desc[props.lang]}
-                      </Typography>
-                      <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[props.lang]}</Button>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </div>
-              <div className={classes.spacing} />
-            </>
-          ) : (
-            "loading"
-          )
-      }
+      <div className={classes.mainContainer}>
+        <Grid container direction="row" justify="space-around" alignItems="center">
+          <Grid item>
+            {props.loaded ? (
+              <Plx
+                className="MyAwesomeParallax"
+                parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
+              >
+                <img className={classes.minImg} src={props.banner[0].img} alt="" />
+              </Plx>
+            ) : (
+              <Skeleton height={600} width={400} className={classes.ImageSkeleton} />
+            )}
+          </Grid>
+          <Grid item>
+            <Box>
+              {props.loaded ? (
+                <>
+                  <Typography className="lightText headerText middleText">
+                    {props.banner[0].thirdHeader[props.lang]}
+                  </Typography>
+                  <Typography className={`boldText headerText ${classes.itemName}`}>
+                    {props.banner[0].firstHeader[props.lang]}                
+                  </Typography>
+                  <Typography className={`boldText activeText ${classes.itemFact}`}>
+                    {props.banner[0].secondHeader[props.lang]}
+                  </Typography>
+                  <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
+                    {props.banner[0].desc[props.lang]}
+                  </Typography>
+
+                  <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[props.lang]}</Button>
+                </>
+              ) : (
+                <div className={classes.TextSkeletons}>
+                  <Skeleton height={22} className={classes.TextSkeleton} />
+                  <Skeleton height={22} className={classes.TextSkeleton} />
+                  <Skeleton height={22} className={classes.TextSkeleton} />
+                  <Skeleton height={22} className={classes.TextSkeleton} />
+                  <Skeleton height={22} className={classes.TextSkeleton} />
+                </div>
+              )}
+            </Box>
+          </Grid>
+        </Grid>
+      </div>
+      <div className={classes.spacing} />
     </>
   );
 };
@@ -128,6 +149,7 @@ const mapStateToProps = (state) => {
   return {
     lang: state.general.lang,
     banner: state.bannersElement.parallaxMainBanner,
+    loaded: (state.bannersElement.parallaxMainBanner.length !== 0),
   };
 };
 
