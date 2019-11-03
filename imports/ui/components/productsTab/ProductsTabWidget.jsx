@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabHeader: {
     boxShadow: 'none',
+    marginTop: '70px',
   },
   tabMobile: {
     fontSize: '30px',

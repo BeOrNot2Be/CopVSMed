@@ -35,10 +35,12 @@ const useStyles = makeStyles((theme) => ({
   spacing: {
     height: '70px',
     backgroundColor: '#ffffff',
+    position: 'relative',
     zIndex: '100000',
   },
   minImg: {
     maxWidth: '100%',
+    zIndex: '100',
   },
   ImageSkeleton: {
     margin: '1em',
@@ -53,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '2em',
     marginBottom: '2em',
     maxWidth: '80%',
+  },
+  textBox: {
+    zIndex: '100000',
   },
 }));
 
@@ -108,7 +113,7 @@ const ProductParallaxBanner = (props) => {
               <Skeleton height={600} width={400} className={classes.ImageSkeleton} />
             )}
           </Grid>
-          <Grid item>
+          <Grid item className={classes.textBox}>
             <Box>
               {props.loaded ? (
                 <>
