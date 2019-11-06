@@ -4,28 +4,11 @@ import NewsReducer from './newsReducer';
 import ReviewsReducer from './reviewsReducer';
 import BannersReducer from './bannersReducer';
 import ProductsReducer from './productsReducer';
+import GeneralReducer from './generalReducer';
 
-let initLanguage = navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage || 'en-US';
-
-if (initLanguage.includes('en')) initLanguage = 'en';
-
-const initState = {
-  lang: initLanguage,
-  user: {},
-  token: 'some token gen',
-  postsElement: {},
-  newsElement: {},
-  bannersElement: {},
-  reviewsElement: {},
-  productsElement: {},
-};
-
-const generalReducer = (state = initState, action) => {
-  return state;
-};
 
 const rootReducer = combineReducers({
-  general: generalReducer,
+  general: GeneralReducer,
   reviewsElement: ReviewsReducer,
   postsElement: PostsReducer,
   newsElement: NewsReducer,

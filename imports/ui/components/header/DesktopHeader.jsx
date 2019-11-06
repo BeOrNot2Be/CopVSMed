@@ -4,6 +4,8 @@ import {
   Container, Grid, Box, Button,
 } from '@material-ui/core';
 import { ShoppingBasketRounded } from '@material-ui/icons';
+import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,15 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const usr = {
-  cart: {
-    items: ['model 1', 'model 2', 'model 43'],
-    sum: '150.65$',
-  },
-};
-
-const DesktopHeader = () => {
+const DesktopHeaderComponent = (props) => {
   const classes = useStyles();
+  const [t, i18n] = useTranslation('translation');
 
   return (
     <>
@@ -67,22 +63,22 @@ const DesktopHeader = () => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button href={links.support.url} className={classes.link}>
-                      {links.support.name}
+                      {t(links.support.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.delevery.url} className={classes.link}>
-                      {links.delevery.name}
+                    <Button href={links.delivery.url} className={classes.link}>
+                      {t(links.delivery.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.legal.url} className={classes.link}>
-                      {links.legal.name}
+                      {t(links.legal.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.about_us.url} className={classes.link}>
-                      {links.about_us.name}
+                      {t(links.about_us.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -93,21 +89,21 @@ const DesktopHeader = () => {
                     <Button className={classes.link}>
                       <ShoppingBasketRounded style={{ marginRight: '5px' }} />
                       {' '}
-                      {usr.cart.sum}
+                      {`${props.cart.sum}$`}
                       {' '}
-                      {usr.cart.items.length}
+                      {props.cart.items.length}
                       {' '}
-                      {usr.cart.items.length > 1 ? <>Items</> : <>Items</>}
+                      {props.cart.items.length > 1 ? <>Items</> : <>Items</>}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.login.url} className={classes.link}>
-                      {links.login.name}
+                      {t(links.login.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.register.url} className={classes.link}>
-                      {links.register.name}
+                      {t(links.register.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -134,32 +130,32 @@ const DesktopHeader = () => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button href={links.home.url} className={classes.link}>
-                      {links.home.name}
+                      {t(links.home.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.men.url} className={classes.link}>
-                      {links.men.name}
+                      {t(links.men.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.women.url} className={classes.link}>
-                      {links.women.name}
+                      {t(links.women.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.kids.url} className={classes.link}>
-                      {links.kids.name}
+                      {t(links.kids.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.brands.url} className={classes.link}>
-                      {links.brands.name}
+                      {t(links.brands.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.sales.url} className={classes.link}>
-                      {links.sales.name}
+                      {t(links.sales.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -172,5 +168,17 @@ const DesktopHeader = () => {
     </>
   );
 };
+
+
+const mapStateToProps = (state) => {
+  return {
+    cart: state.general.cart,
+  };
+};
+
+const DesktopHeader = connect(
+  mapStateToProps,
+  null,
+)(DesktopHeaderComponent);
 
 export default DesktopHeader;

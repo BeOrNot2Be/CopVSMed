@@ -10,6 +10,7 @@ import {
   Storefront, Close, ExpandMore, ExpandLess,
   Menu, AccountCircle,
 } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import { links } from '../../text/links.js';
 
 
@@ -81,6 +82,8 @@ const MobileHeader = () => {
     setState({ ...state, [side]: open });
   };
 
+  const [t, i18n] = useTranslation('translation');
+
   const fullList = side => (
     <div
       className={`${classes.fullList} lightText`}
@@ -100,18 +103,18 @@ const MobileHeader = () => {
                   <AccountCircle className={classes.icons} />
                 </Badge>
               </ListItemAvatar>
-              <ListItemText primary={links.account.name} />
+              <ListItemText primary={t(links.account.name)} />
             </>
           ) : (
             <>
               <AccountCircle className={classes.icons} />
-              <ListItemText primary={links.account.name} />
+              <ListItemText primary={t(links.account.name)} />
             </>
           )}
         </ListItem>
         <ListItem button href={links.home.url}>
           <ListItemIcon><HomeRounded className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={links.home.name} />
+          <ListItemText primary={t(links.home.name)} />
         </ListItem>
         <Divider />
         <ListItem button onClick={handleClick}>
@@ -123,31 +126,31 @@ const MobileHeader = () => {
           <List component="div">
             <ListItem button href={links.men.url}>
               <ListItemIcon />
-              <ListItemText primary={links.men.name} />
+              <ListItemText primary={t(links.men.name)} />
             </ListItem>
             <ListItem button href={links.women.url}>
               <ListItemIcon />
-              <ListItemText primary={links.women.name} />
+              <ListItemText primary={t(links.women.name)} />
             </ListItem>
             <ListItem button href={links.kids.url}>
               <ListItemIcon />
-              <ListItemText primary={links.kids.name} />
+              <ListItemText primary={t(links.kids.name)} />
             </ListItem>
             <ListItem button href={links.sales.url}>
               <ListItemIcon />
-              <ListItemText primary={links.sales.name} />
+              <ListItemText primary={t(links.sales.name)} />
             </ListItem>
           </List>
         </Collapse>
         <Divider />
         <ListItem button href={links.brands.url}>
           <ListItemIcon><Storefront className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={links.brands.name} />
+          <ListItemText primary={t(links.brands.name)} />
         </ListItem>
         <Divider />
         <ListItem button href={links.support.url}>
           <ListItemIcon><Help className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={links.support.name} />
+          <ListItemText primary={t(links.support.name)} />
         </ListItem>
         <Divider />
         <ListItem button onClick={() => setOpenTherms(!openTherms)}>
@@ -157,17 +160,17 @@ const MobileHeader = () => {
         </ListItem>
         <Collapse in={openTherms} timeout="auto" unmountOnExit>
           <List component="div">
-            <ListItem button href={links.delevery.url}>
+            <ListItem button href={links.delivery.url}>
               <ListItemIcon />
-              <ListItemText primary={links.delevery.name} />
+              <ListItemText primary={t(links.delivery.name)} />
             </ListItem>
             <ListItem button href={links.about_us.url}>
               <ListItemIcon />
-              <ListItemText primary={links.about_us.name} />
+              <ListItemText primary={t(links.about_us.name)} />
             </ListItem>
             <ListItem button href={links.legal.url}>
               <ListItemIcon />
-              <ListItemText primary={links.legal.name} />
+              <ListItemText primary={t(links.legal.name)} />
             </ListItem>
           </List>
         </Collapse>

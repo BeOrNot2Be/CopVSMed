@@ -5,6 +5,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import App from '../imports/ui/App.jsx';
 import rootReducer from '../imports/ui/reducers';
+import './i18n';
+
 
 const middleware = [];
 
@@ -27,5 +29,12 @@ const store = createStore(
 );
 
 Meteor.startup(() => {
-  render(<Provider store={store}><App /></Provider>, document.getElementById('react-target'));
+  render(
+    (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    ),
+    document.getElementById('react-target'),
+  );
 });

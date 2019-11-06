@@ -140,8 +140,16 @@ const BannersSchema = new SimpleSchema({
   },
 });
 
+const LanguagesSchema = new SimpleSchema({
+  sign: {
+    label: 'Language browser code',
+    type: String,
+  },
+});
+
 News.attachSchema(NewsSchema);
 Reviews.attachSchema(ReviewsSchema);
 Products.attachSchema(ProductsSchema);
 Posts.attachSchema(PostsSchema);
 Banners.attachSchema(BannersSchema);
+Languages.attachSchema(LanguagesSchema);

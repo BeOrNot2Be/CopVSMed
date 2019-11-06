@@ -5,6 +5,7 @@ import {
   Button, Container, Box, Grid, Avatar, ListItemAvatar,
   ListItemText, ListItem, List,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FooterMap = () => {
   const classes = useStyles();
+  const [t, i18n] = useTranslation('translation');
 
   return (
     <Box>
@@ -82,19 +84,19 @@ const FooterMap = () => {
                 <ListItemText className={`${classes.primary} lightboldText`} primary="Navigation" />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.home.url} className={classes.button}>{links.home.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.home.url} className={classes.button}>{t(links.home.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.about_us.url} className={classes.button}>{links.about_us.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.about_us.url} className={classes.button}>{t(links.about_us.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.latest_news.url} className={classes.button}>{links.latest_news.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.latest_news.url} className={classes.button}>{t(links.latest_news.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.reviewes.url} className={classes.button}>{links.reviewes.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.reviews.url} className={classes.button}>{t(links.reviews.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.brands.url} className={classes.button}>{links.brands.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.brands.url} className={classes.button}>{t(links.brands.name)}</Button>} />
               </ListItem>
             </List>
           </Grid>
@@ -104,19 +106,19 @@ const FooterMap = () => {
                 <ListItemText className={`${classes.primary} lightboldText`} primary="Categories" />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.men.url} className={classes.button}>{links.men.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.men.url} className={classes.button}>{t(links.men.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.women.url} className={classes.button}>{links.women.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.women.url} className={classes.button}>{t(links.women.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.kids.url} className={classes.button}>{links.kids.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.kids.url} className={classes.button}>{t(links.kids.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.baby.url} className={classes.button}>{links.baby.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.baby.url} className={classes.button}>{t(links.baby.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.accessories.url} className={classes.button}>{links.accessories.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.accessories.url} className={classes.button}>{t(links.accessories.name)}</Button>} />
               </ListItem>
             </List>
           </Grid>
@@ -126,16 +128,16 @@ const FooterMap = () => {
                 <ListItemText className={`${classes.primary} lightboldText`} primary="Sales" />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.arrivals.url} className={classes.button}>{links.arrivals.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.arrivals.url} className={classes.button}>{t(links.arrivals.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.popular.url} className={classes.button}>{links.popular.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.popular.url} className={classes.button}>{t(links.popular.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.top_pics.url} className={classes.button}>{links.top_pics.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.top_pics.url} className={classes.button}>{t(links.top_pics.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.outlet.url} className={classes.button}>{links.outlet.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.outlet.url} className={classes.button}>{t(links.outlet.name)}</Button>} />
               </ListItem>
             </List>
           </Grid>
@@ -145,19 +147,19 @@ const FooterMap = () => {
                 <ListItemText className={`${classes.primary} lightboldText`} primary="SUPPORT" />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.ship_diliver.url} className={classes.button}>{links.ship_diliver.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.ship_delivery.url} className={classes.button}>{t(links.ship_delivery.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.return_policy.url} className={classes.button}>{links.return_policy.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.return_policy.url} className={classes.button}>{t(links.return_policy.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.service_terms.url} className={classes.button}>{links.service_terms.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.service_terms.url} className={classes.button}>{t(links.service_terms.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.privacy.url} className={classes.button}>{links.privacy.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.privacy.url} className={classes.button}>{t(links.privacy.name)}</Button>} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.contacts.url} className={classes.button}>{links.contacts.name}</Button>} />
+                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.contacts.url} className={classes.button}>{t(links.contacts.name)}</Button>} />
               </ListItem>
             </List>
           </Grid>

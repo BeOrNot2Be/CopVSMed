@@ -64,7 +64,7 @@ if (Meteor.isServer) {
     return Products.find({});
   });
 
-  Meteor.publish('languagesAll', function () {
+  Meteor.publish('languages', function () {
     // switch
     return Languages.find({});
   });
