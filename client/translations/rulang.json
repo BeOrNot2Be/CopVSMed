@@ -31,5 +31,32 @@
     "facebook": "FaceBook",
     "pinterest": "Pinterest",
     "twitter": "Twitter"
+  },
+  "general": {
+    "call_us": "Позвоните нам",
+    "email_us": "Напишите нам",
+    "address": "Адрес",
+    "navigation": "Навигация",
+    "categories": "Категории",
+    "sales": "Скидки",
+    "support": "Поддержкa",
+    "item": "Предмет",
+    "items": "Предметы",
+    "new_tab": "Новинки",
+    "popular_tab": "Популярные",
+    "top_tab": "Лучший выбор",
+    "news": "Новости",
+    "posts": "Посты",
+    "therms": "Термы",
+    "clothe": "Одежда",
+    "help_button_header": "Ищете помощь?",
+    "help_button_secondary": "Есть вопросы или нужна помощь с заказом? Дайте нам знать!",
+    "help_button": "ЗАДАТЬ ЗАПРОС",
+    "mail_footer":"Бесплатная доставка по Европе",
+    "guarantee_footer":"Гарантия возврата денег",
+    "call_footer":"24/7 Поддержка клиентов",
+    "price_footer":"Самые низкие цены гарантированы",
+    "items_footer":"Эксклюзивные товары для Спортсхол",
+    "delivery_footer":"5-дневная доставка по Европе"
   }
 }

@@ -58,7 +58,7 @@ const FooterMap = () => {
                     <PhoneInTalk />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="CALL US" secondary="0 (1234) 567 890" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.call_us')} secondary="0 (1234) 567 890" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
               </ListItem>
               <ListItem>
                 <ListItemAvatar>
@@ -66,7 +66,7 @@ const FooterMap = () => {
                     <MailSharp />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="EMAIL US" secondary="hello@sportshold.com" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.email_us')} secondary="hello@sportshold.com" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
               </ListItem>
               <ListItem>
                 <ListItemAvatar>
@@ -74,14 +74,14 @@ const FooterMap = () => {
                     <Room />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="ADDRESS" secondary="40 Baria Sreet 133/2, NY, US" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.address')} secondary="40 Baria Sreet 133/2, NY, US" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
               </ListItem>
             </List>
           </Grid>
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="Navigation" />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.navigation')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.home.url} className={classes.button}>{t(links.home.name)}</Button>} />
@@ -103,7 +103,7 @@ const FooterMap = () => {
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="Categories" />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.categories')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.men.url} className={classes.button}>{t(links.men.name)}</Button>} />
@@ -125,7 +125,7 @@ const FooterMap = () => {
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="Sales" />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.sales')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.arrivals.url} className={classes.button}>{t(links.arrivals.name)}</Button>} />
@@ -144,7 +144,7 @@ const FooterMap = () => {
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary="SUPPORT" />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.support')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.ship_delivery.url} className={classes.button}>{t(links.ship_delivery.name)}</Button>} />

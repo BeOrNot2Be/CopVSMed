@@ -119,7 +119,7 @@ const MobileHeader = () => {
         <Divider />
         <ListItem button onClick={handleClick}>
           <ListItemIcon><Store className={classes.icons} /></ListItemIcon>
-          <ListItemText primary="Clothe" />
+          <ListItemText primary={t('general.clothe')} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openStore} timeout="auto" unmountOnExit>
@@ -155,7 +155,7 @@ const MobileHeader = () => {
         <Divider />
         <ListItem button onClick={() => setOpenTherms(!openTherms)}>
           <ListItemIcon><Description className={classes.icons} /></ListItemIcon>
-          <ListItemText primary="Therms" />
+          <ListItemText primary={t('general.therms')} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openTherms} timeout="auto" unmountOnExit>

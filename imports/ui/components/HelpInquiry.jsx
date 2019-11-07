@@ -4,6 +4,7 @@ import {
   Container, Grid, Box, Button, Typography, Hidden,
 } from '@material-ui/core';
 import { MailSharp } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import { links } from '../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 const helpInquiry = () => {
   const classes = useStyles();
+  const [t, i18n] = useTranslation('translation');
 
   return (
     <div className={classes.helpInquiry}>
@@ -66,10 +68,10 @@ const helpInquiry = () => {
                 </Grid>
                 <Grid item md={7} sm={9} xs={9} className={classes.TextBox}>
                   <Typography className={`${classes.header} lightboldText`}>
-                    Looking for help?
+                    {t('general.help_button_header')}
                   </Typography>
                   <Typography className={`${classes.subHeader} lightText`}>
-                    Have any questions or need help with order? Let us know!
+                    {t('general.help_button_secondary')}
                   </Typography>
                 </Grid>
               </Grid>
@@ -79,7 +81,7 @@ const helpInquiry = () => {
             </Hidden>
             <Grid item md={3} sm={12} xs={12} className={classes.helpButtonCell}>
               <Button href={links.brands.url} className={`${classes.helpButton} lightboldText`}>
-                MAKE AN INQUIRY
+                {t('general.help_button')}
               </Button>
             </Grid>
           </Grid>

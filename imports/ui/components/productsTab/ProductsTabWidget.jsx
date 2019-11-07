@@ -6,6 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import ProductTab from './ProductTab.jsx';
 import { getProducts } from '../../actions/products';
 
@@ -100,13 +101,15 @@ const ProductsTabsComponent = (props) => {
     props.getProducts();
   }, []);
 
+  const [t, i18n] = useTranslation('translation');
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.tabHeader}>
         <Tabs value={value} onChange={handleChange} centered aria-label="simple tabs example" className={classes.tab}>
-          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="New" {...a11yProps(0)} />
-          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="Popular" {...a11yProps(1)} />
-          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label="Top Picks" {...a11yProps(2)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('general.new_tab')} {...a11yProps(0)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('general.popular_tab')} {...a11yProps(1)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('general.top_tab')} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       {props.loaded ? (

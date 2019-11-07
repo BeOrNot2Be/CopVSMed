@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import NewsPlate from './NewsPlate.jsx';
 import { getNews } from '../actions/news';
 
@@ -33,11 +34,12 @@ const NewsPlatesComponent = (props) => {
   React.useEffect(() => {
     props.getNews();
   }, []);
+  const [t, i18n] = useTranslation('translation');
 
   return (
     <div className={classes.root}>
       <Typography className={`${classes.header} boldText`}>
-        LATEST NEWS {/*translate */}
+        {t('general.news')}
       </Typography>
       <Box>
         <Container>

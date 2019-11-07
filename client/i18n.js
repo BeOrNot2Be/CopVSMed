@@ -25,14 +25,14 @@ i18n
       en: {
         translation: enlang,
       },
-      es: {
-        translation: eslang,
-      },
       zh: {
         translation: zhlang,
       },
       ru: {
         translation: rulang,
+      },
+      es: {
+        translation: eslang,
       },
     },
   });

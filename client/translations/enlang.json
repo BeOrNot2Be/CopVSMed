@@ -31,5 +31,33 @@
     "facebook": "FaceBook",
     "pinterest": "Pinterest",
     "twitter": "Twitter"
+  },
+  "general": {
+    "call_us": "Call Us",
+    "email_us": "Email Us",
+    "address": "Address",
+    "navigation": "Navigation",
+    "categories": "Categories",
+    "sales": "Sales",
+    "support": "Support",
+    "item": "Item",
+    "items": "Items",
+    "new_tab": "New",
+    "popular_tab": "Popular",
+    "top_tab": "Top Picks",
+    "news": "Latest News",
+    "posts": "Posts",
+    "therms": "Therms",
+    "clothe": "Clothe",
+    "help_button_header": "Looking for help?",
+    "help_button_secondary": "Have any questions or need help with order? Let us know!",
+    "help_button": "MAKE AN INQUIRY",
+    "mail_footer":"Free Shipping in Europe",
+    "guarantee_footer":"Money Back Guarantee",
+    "call_footer":"24/7 Customer Support",
+    "price_footer":"Lowest Prices Guaranteed",
+    "items_footer":"Exclusive Items for Sportshol",
+    "delivery_footer":"5-Day Delivery in Europe"
+    
   }
 }

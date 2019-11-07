@@ -4,6 +4,7 @@ import {
   AccountBalanceWallet, Drafts, Phone, MonetizationOn,
   Redeem, LocalShipping,
 } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import IconsList from '../IconsList.jsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,31 +24,32 @@ const useStyles = makeStyles((theme) => ({
 
 const FooterBenefits = () => {
   const classes = useStyles();
+  const [t, i18n] = useTranslation('translation');
 
   const benefits = [
     {
       icon: (<Drafts className={classes.icon} />),
-      text: 'Free Shipping in Europe',
+      text: t('general.mail_footer'),
     },
     {
       icon: (<AccountBalanceWallet className={classes.icon} />),
-      text: 'Money Back Guarantee',
+      text: t('general.guarantee_footer'),
     },
     {
       icon: (<Phone className={classes.icon} />),
-      text: '24/7 Customer Support',
+      text: t('general.call_footer'),
     },
     {
       icon: (<MonetizationOn className={classes.icon} />),
-      text: 'Lowest Prices Guaranteed',
+      text: t('general.price_footer'),
     },
     {
       icon: (<Redeem className={classes.icon} />),
-      text: 'Exclusive Items for Sportshol',
+      text: t('general.items_footer'),
     },
     {
       icon: (<LocalShipping className={classes.icon} />),
-      text: '5-Day Delivery in Europe',
+      text: t('general.delivery_footer'),
     },
   ];
 

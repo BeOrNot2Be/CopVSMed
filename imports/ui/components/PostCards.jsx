@@ -9,6 +9,7 @@ import { Skeleton } from '@material-ui/lab';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { getPosts } from '../actions/posts';
 
 const useStyles = makeStyles((theme) => ({
@@ -105,6 +106,7 @@ const PostCardsComponent = (props) => {
   React.useEffect(() => {
     props.getPosts();
   }, []);
+  const [t, i18n] = useTranslation('translation');
 
   return (
     <>
@@ -157,7 +159,7 @@ const PostCardsComponent = (props) => {
         </Container>
       </Hidden>
       <Hidden mdUp>
-        <Typography className={`${classes.header} boldText`}> Posts </Typography>
+        <Typography className={`${classes.header} boldText`}>{t('general.posts')}</Typography>
         {props.loaded ? (
           <>
             <AutoPlaySwipeableViews

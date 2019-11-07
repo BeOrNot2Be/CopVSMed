@@ -6,11 +6,11 @@ import HomePage from './pages/Home.jsx';
 
 const App = (props) => {
   return (
-    <>      
+    <>
       <Header />
-        <Router>
-          <HomePage path="/" />
-        </Router>
+      <Router>
+        <HomePage path="/" />
+      </Router>
       <Footer />
     </>
   );

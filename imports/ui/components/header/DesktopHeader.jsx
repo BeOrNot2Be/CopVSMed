@@ -93,7 +93,7 @@ const DesktopHeaderComponent = (props) => {
                       {' '}
                       {props.cart.items.length}
                       {' '}
-                      {props.cart.items.length > 1 ? <>Items</> : <>Items</>}
+                      {props.cart.items.length > 1 ? t('general.item') : t('general.item')}
                     </Button>
                   </Grid>
                   <Grid item>
