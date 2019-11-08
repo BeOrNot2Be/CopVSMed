@@ -3,12 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar, Toolbar, IconButton,
   Drawer, List, Divider, ListItem, ListItemIcon, ListItemText,
-  ListItemAvatar, Collapse, Badge, Box, Avatar,
+  ListItemAvatar, Collapse, Badge, Box, Avatar, Modal, Button, Grid,
 } from '@material-ui/core';
 import {
   Description, HomeRounded, Store, Help,
   Storefront, Close, ExpandMore, ExpandLess,
-  Menu, AccountCircle,
+  Menu, AccountCircle, GTranslate,
 } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import { links } from '../../text/links.js';
@@ -42,7 +42,47 @@ const useStyles = makeStyles((theme) => ({
   AccountAlerts: {
     backgroundColor: '#ff7270',
   },
+  paper: {
+    position: 'absolute',
+    width: 'calc(100% - 32px)',
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: '16px',
+  },
+  LangCloseIcon: {
+    color: '#482423',
+  },
+  LangCloseButton: {
+    float: 'right',
+  },
+  LangCode: {
+    fontSize: '22px',
+    color: '#482423',
+  },
+  LangCodes: {
+    paddingTop: '26px',
+  },
+  LangModal: {
+    zIndex: '100000!important',
+  },
+  TopMenu: {
+    zIndex: '100000!important',
+  },
 }));
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    transform: `translate(0, -${left}%)`,
+  };
+}
 
 const MobileHeader = () => {
   const classes = useStyles();
@@ -61,7 +101,7 @@ const MobileHeader = () => {
   const handleClick = () => {
     setOpenStore(!openStore);
   };
-
+  /*
   const handleChange = event => {
     setAuth(event.target.checked);
   };
@@ -73,7 +113,8 @@ const MobileHeader = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  Login Account work
+  */
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -81,6 +122,18 @@ const MobileHeader = () => {
 
     setState({ ...state, [side]: open });
   };
+
+  const [LangOpen, setLangOpen] = React.useState(false);
+
+  const LangHandleOpen = () => {
+    setLangOpen(true);
+  };
+
+  const LangHandleClose = () => {
+    setLangOpen(false);
+  };
+
+  const [modalStyle] = React.useState(getModalStyle);
 
   const [t, i18n] = useTranslation('translation');
 
@@ -174,6 +227,51 @@ const MobileHeader = () => {
             </ListItem>
           </List>
         </Collapse>
+        <ListItem button onClick={LangHandleOpen}>
+          <ListItemIcon><GTranslate className={classes.icons} /></ListItemIcon>
+          <ListItemText primary={t('general.languages')} />
+        </ListItem>
+        <Modal
+          aria-labelledby="lang-modal-title"
+          aria-describedby="lang-modal-description"
+          open={LangOpen}
+          onClose={LangHandleClose}
+          className={classes.LangModal}
+        >
+          <div style={modalStyle} className={classes.paper}>
+            <Button onClick={LangHandleClose} className={classes.LangCloseButton}>
+              <Close className={classes.LangCloseIcon} />
+            </Button>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              className={classes.LangCodes}
+            >
+              <Grid item>
+                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('en'); LangHandleClose(); }}>
+                  EN
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('es'); LangHandleClose(); }}>
+                  ES
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('zh'); LangHandleClose(); }}>
+                  ZH
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('ru'); LangHandleClose(); }}>
+                  RU
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        </Modal>
       </List>
     </div>
   );
@@ -187,7 +285,7 @@ const MobileHeader = () => {
         <IconButton onClick={toggleDrawer('top', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           <Menu />
         </IconButton>
-        <Drawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)}>
+        <Drawer anchor="top" open={state.top} className={classes.TopMenu} onClose={toggleDrawer('top', false)}>
           {fullList('top')}
         </Drawer>
       </Toolbar>

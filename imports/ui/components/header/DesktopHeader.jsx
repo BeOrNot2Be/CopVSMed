@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Container, Grid, Box, Button,
+  Container, Grid, Box, Button, Menu, MenuItem,
 } from '@material-ui/core';
-import { ShoppingBasketRounded } from '@material-ui/icons';
+import { ShoppingBasketRounded, GTranslate } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { links } from '../../text/links.js';
@@ -46,6 +46,16 @@ const useStyles = makeStyles((theme) => ({
 
 const DesktopHeaderComponent = (props) => {
   const classes = useStyles();
+  const [LangButtonState, setLangButtonState] = React.useState(null);
+
+  const LangButtonHandleClick = event => {
+    setLangButtonState(event.currentTarget);
+  };
+
+  const LangButtonHandleClose = () => {
+    setLangButtonState(null);
+  };
+
   const [t, i18n] = useTranslation('translation');
 
   return (
@@ -85,6 +95,31 @@ const DesktopHeaderComponent = (props) => {
               </Grid>
               <Grid item>
                 <Grid container spacing={1}>
+                  <Grid item>
+                    <Button aria-controls="lang-menu" aria-haspopup="true" onClick={LangButtonHandleClick} className={classes.link}>
+                      <GTranslate />
+                    </Button>
+                    <Menu
+                      id="lang-menu"
+                      anchorEl={LangButtonState}
+                      keepMounted
+                      open={Boolean(LangButtonState)}
+                      onClose={LangButtonHandleClose}
+                    >
+                      <MenuItem onClick={() => { i18n.changeLanguage('en'); LangButtonHandleClose(); }}>
+                        EN
+                      </MenuItem>
+                      <MenuItem onClick={() => { i18n.changeLanguage('zh'); LangButtonHandleClose(); }}>
+                        ZH
+                      </MenuItem>
+                      <MenuItem onClick={() => { i18n.changeLanguage('es'); LangButtonHandleClose(); }}>
+                        ES
+                      </MenuItem>
+                      <MenuItem onClick={() => { i18n.changeLanguage('ru'); LangButtonHandleClose(); }}>
+                        RU
+                      </MenuItem>
+                    </Menu>
+                  </Grid>
                   <Grid item>
                     <Button className={classes.link}>
                       <ShoppingBasketRounded style={{ marginRight: '5px' }} />

@@ -13,7 +13,8 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    debug: true,
+    whitelist: ['en', 'ru', 'zh', 'es'],
+    debug: true, // test version
     interpolation: {
       escapeValue: false,
     },
