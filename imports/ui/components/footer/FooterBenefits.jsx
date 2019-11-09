@@ -4,7 +4,6 @@ import {
   AccountBalanceWallet, Drafts, Phone, MonetizationOn,
   Redeem, LocalShipping,
 } from '@material-ui/icons';
-import { useTranslation } from 'react-i18next';
 import IconsList from '../IconsList.jsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FooterBenefits = () => {
   const classes = useStyles();
-  const [t, i18n] = useTranslation('translation');
+  const t = smth => smth;
 
   const benefits = [
     {

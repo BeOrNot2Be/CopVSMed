@@ -5,7 +5,6 @@ import {
   Button, Container, Box, Grid, Avatar, ListItemAvatar,
   ListItemText, ListItem, List,
 } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
 import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FooterMap = () => {
   const classes = useStyles();
-  const [t, i18n] = useTranslation('translation');
+  const t = smth => smth;
 
   return (
     <Box>

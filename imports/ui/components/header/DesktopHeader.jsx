@@ -5,7 +5,9 @@ import {
 } from '@material-ui/core';
 import { ShoppingBasketRounded, GTranslate } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import {setLanguage} from 'redux-i18n';
+import { getTranslateFunction } from "redux-i18n";
+import PropTypes from 'prop-types';
 import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DesktopHeaderComponent = (props) => {
+const DesktopHeaderComponent = (props, context) => {
   const classes = useStyles();
   const [LangButtonState, setLangButtonState] = React.useState(null);
 
@@ -56,7 +58,7 @@ const DesktopHeaderComponent = (props) => {
     setLangButtonState(null);
   };
 
-  const [t, i18n] = useTranslation('translation');
+  const t = (lang) => lang;
 
   return (
     <>
@@ -73,22 +75,22 @@ const DesktopHeaderComponent = (props) => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button href={links.support.url} className={classes.link}>
-                      {t(links.support.name)}
+                      {context.t(links.support.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.delivery.url} className={classes.link}>
-                      {t(links.delivery.name)}
+                      {context.t(links.delivery.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.legal.url} className={classes.link}>
-                      {t(links.legal.name)}
+                      {context.t(links.legal.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.about_us.url} className={classes.link}>
-                      {t(links.about_us.name)}
+                      {context.t(links.about_us.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -106,16 +108,16 @@ const DesktopHeaderComponent = (props) => {
                       open={Boolean(LangButtonState)}
                       onClose={LangButtonHandleClose}
                     >
-                      <MenuItem onClick={() => { i18n.changeLanguage('en'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { props.changeLanguage('en'); LangButtonHandleClose(); }}>
                         EN
                       </MenuItem>
-                      <MenuItem onClick={() => { i18n.changeLanguage('zh'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { props.changeLanguage('zh'); LangButtonHandleClose(); }}>
                         ZH
                       </MenuItem>
-                      <MenuItem onClick={() => { i18n.changeLanguage('es'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { props.changeLanguage('es'); LangButtonHandleClose(); }}>
                         ES
                       </MenuItem>
-                      <MenuItem onClick={() => { i18n.changeLanguage('ru'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { props.changeLanguage('ru'); LangButtonHandleClose(); }}>
                         RU
                       </MenuItem>
                     </Menu>
@@ -128,17 +130,17 @@ const DesktopHeaderComponent = (props) => {
                       {' '}
                       {props.cart.items.length}
                       {' '}
-                      {props.cart.items.length > 1 ? t('general.item') : t('general.item')}
+                      {props.cart.items.length > 1 ? context.t('items') : context.t('item')}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.login.url} className={classes.link}>
-                      {t(links.login.name)}
+                      {context.t(links.login.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.register.url} className={classes.link}>
-                      {t(links.register.name)}
+                      {context.t(links.register.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -165,32 +167,32 @@ const DesktopHeaderComponent = (props) => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button href={links.home.url} className={classes.link}>
-                      {t(links.home.name)}
+                      {context.t(links.home.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.men.url} className={classes.link}>
-                      {t(links.men.name)}
+                      {context.t(links.men.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.women.url} className={classes.link}>
-                      {t(links.women.name)}
+                      {context.t(links.women.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.kids.url} className={classes.link}>
-                      {t(links.kids.name)}
+                      {context.t(links.kids.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.brands.url} className={classes.link}>
-                      {t(links.brands.name)}
+                      {context.t(links.brands.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.sales.url} className={classes.link}>
-                      {t(links.sales.name)}
+                      {context.t(links.sales.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -204,6 +206,10 @@ const DesktopHeaderComponent = (props) => {
   );
 };
 
+DesktopHeaderComponent.contextTypes = {
+  t: PropTypes.func.isRequired
+}
+
 
 const mapStateToProps = (state) => {
   return {
@@ -211,9 +217,15 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapActionsToProps = (dispatch) => {
+  return {
+    changeLanguage: (lang) => dispatch(setLanguage(lang)),
+  };
+};
+
 const DesktopHeader = connect(
   mapStateToProps,
-  null,
+  mapActionsToProps,
 )(DesktopHeaderComponent);
 
 export default DesktopHeader;
