@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DesktopHeaderComponent = (props, context) => {
+  const {
+    changeLanguage,
+    cart,
+  } = props;
   const classes = useStyles();
   const [LangButtonState, setLangButtonState] = React.useState(null);
 
@@ -107,16 +111,16 @@ const DesktopHeaderComponent = (props, context) => {
                       open={Boolean(LangButtonState)}
                       onClose={LangButtonHandleClose}
                     >
-                      <MenuItem onClick={() => { props.changeLanguage('en'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { changeLanguage('en'); LangButtonHandleClose(); }}>
                         EN
                       </MenuItem>
-                      <MenuItem onClick={() => { props.changeLanguage('zh'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { changeLanguage('zh'); LangButtonHandleClose(); }}>
                         ZH
                       </MenuItem>
-                      <MenuItem onClick={() => { props.changeLanguage('es'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { changeLanguage('es'); LangButtonHandleClose(); }}>
                         ES
                       </MenuItem>
-                      <MenuItem onClick={() => { props.changeLanguage('ru'); LangButtonHandleClose(); }}>
+                      <MenuItem onClick={() => { changeLanguage('ru'); LangButtonHandleClose(); }}>
                         RU
                       </MenuItem>
                     </Menu>
@@ -125,11 +129,11 @@ const DesktopHeaderComponent = (props, context) => {
                     <Button className={classes.link}>
                       <ShoppingBasketRounded style={{ marginRight: '5px' }} />
                       {' '}
-                      {`${props.cart.sum}$`}
+                      {`${cart.sum}$`}
                       {' '}
-                      {props.cart.items.length}
+                      {cart.items.length}
                       {' '}
-                      {props.cart.items.length === 1 ? t('item') : t('items')}
+                      {cart.items.length === 1 ? t('item') : t('items')}
                     </Button>
                   </Grid>
                   <Grid item>
@@ -209,6 +213,10 @@ DesktopHeaderComponent.contextTypes = {
   t: PropTypes.func.isRequired,
 };
 
+DesktopHeaderComponent.propTypes = {
+  changeLanguage: PropTypes.func.isRequired,
+  cart: PropTypes.any.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {

@@ -87,6 +87,9 @@ function getModalStyle() {
 }
 
 const MobileHeaderComponent = (props, context) => {
+  const {
+    changeLanguage,
+  } = props;
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [openStore, setOpenStore] = React.useState(false);
@@ -117,12 +120,12 @@ const MobileHeaderComponent = (props, context) => {
   };
   Login Account work
   */
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = (open) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [side]: open });
+    setState({ ...state, ['top']: open });
   };
 
   const [LangOpen, setLangOpen] = React.useState(false);
@@ -139,14 +142,14 @@ const MobileHeaderComponent = (props, context) => {
 
   const { t } = context;
 
-  const fullList = side => (
+  const fullList = () => (
     <div
       className={`${classes.fullList} lightText`}
       role="presentation"
     >
       <List>
         <ListItem className={classes.closeButtonListItem}>
-          <IconButton aria-label="exit" className={classes.closeButton} onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
+          <IconButton aria-label="exit" className={classes.closeButton} onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <Close className={classes.icons} />
           </IconButton>
         </ListItem>
@@ -252,22 +255,22 @@ const MobileHeaderComponent = (props, context) => {
               className={classes.LangCodes}
             >
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('en'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { changeLanguage('en'); LangHandleClose(); }}>
                   EN
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('es'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { changeLanguage('es'); LangHandleClose(); }}>
                   ES
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('zh'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { changeLanguage('zh'); LangHandleClose(); }}>
                   ZH
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('ru'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { changeLanguage('ru'); LangHandleClose(); }}>
                   RU
                 </Button>
               </Grid>
@@ -284,11 +287,11 @@ const MobileHeaderComponent = (props, context) => {
         <Box className={classes.brandName}>
           <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
         </Box>
-        <IconButton onClick={toggleDrawer('top', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+        <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           <Menu />
         </IconButton>
-        <Drawer anchor="top" open={state.top} className={classes.TopMenu} onClose={toggleDrawer('top', false)}>
-          {fullList('top')}
+        <Drawer anchor="top" open={state.top} className={classes.TopMenu} onClose={toggleDrawer(false)}>
+          {fullList()}
         </Drawer>
       </Toolbar>
     </AppBar>
@@ -297,6 +300,10 @@ const MobileHeaderComponent = (props, context) => {
 
 MobileHeaderComponent.contextTypes = {
   t: PropTypes.func.isRequired,
+};
+
+MobileHeaderComponent.propTypes = {
+  changeLanguage: PropTypes.func.isRequired,
 };
 
 const mapActionsToProps = (dispatch) => {

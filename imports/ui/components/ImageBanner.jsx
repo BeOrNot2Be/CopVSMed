@@ -27,12 +27,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '50px',
   },
   itemDesc: {
-    fontSize: '16px', //font size
+    fontSize: '16px',
     maxWidth: '400px',
     paddingBottom: '16px',
-  },
-  imageParallox: {
-    margin: '0',
   },
   spacing: {
     height: '70px',
