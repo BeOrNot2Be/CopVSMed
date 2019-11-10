@@ -121,7 +121,7 @@ const PostCardsComponent = (props, context) => {
           <Row>
             <Col md={6} className={classes.postImgCellBig}>
               {loaded ? (
-                <Button variant="contained" href={`/posts/${posts[0].name[lang] || posts[0].name['en']}`} className={classes.button}>
+                <Button variant="contained" href={`/posts/${posts[0].name[lang] || posts[0].name.en}`} className={classes.button}>
                   <img className={classes.postImg} src={posts[0].img[4]} alt="" />
                 </Button>
               ) : (
@@ -133,7 +133,7 @@ const PostCardsComponent = (props, context) => {
                 <Row>
                   <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
                     {loaded ? (
-                      <Button variant="contained" href={`/posts/${posts[1].name[lang] || posts[1].name['en']}`} className={classes.button}>
+                      <Button variant="contained" href={`/posts/${posts[1].name[lang] || posts[1].name.en}`} className={classes.button}>
                         <img className={classes.postImg} src={posts[1].img[2]} alt="" />
                       </Button>
                     ) : (
@@ -142,7 +142,7 @@ const PostCardsComponent = (props, context) => {
                   </Col>
                   <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
                     {loaded ? (
-                      <Button variant="contained" href={`/posts/${posts[2].name[lang] || posts[2].name['en']}`} className={classes.button}>
+                      <Button variant="contained" href={`/posts/${posts[2].name[lang] || posts[2].name.en}`} className={classes.button}>
                         <img className={classes.postImg} src={posts[2].img[1]} alt="" />
                       </Button>
                     ) : (
@@ -151,7 +151,7 @@ const PostCardsComponent = (props, context) => {
                   </Col>
                   <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
                     {loaded ? (
-                      <Button variant="contained" href={`/posts/${posts[3].name[lang] || posts[3].name['en']}`} className={classes.button}>
+                      <Button variant="contained" href={`/posts/${posts[3].name[lang] || posts[3].name.en}`} className={classes.button}>
                         <img className={classes.postImg} src={posts[3].img[1]} alt="" />
                       </Button>
                     ) : (
@@ -175,10 +175,10 @@ const PostCardsComponent = (props, context) => {
               enableMouseEvents
             >
               {posts.map((post, index) => (
-                <div key={post.name[lang] || post.name['en']}>
+                <div key={post.name[lang] || post.name.en}>
                   {Math.abs(activeStep - index) <= 2 ? (
-                    <Button variant="contained" href={`/posts/${post.name[lang] || post.name['en']}`} className={classes.button}>
-                      <img className={classes.img} src={post.img.mob} alt={post.name[lang] || post.name['en']} />
+                    <Button variant="contained" href={`/posts/${post.name[lang] || post.name.en}`} className={classes.button}>
+                      <img className={classes.img} src={post.img.mob} alt={post.name[lang] || post.name.en} />
                     </Button>
                   ) : null}
                 </div>

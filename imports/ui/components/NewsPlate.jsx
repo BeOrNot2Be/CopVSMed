@@ -40,29 +40,31 @@ const useStyles = makeStyles({
   },
 });
 
-const NewsPlateComponent = (props) => {
+const NewsPlateComponent = (props, context) => {
   const {
     post,
     lang,
   } = props;
   const classes = useStyles();
+  const { t } = context;
+
   return (
     <Card className={classes.plate} style={{ backgroundImage: `url(${post.img})` }}>
       <CardContent className={classes.card}>
         <CardActionArea href={`/news/${post.id}`}>
           <CardContent className={classes.post}>
             <Typography className={`${classes.newsDate} lightboldText`}>
-              {post.date}
+              {`${t(post.date.slice(0, 3))}${post.date.slice(3)}`}
             </Typography>
             <Typography className={`${classes.newsName} lightText`}>
-              {post.name[lang] || post.name['en']}
+              {post.name[lang] || post.name.en}
             </Typography>
             <div className={`${classes.newsComments} lightText`}>
               <QuestionAnswer style={{ paddingRight: '5px' }} />
               <Typography className={`${classes.newsCommentsText} lightText`}>
                 {post.commentsNum}
                 {' '}
-                {(post.commentsNum === 1) ? 'Comment' : 'Comments'}
+                {(post.commentsNum === 1) ? t('comment') : t('comments')}
               </Typography>
             </div>
           </CardContent>
@@ -70,6 +72,10 @@ const NewsPlateComponent = (props) => {
       </CardContent>
     </Card>
   );
+};
+
+NewsPlateComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
 };
 
 NewsPlateComponent.propTypes = {
