@@ -14,6 +14,17 @@ const langWrapper = (texts) => {
   return { ...wrappedTexts };
 };
 
+const newLangWrap = (lang, texts, originalObj) => {
+  let newObj = originalObj;
+  let newObjAns = {};
+  for (let key of Object.keys(texts)) {
+    newObj[key][lang] = texts[key];
+    newObjAns[key] = newObj[key];
+  }
+
+  return newObjAns;
+};
+
 export const InsertNews = (name, img) => {
   const newsPost = { img, ...langWrapper({ name }) };
   News.insert(newsPost);
@@ -68,4 +79,19 @@ export const InsertBanner = (firstHeader, secondHeader, thirdHeader, desc, butto
 
 export const InsertLanguage = (sign) => {
   Languages.insert({ sign });
+};
+
+export const BannerLanguageUpdate = (firstHeaderEn, lang, firstHeader, secondHeader, thirdHeader, desc, buttonText) => {
+  let banner = Banners.findOne({ firstHeader: { en: firstHeaderEn } });
+  const newLangTexts = {
+    firstHeader,
+    secondHeader,
+    thirdHeader,
+    desc,
+    buttonText,
+  };
+
+  banner = newLangWrap(lang, newLangTexts, banner);
+
+  Banners.update({ firstHeader: { en: firstHeaderEn } }, { $set: { ...banner } });
 };

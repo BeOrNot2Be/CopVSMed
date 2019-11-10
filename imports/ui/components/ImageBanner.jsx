@@ -68,7 +68,7 @@ const parallaxData = [
     properties: [
       {
         startValue: -10,
-        endValue: 100,
+        endValue: 95,
         property: 'translateY',
       },
     ],

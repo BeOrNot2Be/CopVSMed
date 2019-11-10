@@ -2,7 +2,7 @@ body {
   margin: 0px;
 }
 body {
-  font-family: 'TruenoRegular';
+  font-family: 'TruenoRegular'!important;
   font-weight: normal;
   font-style: normal;
 }
@@ -87,4 +87,10 @@ body {
 
 .MuiAppBar-colorPrimary {
   background-color: transparent!important;
+}
+
+.MuiButton-root {
+  font-family: 'TruenoLight'!important;
+  font-weight: normal;
+  font-style: normal;
 }

@@ -4,7 +4,7 @@ import {
 import '../imports/startups/publish';
 import {
   InsertNews, InsertLanguage, InsertReviews, InsertProduct,
-  InsertPosts, TestUpdatePostImage, InsertBanner,
+  InsertPosts, TestUpdatePostImage, InsertBanner, BannerLanguageUpdate,
 } from './db';
 
 const runDebugModels = () => {
@@ -141,6 +141,15 @@ const runDebugModels = () => {
       'Since this is our favorite sneaker, we’re bringing you 50 variants to suit everyone’s needs.',
       'Browse more',
       'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570005911/84247_PCHS_qrjynz.png',
+    );
+    BannerLanguageUpdate(
+      'CM v1',
+      'ru',
+      'СМ вер.1',
+      '8 вариантов',
+      'От 80$',
+      'Так как это наши любимые кроссовки, мы предлагаем вам 50 вариантов для удовлетворения потребностей каждого.',
+      'Еще',
     );
   }
   Languages.remove({});
