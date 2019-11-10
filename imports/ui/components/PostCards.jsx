@@ -87,6 +87,12 @@ const useStyles = makeStyles((theme) => ({
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const PostCardsComponent = (props, context) => {
+  const {
+    loaded,
+    lang,
+    postsTracker,
+    posts,
+  } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -104,7 +110,7 @@ const PostCardsComponent = (props, context) => {
   };
 
   React.useEffect(() => {
-    props.getPosts();
+    postsTracker();
   }, []);
   const { t } = context;
 
@@ -114,9 +120,9 @@ const PostCardsComponent = (props, context) => {
         <Container>
           <Row>
             <Col md={6} className={classes.postImgCellBig}>
-              {props.loaded ? (
-                <Button variant="contained" href={`/posts/${props.posts[0].name[props.lang] || props.posts[0].name['en']}`} className={classes.button}>
-                  <img className={classes.postImg} src={props.posts[0].img[4]} alt="" />
+              {loaded ? (
+                <Button variant="contained" href={`/posts/${posts[0].name[lang] || posts[0].name['en']}`} className={classes.button}>
+                  <img className={classes.postImg} src={posts[0].img[4]} alt="" />
                 </Button>
               ) : (
                 <Skeleton height={555} className={classes.card} />
@@ -126,27 +132,27 @@ const PostCardsComponent = (props, context) => {
               <Container>
                 <Row>
                   <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
-                    {props.loaded ? (
-                      <Button variant="contained" href={`/posts/${props.posts[1].name[props.lang] || props.posts[1].name['en']}`} className={classes.button}>
-                        <img className={classes.postImg} src={props.posts[1].img[2]} alt="" />
+                    {loaded ? (
+                      <Button variant="contained" href={`/posts/${posts[1].name[lang] || posts[1].name['en']}`} className={classes.button}>
+                        <img className={classes.postImg} src={posts[1].img[2]} alt="" />
                       </Button>
                     ) : (
                       <Skeleton height={270} className={classes.card} />
                     )}
                   </Col>
                   <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
-                    {props.loaded ? (
-                      <Button variant="contained" href={`/posts/${props.posts[2].name[props.lang] || props.posts[2].name['en']}`} className={classes.button}>
-                        <img className={classes.postImg} src={props.posts[2].img[1]} alt="" />
+                    {loaded ? (
+                      <Button variant="contained" href={`/posts/${posts[2].name[lang] || posts[2].name['en']}`} className={classes.button}>
+                        <img className={classes.postImg} src={posts[2].img[1]} alt="" />
                       </Button>
                     ) : (
                       <Skeleton height={255} className={classes.card} />
                     )}
                   </Col>
                   <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
-                    {props.loaded ? (
-                      <Button variant="contained" href={`/posts/${props.posts[3].name[props.lang] || props.posts[3].name['en']}`} className={classes.button}>
-                        <img className={classes.postImg} src={props.posts[3].img[1]} alt="" />
+                    {loaded ? (
+                      <Button variant="contained" href={`/posts/${posts[3].name[lang] || posts[3].name['en']}`} className={classes.button}>
+                        <img className={classes.postImg} src={posts[3].img[1]} alt="" />
                       </Button>
                     ) : (
                       <Skeleton height={255} className={classes.card} />
@@ -160,7 +166,7 @@ const PostCardsComponent = (props, context) => {
       </Hidden>
       <Hidden mdUp>
         <Typography className={`${classes.header} boldText`}>{t('posts')}</Typography>
-        {props.loaded ? (
+        {loaded ? (
           <>
             <AutoPlaySwipeableViews
               axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -168,11 +174,11 @@ const PostCardsComponent = (props, context) => {
               onChangeIndex={handleStepChange}
               enableMouseEvents
             >
-              {props.posts.map((post, index) => (
-                <div key={post.name[props.lang] || post.name['en']}>
+              {posts.map((post, index) => (
+                <div key={post.name[lang] || post.name['en']}>
                   {Math.abs(activeStep - index) <= 2 ? (
-                    <Button variant="contained" href={`/posts/${post.name[props.lang] || post.name['en']}`} className={classes.button}>
-                      <img className={classes.img} src={post.img.mob} alt={post.name[props.lang] || post.name['en']} />
+                    <Button variant="contained" href={`/posts/${post.name[lang] || post.name['en']}`} className={classes.button}>
+                      <img className={classes.img} src={post.img.mob} alt={post.name[lang] || post.name['en']} />
                     </Button>
                   ) : null}
                 </div>
@@ -214,6 +220,14 @@ PostCardsComponent.contextTypes = {
   t: PropTypes.func.isRequired,
 };
 
+PostCardsComponent.propTypes = {
+  lang: PropTypes.string.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  posts: PropTypes.array.isRequired,
+  postsTracker: PropTypes.func.isRequired,
+};
+
+
 const mapStateToProps = (state) => ({
   lang: state.i18nState.lang,
   posts: state.postsElement.posts,
@@ -221,7 +235,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPosts: () => getPosts()(dispatch),
+  postsTracker: () => getPosts()(dispatch),
 });
 
 const PostCards = connect(

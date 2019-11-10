@@ -3,13 +3,26 @@ import PropTypes from 'prop-types';
 import {
   Typography, Grid, Box, Container,
 } from '@material-ui/core';
-import withWidth from '@material-ui/core/withWidth';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 import ProductCard from './ProductCard.jsx';
+
+function useWidth() {
+  const theme = useTheme();
+  const keys = [...theme.breakpoints.keys].reverse();
+  return (
+    keys.reduce((output, key) => {
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return !output && matches ? key : output;
+    }, null) || 'xs'
+  );
+}
 
 const TabPanel = (props) => {
   const {
     value, tabIndex, items, ...other
   } = props;
+  const width = useWidth();
 
   return (
     <Typography
@@ -23,7 +36,7 @@ const TabPanel = (props) => {
       <Box p={3}>
         <Container>
           <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
-            {(props.width === 'sm') || (props.width === 'xs')
+            {(width === 'sm') || (width === 'xs')
               ? (items.slice(0, 3).map((element, index) => <ProductCard item={element} key={index} />))
               : (items.map((element, index) => <ProductCard item={element} key={index} />))}
           </Grid>
@@ -34,9 +47,9 @@ const TabPanel = (props) => {
 };
 
 TabPanel.propTypes = {
-  items: PropTypes.any.isRequired,
-  tabIndex: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  items: PropTypes.array.isRequired,
+  tabIndex: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
-export default withWidth()(TabPanel);
+export default TabPanel;

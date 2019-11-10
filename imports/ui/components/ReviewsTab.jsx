@@ -10,6 +10,7 @@ import {
   StarBorder, ExpandMore,
 } from '@material-ui/icons';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import CommentTab from './CommentTab.jsx';
 import { getReviews } from '../actions/reviews';
 
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   reviewerName: {
     color: '#ffffff',
   },
-  avater: {
+  avatar: {
     border: '2px solid #ffffff',
     width: '60px',
     height: '60px',
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   ReviewText: {
     color: '#ffffff',
   },
-  avaterSmall: {
+  avatarSmall: {
     border: '2px solid #ffffff',
     width: '60px',
     height: '60px',
@@ -99,6 +100,12 @@ const getLabelText = (value) => `${value} Star${value !== 1 ? 's' : ''}`;
 
 
 const ReviewsTabComponent = (props) => {
+  const {
+    loaded,
+    lang,
+    reviewsTracker,
+    reviews,
+  } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -107,7 +114,7 @@ const ReviewsTabComponent = (props) => {
   };
 
   React.useEffect(() => {
-    props.getReviews();
+    reviewsTracker();
   }, []);
 
   return (
@@ -115,19 +122,19 @@ const ReviewsTabComponent = (props) => {
       <div className={classes.color}>
         <Hidden smDown>
           <AppBar position="static" className={classes.tabHeader} >
-            {props.loaded ? (
+            {loaded ? (
               <Tabs TabIndicatorProps={{ className: classes.indicator }} value={value} onChange={handleChange} centered aria-label="simple tabs example">
-                {props.reviews.map((review, index) => (
+                {reviews.map((review, index) => (
                   <StyledTab
                     selected
                     key={review._id}
                     className="lightText middleText"
                     icon={(
                       <>
-                        <Avatar className={classes.avater} src={review.img} alt={review.name[props.lang] || review.name['en']} />
-                        <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[props.lang] || review.name['en']}</Typography>
+                        <Avatar className={classes.avatar} src={review.img} alt={review.name[lang] || review.name['en']} />
+                        <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[lang] || review.name['en']}</Typography>
                         <StyledRating
-                          name={review.name[props.lang] || review.name['en']}
+                          name={review.name[lang] || review.name['en']}
                           value={review.starsNum}
                           getLabelText={getLabelText}
                           precision={0.5}
@@ -181,10 +188,10 @@ const ReviewsTabComponent = (props) => {
               </Tabs>
             )}
           </AppBar>
-          {props.loaded ? (
+          {loaded ? (
             <>
-              {props.reviews.map((review, index) => (
-                <CommentTab value={value} tabIndex={index} key={review._id} review={review.text[props.lang] || review.text['en']} />
+              {reviews.map((review, index) => (
+                <CommentTab value={value} tabIndex={index} key={review._id} review={review.text[lang] || review.text['en']} />
               ))}
             </>
           ) : (
@@ -195,9 +202,9 @@ const ReviewsTabComponent = (props) => {
         </Hidden>
         <Hidden mdUp>
           <Container>
-            { props.loaded ? (
+            { loaded ? (
               <>
-                {props.reviews.map((review, index) => (
+                {reviews.map((review, index) => (
                   <ExpansionPanel key={review._id} className={classes.panel}>
                     <ExpansionPanelSummary
                       expandIcon={<ExpandMore className={classes.arrowIcon} />}
@@ -206,15 +213,15 @@ const ReviewsTabComponent = (props) => {
                     >
                       <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
                         <Grid item sm={4} xs={4}>
-                          <Avatar className={classes.avaterSmall} src={review.img} alt={review.name[props.lang] || review.name['en']} />
+                          <Avatar className={classes.avatarSmall} src={review.img} alt={review.name[lang] || review.name['en']} />
                         </Grid>
                         <Grid container item sm={6} xs={6}>
                           <Grid item>
-                            <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[props.lang] || review.name['en']}</Typography>
+                            <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[lang] || review.name['en']}</Typography>
                           </Grid>
                           <Grid item sm={12} xs={12}>
                             <StyledRating
-                              name={review.name[props.lang] || review.name['en']}
+                              name={review.name[lang] || review.name['en']}
                               value={review.starsNum}
                               getLabelText={getLabelText}
                               precision={0.5}
@@ -227,7 +234,7 @@ const ReviewsTabComponent = (props) => {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                       <Typography className={`${classes.ReviewText} lightText `}>
-                        {review.text[props.lang] || review.text['en']}
+                        {review.text[lang] || review.text['en']}
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
@@ -316,6 +323,13 @@ const ReviewsTabComponent = (props) => {
   );
 };
 
+ReviewsTabComponent.propTypes = {
+  lang: PropTypes.string.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  reviews: PropTypes.array.isRequired,
+  reviewsTracker: PropTypes.func.isRequired,
+};
+
 
 const mapStateToProps = (state) => {
   return {
@@ -327,7 +341,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getReviews: () => getReviews()(dispatch),
+    reviewsTracker: () => getReviews()(dispatch),
   };
 };
 

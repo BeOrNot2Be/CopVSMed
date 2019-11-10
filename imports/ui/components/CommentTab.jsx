@@ -19,8 +19,6 @@ const useStyles = makeStyles({
   },
 });
 
-const lang = 'en';
-
 const CommentTab = (props) => {
   const classes = useStyles();
   const {
@@ -60,9 +58,9 @@ const CommentTab = (props) => {
 }
 
 CommentTab.propTypes = {
-  review: PropTypes.any.isRequired,
-  tabIndex: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  review: PropTypes.string.isRequired,
+  tabIndex: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default CommentTab;

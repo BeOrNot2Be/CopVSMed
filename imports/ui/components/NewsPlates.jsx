@@ -30,9 +30,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 const NewsPlatesComponent = (props, context) => {
+  const {
+    loaded,
+    newsTracker,
+    news,
+  } = props;
   const classes = useStyles();
   React.useEffect(() => {
-    props.getNews();
+    newsTracker();
   }, []);
   const { t } = context;
 
@@ -50,9 +55,9 @@ const NewsPlatesComponent = (props, context) => {
             alignItems="center"
             spacing={4}
           >
-            {props.loaded ? (
+            {loaded ? (
               <>
-                {props.news.map((plate) => (
+                {news.map((plate) => (
                   <Grid item key={plate._id}>
                     <NewsPlate post={plate} />
                   </Grid>
@@ -82,6 +87,11 @@ NewsPlatesComponent.contextTypes = {
   t: PropTypes.func.isRequired,
 };
 
+NewsPlatesComponent.propTypes = {
+  loaded: PropTypes.bool.isRequired,
+  news: PropTypes.array.isRequired,
+  newsTracker: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -92,7 +102,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getNews: () => getNews()(dispatch),
+    newsTracker: () => getNews()(dispatch),
   };
 };
 

@@ -1,11 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Plx from 'react-plx';
 import {
-  Grid, Box, Button, Typography, withWidth,
+  Grid, Box, Button, Typography,
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { links } from '../text/links';
 import { getBanners } from '../actions/banners';
 
@@ -89,12 +91,30 @@ const mobileParallaxData = [
   },
 ];
 
+function useWidth() {
+  const theme = useTheme();
+  const keys = [...theme.breakpoints.keys].reverse();
+  return (
+    keys.reduce((output, key) => {
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return !output && matches ? key : output;
+    }, null) || 'xs'
+  );
+}
+
 
 const ProductParallaxBanner = (props) => {
+  const {
+    loaded,
+    lang,
+    bannersTracker,
+    banner,
+  } = props;
   const classes = useStyles();
+  const width = useWidth();
 
   React.useEffect(() => {
-    props.getBanners();
+    bannersTracker();
   }, []);
 
   return (
@@ -102,12 +122,12 @@ const ProductParallaxBanner = (props) => {
       <div className={classes.mainContainer}>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item>
-            {props.loaded ? (
+            {loaded ? (
               <Plx
                 className="MyAwesomeParallax"
-                parallaxData={(props.width === 'sm') || (props.width === 'xs') ? mobileParallaxData : parallaxData}
+                parallaxData={(width === 'sm') || (width === 'xs') ? mobileParallaxData : parallaxData /*paralax width fix*/} 
               >
-                <img className={classes.minImg} src={props.banner[0].img} alt="" />
+                <img className={classes.minImg} src={banner[0].img} alt="" />
               </Plx>
             ) : (
               <Skeleton height={600} width={400} className={classes.ImageSkeleton} />
@@ -115,22 +135,22 @@ const ProductParallaxBanner = (props) => {
           </Grid>
           <Grid item className={classes.textBox}>
             <Box>
-              {props.loaded ? (
+              {loaded ? (
                 <>
                   <Typography className="lightText headerText middleText">
-                    {props.banner[0].thirdHeader[props.lang] || props.banner[0].thirdHeader['en']}
+                    {banner[0].thirdHeader[lang] || banner[0].thirdHeader['en']}
                   </Typography>
                   <Typography className={`boldText headerText ${classes.itemName}`}>
-                    {props.banner[0].firstHeader[props.lang] || props.banner[0].firstHeader['en']}                
+                    {banner[0].firstHeader[lang] || banner[0].firstHeader['en']}                
                   </Typography>
                   <Typography className={`boldText activeText ${classes.itemFact}`}>
-                    {props.banner[0].secondHeader[props.lang] || props.banner[0].secondHeader['en']}
+                    {banner[0].secondHeader[lang] || banner[0].secondHeader['en']}
                   </Typography>
                   <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-                    {props.banner[0].desc[props.lang] || props.banner[0].desc['en']}
+                    {banner[0].desc[lang] || banner[0].desc['en']}
                   </Typography>
 
-                  <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[props.lang] || props.banner[0].buttonText['en'] }</Button>
+                  <Button href={links.products.url} className={classes.activeButton}>{banner[0].buttonText[lang] || banner[0].buttonText['en'] }</Button>
                 </>
               ) : (
                 <div className={classes.TextSkeletons}>
@@ -150,6 +170,14 @@ const ProductParallaxBanner = (props) => {
   );
 };
 
+ProductParallaxBanner.propTypes = {
+  lang: PropTypes.string.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  banner: PropTypes.array.isRequired,
+  bannersTracker: PropTypes.func.isRequired,
+};
+
+
 const mapStateToProps = (state) => {
   return {
     lang: state.i18nState.lang,
@@ -160,7 +188,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBanners: () => getBanners()(dispatch),
+    bannersTracker: () => getBanners()(dispatch),
   };
 };
 

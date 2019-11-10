@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React from 'react';
 import {
-  AppBar, Tabs, Tab, Box, Container, Grid, Card, CardContent
+  AppBar, Tabs, Tab, Box, Container, Grid, Card, CardContent,
 } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -58,7 +59,6 @@ function useWidth() {
   const keys = [...theme.breakpoints.keys].reverse();
   return (
     keys.reduce((output, key) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
       const matches = useMediaQuery(theme.breakpoints.up(key));
       return !output && matches ? key : output;
     }, null) || 'xs'
@@ -88,6 +88,13 @@ const ProductSkeleton = (props) => {
 }
 
 const ProductsTabsComponent = (props, context) => {
+  const {
+    loaded,
+    reviewsNew,
+    reviewsPopular,
+    reviewsTop,
+    productsTracker,
+  } = props;
   const classes = useStyles();
   const width = useWidth();
 
@@ -98,7 +105,7 @@ const ProductsTabsComponent = (props, context) => {
   };
 
   React.useEffect(() => {
-    props.getProducts();
+    productsTracker();
   }, []);
 
   const { t } = context;
@@ -112,11 +119,11 @@ const ProductsTabsComponent = (props, context) => {
           <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('top_tab')} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      {props.loaded ? (
+      {loaded ? (
         <>
-          <ProductTab value={value} tabIndex={0} items={props.reviewsNew} />
-          <ProductTab value={value} tabIndex={1} items={props.reviewsPopular} />
-          <ProductTab value={value} tabIndex={2} items={props.reviewsTop} />
+          <ProductTab value={value} tabIndex={0} items={reviewsNew} />
+          <ProductTab value={value} tabIndex={1} items={reviewsPopular} />
+          <ProductTab value={value} tabIndex={2} items={reviewsTop} />
         </>
       ) : (
         <Box p={3}>
@@ -133,6 +140,14 @@ const ProductsTabsComponent = (props, context) => {
   );
 };
 
+ProductsTabsComponent.propTypes = {
+  loaded: PropTypes.bool.isRequired,
+  reviewsNew: PropTypes.any.isRequired,
+  reviewsPopular: PropTypes.any.isRequired,
+  reviewsTop: PropTypes.any.isRequired,
+  productsTracker: PropTypes.func.isRequired,
+};
+
 ProductsTabsComponent.contextTypes = {
   t: PropTypes.func.isRequired,
 };
@@ -140,14 +155,18 @@ ProductsTabsComponent.contextTypes = {
 const mapStateToProps = (state) => {
   return {
     lang: state.lang,
-    loaded: ((state.productsElement.products.reviewsNew.length === 8) && (state.productsElement.products.reviewsPopular.length === 8) && (state.productsElement.products.reviewsTop.length === 8)),
+    loaded: (
+      (state.productsElement.products.reviewsNew.length === 8) &&
+      (state.productsElement.products.reviewsPopular.length === 8) &&
+      (state.productsElement.products.reviewsTop.length === 8)
+    ),
     ...state.productsElement.products,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProducts: () => getProducts()(dispatch),
+    productsTracker: () => getProducts()(dispatch),
   };
 };
 

@@ -4,6 +4,7 @@ import {
   Typography, Grid, Card, CardContent, CardActionArea, CardMedia,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   img: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   cardSku: {
     fontSize: '13px',
   },
-  corssedText: {
+  crossedText: {
     textDecoration: 'line-through',
     fontSize: '16px',
   },
@@ -46,11 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const lang = 'en';
-
-const ProductCard = ({ item }) => {
+const ProductCardComponent = (props, context) => {
   const classes = useStyles();
-
+  const {
+    item,
+    lang,
+  } = props;
   return (
     <Grid item md={3} sm={12} xs={12}>
       <Card style={{ borderRadius: '0px' }}>
@@ -67,7 +69,7 @@ const ProductCard = ({ item }) => {
               ) : (
                 <></>
               )}
-              <Typography className={`lightText ${classes.cardPrice} ${item.sale ? classes.corssedText : ''}`} color="textSecondary">
+              <Typography className={`lightText ${classes.cardPrice} ${item.sale ? classes.crossedText : ''}`} color="textSecondary">
                 ${item.price}
               </Typography>
               {item.sale ? (
@@ -76,13 +78,13 @@ const ProductCard = ({ item }) => {
                 <div className={classes.priceGap} />
               )}
             </CardContent>
-            <CardMedia className={classes.img} image={item.img} title={item.name[lang]} />
+            <CardMedia className={classes.img} image={item.img} title={item.name[lang] || item.name.en} />
             <CardContent>
               <Typography className={`boldText ${classes.cardName}`} color="textSecondary">
-                {item.gender[lang]}
+                {item.gender[lang] || item.gender.en}
               </Typography>
               <Typography className={`lightText ${classes.cardName}`} color="textSecondary">
-                {item.name[lang]}
+                {item.name[lang] || item.name.en}
               </Typography>
               <Typography className={`lightText ${classes.cardSku}`} color="textSecondary">
                 #{item.skuNum}
@@ -95,8 +97,22 @@ const ProductCard = ({ item }) => {
   );
 };
 
-ProductCard.propTypes = {
+ProductCardComponent.propTypes = {
   item: PropTypes.any.isRequired,
+  lang: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    lang: state.i18nState.lang,
+    ...ownProps,
+  };
+};
+
+
+const ProductCard = connect(
+  mapStateToProps,
+  null,
+)(ProductCardComponent);
 
 export default ProductCard;

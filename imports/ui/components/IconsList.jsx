@@ -63,8 +63,8 @@ IconsListComponent.contextTypes = {
 };
 
 IconsListComponent.propTypes = {
-  cells: PropTypes.any.isRequired,
-  textClass: PropTypes.any.isRequired,
+  cells: PropTypes.array.isRequired,
+  textClass: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
