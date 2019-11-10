@@ -118,19 +118,19 @@ const ProductParallaxBanner = (props) => {
               {props.loaded ? (
                 <>
                   <Typography className="lightText headerText middleText">
-                    {props.banner[0].thirdHeader[props.lang]}
+                    {props.banner[0].thirdHeader[props.lang] || props.banner[0].thirdHeader['en']}
                   </Typography>
                   <Typography className={`boldText headerText ${classes.itemName}`}>
-                    {props.banner[0].firstHeader[props.lang]}                
+                    {props.banner[0].firstHeader[props.lang] || props.banner[0].firstHeader['en']}                
                   </Typography>
                   <Typography className={`boldText activeText ${classes.itemFact}`}>
-                    {props.banner[0].secondHeader[props.lang]}
+                    {props.banner[0].secondHeader[props.lang] || props.banner[0].secondHeader['en']}
                   </Typography>
                   <Typography className={`lightText ${classes.itemDesc}`} color="textSecondary">
-                    {props.banner[0].desc[props.lang]}
+                    {props.banner[0].desc[props.lang] || props.banner[0].desc['en']}
                   </Typography>
 
-                  <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[props.lang]}</Button>
+                  <Button href={links.products.url} className={classes.activeButton}>{props.banner[0].buttonText[props.lang] || props.banner[0].buttonText['en'] }</Button>
                 </>
               ) : (
                 <div className={classes.TextSkeletons}>

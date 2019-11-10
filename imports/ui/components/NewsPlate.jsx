@@ -51,7 +51,7 @@ const NewsPlateComponent = (props) => {
               {props.post.date} {/*translate*/}
             </Typography>
             <Typography className={`${classes.newsName} lightText`}>
-              {props.post.name[props.lang]}
+              {props.post.name[props.lang] || props.post.name['en']}
             </Typography>
             <div className={`${classes.newsComments} lightText`}>
               <QuestionAnswer style={{ paddingRight: '5px' }} />

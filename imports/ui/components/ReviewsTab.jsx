@@ -97,7 +97,6 @@ const StyledTab = withStyles({
 
 const getLabelText = (value) => `${value} Star${value !== 1 ? 's' : ''}`;
 
-const lang = 'en';
 
 const ReviewsTabComponent = (props) => {
   const classes = useStyles();
@@ -125,10 +124,10 @@ const ReviewsTabComponent = (props) => {
                     className="lightText middleText"
                     icon={(
                       <>
-                        <Avatar className={classes.avater} src={review.img} alt={review.name[lang]} />
-                        <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[lang]}</Typography>
+                        <Avatar className={classes.avater} src={review.img} alt={review.name[props.lang] || review.name['en']} />
+                        <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[props.lang] || review.name['en']}</Typography>
                         <StyledRating
-                          name={review.name[lang]}
+                          name={review.name[props.lang] || review.name['en']}
                           value={review.starsNum}
                           getLabelText={getLabelText}
                           precision={0.5}
@@ -185,7 +184,7 @@ const ReviewsTabComponent = (props) => {
           {props.loaded ? (
             <>
               {props.reviews.map((review, index) => (
-                <CommentTab value={value} tabIndex={index} key={review._id} review={review.text[lang]} />
+                <CommentTab value={value} tabIndex={index} key={review._id} review={review.text[props.lang] || review.text['en']} />
               ))}
             </>
           ) : (
@@ -207,15 +206,15 @@ const ReviewsTabComponent = (props) => {
                     >
                       <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
                         <Grid item sm={4} xs={4}>
-                          <Avatar className={classes.avaterSmall} src={review.img} alt={review.name[lang]} />
+                          <Avatar className={classes.avaterSmall} src={review.img} alt={review.name[props.lang] || review.name['en']} />
                         </Grid>
                         <Grid container item sm={6} xs={6}>
                           <Grid item>
-                            <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[lang]}</Typography>
+                            <Typography className={`${classes.reviewerName} lightboldText`}>{review.name[props.lang] || review.name['en']}</Typography>
                           </Grid>
                           <Grid item sm={12} xs={12}>
                             <StyledRating
-                              name={review.name[lang]}
+                              name={review.name[props.lang] || review.name['en']}
                               value={review.starsNum}
                               getLabelText={getLabelText}
                               precision={0.5}
@@ -228,7 +227,7 @@ const ReviewsTabComponent = (props) => {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                       <Typography className={`${classes.ReviewText} lightText `}>
-                        {review.text[lang]}
+                        {review.text[props.lang] || review.text['en']}
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
