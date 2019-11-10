@@ -89,6 +89,7 @@ function getModalStyle() {
 const MobileHeaderComponent = (props, context) => {
   const {
     changeLanguage,
+    langs,
   } = props;
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
@@ -254,26 +255,13 @@ const MobileHeaderComponent = (props, context) => {
               alignItems="center"
               className={classes.LangCodes}
             >
-              <Grid item>
-                <Button className={classes.LangCode} onClick={() => { changeLanguage('en'); LangHandleClose(); }}>
-                  EN
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.LangCode} onClick={() => { changeLanguage('es'); LangHandleClose(); }}>
-                  ES
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.LangCode} onClick={() => { changeLanguage('zh'); LangHandleClose(); }}>
-                  ZH
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button className={classes.LangCode} onClick={() => { changeLanguage('ru'); LangHandleClose(); }}>
-                  RU
-                </Button>
-              </Grid>
+              {langs.map((lang) => (
+                <Grid item>
+                  <Button className={classes.LangCode} onClick={() => { changeLanguage(lang); LangHandleClose(); }}>
+                    {lang}
+                  </Button>
+                </Grid>
+              ))}
             </Grid>
           </div>
         </Modal>
@@ -303,7 +291,14 @@ MobileHeaderComponent.contextTypes = {
 };
 
 MobileHeaderComponent.propTypes = {
+  langs: PropTypes.array.isRequired,
   changeLanguage: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    langs: state.general.langs,
+  };
 };
 
 const mapActionsToProps = (dispatch) => {
@@ -313,7 +308,7 @@ const mapActionsToProps = (dispatch) => {
 };
 
 const MobileHeader = connect(
-  null,
+  mapStateToProps,
   mapActionsToProps,
 )(MobileHeaderComponent);
 

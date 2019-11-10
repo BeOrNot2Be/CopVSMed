@@ -1,4 +1,4 @@
-// import actions
+import { NEW_LANGUAGE_UPDATE } from '../actions/general';
 
 const initState = {
   user: {},
@@ -6,6 +6,7 @@ const initState = {
     items: [],
     sum: 0,
   },
+  langs: [],
   token: 'some token gen',
   postsElement: {},
   newsElement: {},
@@ -17,8 +18,8 @@ const initState = {
 
 const generalReducer = (state = initState, action) => {
   switch (action.type) {
-    case '':
-      return state;
+    case NEW_LANGUAGE_UPDATE:
+      return { ...state, langs: state.langs.concat([action.lang]) };
 
     default:
       return state;

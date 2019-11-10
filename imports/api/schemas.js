@@ -145,6 +145,10 @@ const LanguagesSchema = new SimpleSchema({
     label: 'Language browser code',
     type: String,
   },
+  url: {
+    label: 'Language scheme url',
+    type: String,
+  },
 });
 
 News.attachSchema(NewsSchema);

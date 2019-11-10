@@ -49,6 +49,7 @@ const DesktopHeaderComponent = (props, context) => {
   const {
     changeLanguage,
     cart,
+    langs,
   } = props;
   const classes = useStyles();
   const [LangButtonState, setLangButtonState] = React.useState(null);
@@ -111,18 +112,11 @@ const DesktopHeaderComponent = (props, context) => {
                       open={Boolean(LangButtonState)}
                       onClose={LangButtonHandleClose}
                     >
-                      <MenuItem onClick={() => { changeLanguage('en'); LangButtonHandleClose(); }}>
-                        EN
-                      </MenuItem>
-                      <MenuItem onClick={() => { changeLanguage('zh'); LangButtonHandleClose(); }}>
-                        ZH
-                      </MenuItem>
-                      <MenuItem onClick={() => { changeLanguage('es'); LangButtonHandleClose(); }}>
-                        ES
-                      </MenuItem>
-                      <MenuItem onClick={() => { changeLanguage('ru'); LangButtonHandleClose(); }}>
-                        RU
-                      </MenuItem>
+                      {langs.map((lang) => (
+                        <MenuItem onClick={() => { changeLanguage(lang); LangButtonHandleClose(); }}>
+                          {lang}
+                        </MenuItem>
+                      ))}
                     </Menu>
                   </Grid>
                   <Grid item>
@@ -214,12 +208,14 @@ DesktopHeaderComponent.contextTypes = {
 };
 
 DesktopHeaderComponent.propTypes = {
+  langs: PropTypes.array.isRequired,
   changeLanguage: PropTypes.func.isRequired,
   cart: PropTypes.any.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
+    langs: state.general.langs,
     cart: state.general.cart,
   };
 };

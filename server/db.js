@@ -77,8 +77,8 @@ export const InsertBanner = (firstHeader, secondHeader, thirdHeader, desc, butto
   Banners.insert(newBanner);
 };
 
-export const InsertLanguage = (sign) => {
-  Languages.insert({ sign });
+export const InsertLanguage = (sign, url) => {
+  Languages.insert({ sign, url });
 };
 
 export const BannerLanguageUpdate = (firstHeaderEn, lang, firstHeader, secondHeader, thirdHeader, desc, buttonText) => {

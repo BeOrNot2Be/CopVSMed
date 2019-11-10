@@ -154,10 +154,10 @@ const runDebugModels = () => {
   }
   Languages.remove({});
   if (Languages.find({}).count() < 4) {
-    InsertLanguage('en');
-    InsertLanguage('ru');
-    InsertLanguage('es');
-    InsertLanguage('zh');
+    InsertLanguage('en', '/translations/enlang.json');
+    InsertLanguage('ru', '/translations/rulang.json');
+    InsertLanguage('es', '/translations/eslang.json');
+    InsertLanguage('zh', '/translations/zhlang.json');
   }
 };
 
