@@ -5,6 +5,8 @@ import {
   Button, Container, Box, Grid, Avatar, ListItemAvatar,
   ListItemText, ListItem, List,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { links } from '../../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const FooterMap = () => {
+const FooterMapComponent = (props, context) => {
   const classes = useStyles();
-  const t = smth => smth;
+  const { t } = context;
 
   return (
     <Box>
@@ -57,7 +59,7 @@ const FooterMap = () => {
                     <PhoneInTalk />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.call_us')} secondary="0 (1234) 567 890" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('call_us')} secondary="0 (1234) 567 890" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
               </ListItem>
               <ListItem>
                 <ListItemAvatar>
@@ -65,7 +67,7 @@ const FooterMap = () => {
                     <MailSharp />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.email_us')} secondary="hello@sportshold.com" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('email_us')} secondary="hello@sportshold.com" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
               </ListItem>
               <ListItem>
                 <ListItemAvatar>
@@ -73,14 +75,14 @@ const FooterMap = () => {
                     <Room />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.address')} secondary="40 Baria Sreet 133/2, NY, US" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('address')} secondary="40 Baria Sreet 133/2, NY, US" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
               </ListItem>
             </List>
           </Grid>
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.navigation')} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('navigation')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.home.url} className={classes.button}>{t(links.home.name)}</Button>} />
@@ -102,7 +104,7 @@ const FooterMap = () => {
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.categories')} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('categories')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.men.url} className={classes.button}>{t(links.men.name)}</Button>} />
@@ -124,7 +126,7 @@ const FooterMap = () => {
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.sales')} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('sales')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.arrivals.url} className={classes.button}>{t(links.arrivals.name)}</Button>} />
@@ -143,7 +145,7 @@ const FooterMap = () => {
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('general.support')} />
+                <ListItemText className={`${classes.primary} lightboldText`} primary={t('support')} />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
                 <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.ship_delivery.url} className={classes.button}>{t(links.ship_delivery.name)}</Button>} />
@@ -167,5 +169,15 @@ const FooterMap = () => {
     </Box>
   );
 };
+
+FooterMapComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+
+const FooterMap = connect(
+  null,
+  null,
+)(FooterMapComponent);
 
 export default FooterMap;

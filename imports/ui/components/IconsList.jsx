@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid, Box, Container, Typography,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const IconsList = (props) => {
+const IconsListComponent = (props, context) => {
   const {
     cells, textClass, ...other
   } = props;
@@ -57,10 +58,25 @@ const IconsList = (props) => {
   );
 };
 
+IconsListComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
 
-IconsList.propTypes = {
+IconsListComponent.propTypes = {
   cells: PropTypes.any.isRequired,
   textClass: PropTypes.any.isRequired,
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...ownProps,
+  };
+};
+
+const IconsList = connect(
+  mapStateToProps,
+  null,
+)(IconsListComponent);
+
 
 export default IconsList;

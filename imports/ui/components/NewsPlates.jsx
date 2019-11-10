@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import NewsPlate from './NewsPlate.jsx';
 import { getNews } from '../actions/news';
 
@@ -29,17 +29,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const NewsPlatesComponent = (props) => {
+const NewsPlatesComponent = (props, context) => {
   const classes = useStyles();
   React.useEffect(() => {
     props.getNews();
   }, []);
-  const [t, i18n] = useTranslation('translation');
+  const { t } = context;
 
   return (
     <div className={classes.root}>
       <Typography className={`${classes.header} boldText`}>
-        {t('general.news')}
+        {t('news')}
       </Typography>
       <Box>
         <Container>
@@ -76,6 +76,10 @@ const NewsPlatesComponent = (props) => {
       </Box>
     </div>
   );
+};
+
+NewsPlatesComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
 };
 
 

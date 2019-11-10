@@ -320,7 +320,7 @@ const ReviewsTabComponent = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    lang: state.general.lang,
+    lang: state.i18nState.lang,
     reviews: state.reviewsElement.reviews,
     loaded: (state.reviewsElement.reviews.length === 3),
   };

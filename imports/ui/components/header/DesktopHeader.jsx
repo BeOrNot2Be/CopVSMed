@@ -5,8 +5,7 @@ import {
 } from '@material-ui/core';
 import { ShoppingBasketRounded, GTranslate } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import {setLanguage} from 'redux-i18n';
-import { getTranslateFunction } from "redux-i18n";
+import { setLanguage } from 'redux-i18n';
 import PropTypes from 'prop-types';
 import { links } from '../../text/links.js';
 
@@ -58,7 +57,7 @@ const DesktopHeaderComponent = (props, context) => {
     setLangButtonState(null);
   };
 
-  const t = (lang) => lang;
+  const { t } = context;
 
   return (
     <>
@@ -75,22 +74,22 @@ const DesktopHeaderComponent = (props, context) => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button href={links.support.url} className={classes.link}>
-                      {context.t(links.support.name)}
+                      {t(links.support.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.delivery.url} className={classes.link}>
-                      {context.t(links.delivery.name)}
+                      {t(links.delivery.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.legal.url} className={classes.link}>
-                      {context.t(links.legal.name)}
+                      {t(links.legal.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.about_us.url} className={classes.link}>
-                      {context.t(links.about_us.name)}
+                      {t(links.about_us.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -130,17 +129,17 @@ const DesktopHeaderComponent = (props, context) => {
                       {' '}
                       {props.cart.items.length}
                       {' '}
-                      {props.cart.items.length > 1 ? context.t('items') : context.t('item')}
+                      {props.cart.items.length === 1 ? t('item') : t('items')}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.login.url} className={classes.link}>
-                      {context.t(links.login.name)}
+                      {t(links.login.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.register.url} className={classes.link}>
-                      {context.t(links.register.name)}
+                      {t(links.register.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -167,32 +166,32 @@ const DesktopHeaderComponent = (props, context) => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button href={links.home.url} className={classes.link}>
-                      {context.t(links.home.name)}
+                      {t(links.home.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.men.url} className={classes.link}>
-                      {context.t(links.men.name)}
+                      {t(links.men.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.women.url} className={classes.link}>
-                      {context.t(links.women.name)}
+                      {t(links.women.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.kids.url} className={classes.link}>
-                      {context.t(links.kids.name)}
+                      {t(links.kids.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.brands.url} className={classes.link}>
-                      {context.t(links.brands.name)}
+                      {t(links.brands.name)}
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button href={links.sales.url} className={classes.link}>
-                      {context.t(links.sales.name)}
+                      {t(links.sales.name)}
                     </Button>
                   </Grid>
                 </Grid>
@@ -207,8 +206,8 @@ const DesktopHeaderComponent = (props, context) => {
 };
 
 DesktopHeaderComponent.contextTypes = {
-  t: PropTypes.func.isRequired
-}
+  t: PropTypes.func.isRequired,
+};
 
 
 const mapStateToProps = (state) => {

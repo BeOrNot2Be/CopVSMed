@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 const TechnologiesTab = () => {
   const classes = useStyles();
-
   const techs = [
     {
       icon: (

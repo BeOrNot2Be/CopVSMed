@@ -6,7 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import ProductTab from './ProductTab.jsx';
 import { getProducts } from '../../actions/products';
 
@@ -87,7 +87,7 @@ const ProductSkeleton = (props) => {
   );
 }
 
-const ProductsTabsComponent = (props) => {
+const ProductsTabsComponent = (props, context) => {
   const classes = useStyles();
   const width = useWidth();
 
@@ -101,15 +101,15 @@ const ProductsTabsComponent = (props) => {
     props.getProducts();
   }, []);
 
-  const [t, i18n] = useTranslation('translation');
+  const { t } = context;
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.tabHeader}>
         <Tabs value={value} onChange={handleChange} centered aria-label="simple tabs example" className={classes.tab}>
-          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('general.new_tab')} {...a11yProps(0)} />
-          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('general.popular_tab')} {...a11yProps(1)} />
-          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('general.top_tab')} {...a11yProps(2)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('new_tab')} {...a11yProps(0)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('popular_tab')} {...a11yProps(1)} />
+          <Tab classes={{ selected: 'Mui-selected-main' }} className={` ${classes.tabMobile} lightText`} label={t('top_tab')} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       {props.loaded ? (
@@ -133,9 +133,13 @@ const ProductsTabsComponent = (props) => {
   );
 };
 
+ProductsTabsComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => {
   return {
-    lang: state.general.lang,
+    lang: state.lang,
     loaded: ((state.productsElement.products.reviewsNew.length === 8) && (state.productsElement.products.reviewsPopular.length === 8) && (state.productsElement.products.reviewsTop.length === 8)),
     ...state.productsElement.products,
   };

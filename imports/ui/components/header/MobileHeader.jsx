@@ -10,7 +10,9 @@ import {
   Storefront, Close, ExpandMore, ExpandLess,
   Menu, AccountCircle, GTranslate,
 } from '@material-ui/icons';
-import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { setLanguage } from 'redux-i18n';
+import PropTypes from 'prop-types';
 import { links } from '../../text/links.js';
 
 
@@ -84,7 +86,7 @@ function getModalStyle() {
   };
 }
 
-const MobileHeader = () => {
+const MobileHeaderComponent = (props, context) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [openStore, setOpenStore] = React.useState(false);
@@ -135,7 +137,7 @@ const MobileHeader = () => {
 
   const [modalStyle] = React.useState(getModalStyle);
 
-  const [t, i18n] = useTranslation('translation');
+  const { t } = context;
 
   const fullList = side => (
     <div
@@ -172,25 +174,25 @@ const MobileHeader = () => {
         <Divider />
         <ListItem button onClick={handleClick}>
           <ListItemIcon><Store className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={t('general.clothe')} />
+          <ListItemText primary={t('clothe')} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openStore} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItem button href={links.men.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.men.name)} />
             </ListItem>
             <ListItem button href={links.women.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.women.name)} />
             </ListItem>
             <ListItem button href={links.kids.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.kids.name)} />
             </ListItem>
             <ListItem button href={links.sales.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.sales.name)} />
             </ListItem>
           </List>
@@ -208,28 +210,28 @@ const MobileHeader = () => {
         <Divider />
         <ListItem button onClick={() => setOpenTherms(!openTherms)}>
           <ListItemIcon><Description className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={t('general.therms')} />
+          <ListItemText primary={t('therms')} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openTherms} timeout="auto" unmountOnExit>
           <List component="div">
             <ListItem button href={links.delivery.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.delivery.name)} />
             </ListItem>
             <ListItem button href={links.about_us.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.about_us.name)} />
             </ListItem>
             <ListItem button href={links.legal.url}>
-              <ListItemIcon />
+              <ListItemIcon><div /></ListItemIcon>
               <ListItemText primary={t(links.legal.name)} />
             </ListItem>
           </List>
         </Collapse>
         <ListItem button onClick={LangHandleOpen}>
           <ListItemIcon><GTranslate className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={t('general.languages')} />
+          <ListItemText primary={t('languages')} />
         </ListItem>
         <Modal
           aria-labelledby="lang-modal-title"
@@ -250,22 +252,22 @@ const MobileHeader = () => {
               className={classes.LangCodes}
             >
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('en'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('en'); LangHandleClose(); }}>
                   EN
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('es'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('es'); LangHandleClose(); }}>
                   ES
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('zh'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('zh'); LangHandleClose(); }}>
                   ZH
                 </Button>
               </Grid>
               <Grid item>
-                <Button className={classes.LangCode} onClick={() => { i18n.changeLanguage('ru'); LangHandleClose(); }}>
+                <Button className={classes.LangCode} onClick={() => { props.changeLanguage('ru'); LangHandleClose(); }}>
                   RU
                 </Button>
               </Grid>
@@ -292,5 +294,20 @@ const MobileHeader = () => {
     </AppBar>
   );
 };
+
+MobileHeaderComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    changeLanguage: (lang) => dispatch(setLanguage(lang)),
+  };
+};
+
+const MobileHeader = connect(
+  null,
+  mapActionsToProps,
+)(MobileHeaderComponent);
 
 export default MobileHeader;

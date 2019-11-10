@@ -4,7 +4,8 @@ import {
   Container, Grid, Box, Button, Typography, Hidden,
 } from '@material-ui/core';
 import { MailSharp } from '@material-ui/icons';
-import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { links } from '../text/links.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,9 +42,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const helpInquiry = () => {
+const HelpInquiryComponent = (props, context) => {
   const classes = useStyles();
-  const [t, i18n] = useTranslation('translation');
+  const { t } = context;
 
   return (
     <div className={classes.helpInquiry}>
@@ -68,10 +69,10 @@ const helpInquiry = () => {
                 </Grid>
                 <Grid item md={7} sm={9} xs={9} className={classes.TextBox}>
                   <Typography className={`${classes.header} lightboldText`}>
-                    {t('general.help_button_header')}
+                    {t('help_button_header')}
                   </Typography>
                   <Typography className={`${classes.subHeader} lightText`}>
-                    {t('general.help_button_secondary')}
+                    {t('help_button_secondary')}
                   </Typography>
                 </Grid>
               </Grid>
@@ -81,7 +82,7 @@ const helpInquiry = () => {
             </Hidden>
             <Grid item md={3} sm={12} xs={12} className={classes.helpButtonCell}>
               <Button href={links.brands.url} className={`${classes.helpButton} lightboldText`}>
-                {t('general.help_button')}
+                {t('help_button')}
               </Button>
             </Grid>
           </Grid>
@@ -91,4 +92,15 @@ const helpInquiry = () => {
   );
 };
 
-export default helpInquiry;
+
+HelpInquiryComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+
+const HelpInquiry = connect(
+  null,
+  null,
+)(HelpInquiryComponent);
+
+export default HelpInquiry;

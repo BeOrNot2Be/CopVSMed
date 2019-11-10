@@ -9,7 +9,7 @@ import { Skeleton } from '@material-ui/lab';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import { getPosts } from '../actions/posts';
 
 const useStyles = makeStyles((theme) => ({
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const PostCardsComponent = (props) => {
+const PostCardsComponent = (props, context) => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -106,7 +106,7 @@ const PostCardsComponent = (props) => {
   React.useEffect(() => {
     props.getPosts();
   }, []);
-  const [t, i18n] = useTranslation('translation');
+  const { t } = context;
 
   return (
     <>
@@ -159,7 +159,7 @@ const PostCardsComponent = (props) => {
         </Container>
       </Hidden>
       <Hidden mdUp>
-        <Typography className={`${classes.header} boldText`}>{t('general.posts')}</Typography>
+        <Typography className={`${classes.header} boldText`}>{t('posts')}</Typography>
         {props.loaded ? (
           <>
             <AutoPlaySwipeableViews
@@ -210,8 +210,12 @@ const PostCardsComponent = (props) => {
   );
 };
 
+PostCardsComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  lang: state.general.lang,
+  lang: state.i18nState.lang,
   posts: state.postsElement.posts,
   loaded: (state.postsElement.posts.length === 4),
 });

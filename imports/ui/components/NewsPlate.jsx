@@ -75,7 +75,7 @@ NewsPlateComponent.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    lang: state.general.lang,
+    lang: state.i18nState.lang,
     post: ownProps.post,
   };
 };

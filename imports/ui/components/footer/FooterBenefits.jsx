@@ -4,6 +4,7 @@ import {
   AccountBalanceWallet, Drafts, Phone, MonetizationOn,
   Redeem, LocalShipping,
 } from '@material-ui/icons';
+import PropTypes from 'prop-types';
 import IconsList from '../IconsList.jsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,40 +22,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FooterBenefits = () => {
+const FooterBenefitsComponent = (props, context) => {
   const classes = useStyles();
-  const t = smth => smth;
+  const { t } = context;
 
   const benefits = [
     {
       icon: (<Drafts className={classes.icon} />),
-      text: t('general.mail_footer'),
+      text: t('mail_footer'),
     },
     {
       icon: (<AccountBalanceWallet className={classes.icon} />),
-      text: t('general.guarantee_footer'),
+      text: t('guarantee_footer'),
     },
     {
       icon: (<Phone className={classes.icon} />),
-      text: t('general.call_footer'),
+      text: t('call_footer'),
     },
     {
       icon: (<MonetizationOn className={classes.icon} />),
-      text: t('general.price_footer'),
+      text: t('price_footer'),
     },
     {
       icon: (<Redeem className={classes.icon} />),
-      text: t('general.items_footer'),
+      text: t('items_footer'),
     },
     {
       icon: (<LocalShipping className={classes.icon} />),
-      text: t('general.delivery_footer'),
+      text: t('delivery_footer'),
     },
   ];
 
   return (
-    <IconsList cells={benefits} textClass={`${classes.footerText} lightText`} />
+    <div>
+      <IconsList cells={benefits} textClass={`${classes.footerText} lightText`} />
+    </div>
   );
 };
 
-export default FooterBenefits;
+FooterBenefitsComponent.contextTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+
+export default FooterBenefitsComponent;

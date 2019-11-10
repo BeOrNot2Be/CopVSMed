@@ -152,7 +152,7 @@ const ProductParallaxBanner = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    lang: state.general.lang,
+    lang: state.i18nState.lang,
     banner: state.bannersElement.parallaxMainBanner,
     loaded: (state.bannersElement.parallaxMainBanner.length !== 0),
   };

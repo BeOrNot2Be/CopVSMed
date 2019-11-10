@@ -1,7 +1,6 @@
-import { CHANGE_LANG } from '../actions/general';
+// import actions
 
 const initState = {
-  lang: 'en',
   user: {},
   cart: {
     items: [],
@@ -18,13 +17,8 @@ const initState = {
 
 const generalReducer = (state = initState, action) => {
   switch (action.type) {
-    case CHANGE_LANG:
-      if (state.lang === action.lang) {
-        return state;
-      } else {
-        console.log(action);
-        return { ...state, lang: action.lang };
-      }
+    case '':
+      return state;
 
     default:
       return state;

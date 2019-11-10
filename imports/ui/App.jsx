@@ -6,8 +6,6 @@ import HomePage from './pages/Home.jsx';
 
 
 const App = (props) => {
-  console.log(props);
-
   return (
     <>
       <Header />
