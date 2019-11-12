@@ -1,18 +1,22 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar, Toolbar, IconButton,
   Drawer, List, Divider, ListItem, ListItemIcon, ListItemText,
-  ListItemAvatar, Collapse, Badge, Box, Avatar, Modal, Button, Grid,
+  ListItemAvatar, Collapse, Badge, Box, Avatar, Modal, Button,
+  Grid,
 } from '@material-ui/core';
 import {
   Description, HomeRounded, Store, Help,
   Storefront, Close, ExpandMore, ExpandLess,
   Menu, AccountCircle, GTranslate,
+  ExitToApp,
 } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { setLanguage } from 'redux-i18n';
 import PropTypes from 'prop-types';
+import { USER_LOGIN, USER_LOGOUT } from '../../actions/general';
 import { links } from '../../text/links.js';
 
 
@@ -90,6 +94,10 @@ const MobileHeaderComponent = (props, context) => {
   const {
     changeLanguage,
     langs,
+    user,
+    login,
+    openAccount,
+    logout,
   } = props;
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
@@ -103,7 +111,7 @@ const MobileHeaderComponent = (props, context) => {
     bottom: false,
     right: false,
   });
-
+  
   const handleClick = () => {
     setOpenStore(!openStore);
   };
@@ -154,23 +162,35 @@ const MobileHeaderComponent = (props, context) => {
             <Close className={classes.icons} />
           </IconButton>
         </ListItem>
-        <ListItem button href={auth ? links.account.url : links.login.url}>
-          {auth ? (
+        <ListItem button onClick={Object.keys(user).length ? openAccount : login}>
+          {Object.keys(user).length ? (
             <>
               <ListItemAvatar>
-                <Badge badgeContent={4} classes={{ badge: classes.AccountAlerts }}>
-                  <AccountCircle className={classes.icons} />
+                <Badge badgeContent={user.profile.messages} classes={{ badge: classes.AccountAlerts }}>
+                  { user.profile.img !== '' ? (
+                    <Avatar src={user.profile.img} alt={user.profile.name} />
+                  ) : (
+                    <AccountCircle className={classes.icons} />
+                  )}
                 </Badge>
               </ListItemAvatar>
               <ListItemText primary={t(links.account.name)} />
             </>
           ) : (
             <>
-              <AccountCircle className={classes.icons} />
-              <ListItemText primary={t(links.account.name)} />
+              <ListItemAvatar>
+                <AccountCircle className={classes.icons} />
+              </ListItemAvatar>
+              <ListItemText primary={`${t(links.login.name)} / ${links.register.name}`} />
             </>
           )}
         </ListItem>
+        {Object.keys(user).length ? ( 
+          <ListItem button onClick={logout}>
+            <ListItemIcon><ExitToApp className={classes.icons} /></ListItemIcon>
+            <ListItemText primary={t(links.logout.name)} />
+          </ListItem>
+        ) : ''}
         <ListItem button href={links.home.url}>
           <ListItemIcon><HomeRounded className={classes.icons} /></ListItemIcon>
           <ListItemText primary={t(links.home.name)} />
@@ -255,8 +275,8 @@ const MobileHeaderComponent = (props, context) => {
               alignItems="center"
               className={classes.LangCodes}
             >
-              {langs.map((lang) => (
-                <Grid item>
+              {langs.map((lang, index) => (
+                <Grid item key={index}>
                   <Button className={classes.LangCode} onClick={() => { changeLanguage(lang); LangHandleClose(); }}>
                     {lang}
                   </Button>
@@ -293,17 +313,25 @@ MobileHeaderComponent.contextTypes = {
 MobileHeaderComponent.propTypes = {
   langs: PropTypes.array.isRequired,
   changeLanguage: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  openAccount: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     langs: state.general.langs,
+    user: Meteor.user() || {},
   };
 };
 
 const mapActionsToProps = (dispatch) => {
   return {
     changeLanguage: (lang) => dispatch(setLanguage(lang)),
+    login: () => dispatch({ type: USER_LOGIN }),
+    logout: () => dispatch({ type: USER_LOGOUT }),
+    openAccount: () => (links.account.url),
   };
 };
 

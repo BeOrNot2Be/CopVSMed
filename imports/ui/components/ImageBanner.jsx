@@ -67,7 +67,7 @@ const parallaxData = [
     properties: [
       {
         startValue: -10,
-        endValue: 95,
+        endValue: 90,
         property: 'translateY',
       },
     ],
@@ -122,7 +122,7 @@ const ProductParallaxBanner = (props) => {
             {loaded ? (
               <Plx
                 className="MyAwesomeParallax"
-                parallaxData={(width === 'sm') || (width === 'xs') ? mobileParallaxData : parallaxData /*paralax width fix*/} 
+                parallaxData={(width === 'sm') || (width === 'xs') ? mobileParallaxData : parallaxData}
               >
                 <img className={classes.minImg} src={banner[0].img} alt="" />
               </Plx>

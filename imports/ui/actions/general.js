@@ -5,6 +5,13 @@ import { Languages } from '../../api/schemas';
 
 export const NEW_LANGUAGE_UPDATE = 'NEW_LANGUAGE_UPDATE';
 
+export const USER_LOGIN = 'USER_LOGIN';
+
+export const USER_LOGOUT = 'USER_LOGOUT';
+
+export const PROCESS_LOGIN = 'PROCESS_LOGIN';
+
+export const USER_AUTH_CHECK = 'USER_AUTH_CHECK';
 
 export const getTranslation = () => {
   return (dispatch) => {
@@ -24,7 +31,7 @@ export const getTranslation = () => {
             .then((data) => { lang = data; })
             .then(() => callbackLangAssigning(lang))
             .catch((err) => {
-              console.log("Error Reading data " + err);
+              console.log(`Error Reading data ${err}`);
             });
         });
       }

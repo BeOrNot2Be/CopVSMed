@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container, Grid, Box, Button, Menu, MenuItem,
@@ -8,6 +9,10 @@ import { connect } from 'react-redux';
 import { setLanguage } from 'redux-i18n';
 import PropTypes from 'prop-types';
 import { links } from '../../text/links.js';
+import {
+  USER_LOGIN,
+  USER_LOGOUT
+} from '../../actions/general';
 
 const useStyles = makeStyles((theme) => ({
   headerTop: {
@@ -43,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   fullList: {
     width: '100wh',
   },
+  registrationLink: {
+    backgroundColor: '#ff7270',
+  },
 }));
 
 const DesktopHeaderComponent = (props, context) => {
@@ -50,6 +58,9 @@ const DesktopHeaderComponent = (props, context) => {
     changeLanguage,
     cart,
     langs,
+    login,
+    logout,
+    user,
   } = props;
   const classes = useStyles();
   const [LangButtonState, setLangButtonState] = React.useState(null);
@@ -100,7 +111,7 @@ const DesktopHeaderComponent = (props, context) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Grid container spacing={1}>
+                <Grid container>
                   <Grid item>
                     <Button aria-controls="lang-menu" aria-haspopup="true" onClick={LangButtonHandleClick} className={classes.link}>
                       <GTranslate />
@@ -112,8 +123,8 @@ const DesktopHeaderComponent = (props, context) => {
                       open={Boolean(LangButtonState)}
                       onClose={LangButtonHandleClose}
                     >
-                      {langs.map((lang) => (
-                        <MenuItem onClick={() => { changeLanguage(lang); LangButtonHandleClose(); }}>
+                      {langs.map((lang, index) => (
+                        <MenuItem key={index} onClick={() => { changeLanguage(lang); LangButtonHandleClose(); }}>
                           {lang}
                         </MenuItem>
                       ))}
@@ -130,16 +141,33 @@ const DesktopHeaderComponent = (props, context) => {
                       {cart.items.length === 1 ? t('item') : t('items')}
                     </Button>
                   </Grid>
-                  <Grid item>
-                    <Button href={links.login.url} className={classes.link}>
-                      {t(links.login.name)}
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button href={links.register.url} className={classes.link}>
-                      {t(links.register.name)}
-                    </Button>
-                  </Grid>
+                  { Object.keys(user).length ? (
+                    <>
+                      <Grid item className={classes.registrationLink}>
+                        <Button href={links.account.link} className={classes.link}>
+                          {t(links.account.name)}
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Button onClick={logout} className={classes.link}>
+                          {t(links.logout.name)}
+                        </Button>
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <Grid item>
+                        <Button onClick={login} className={classes.link}>
+                          {t(links.login.name)}
+                        </Button>
+                      </Grid>
+                      <Grid item className={classes.registrationLink}>
+                        <Button onClick={login} className={classes.link}>
+                          {t(links.register.name)}
+                        </Button>
+                      </Grid>
+                    </>
+                  ) }
                 </Grid>
               </Grid>
               <Grid />
@@ -210,19 +238,25 @@ DesktopHeaderComponent.contextTypes = {
 DesktopHeaderComponent.propTypes = {
   langs: PropTypes.array.isRequired,
   changeLanguage: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   cart: PropTypes.any.isRequired,
+  user: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     langs: state.general.langs,
     cart: state.general.cart,
+    user: Meteor.user() || {},
   };
 };
 
 const mapActionsToProps = (dispatch) => {
   return {
     changeLanguage: (lang) => dispatch(setLanguage(lang)),
+    login: () => dispatch({ type: USER_LOGIN }),
+    logout: () => dispatch({ type: USER_LOGOUT }),
   };
 };
 

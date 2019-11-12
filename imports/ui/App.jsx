@@ -5,15 +5,18 @@ import PropTypes from 'prop-types';
 import Header from './components/header/Header.jsx';
 import Footer from './components/footer/Footer.jsx';
 import HomePage from './pages/Home.jsx';
-import { getTranslation } from './actions/general';
+import CallbackPage from './pages/CallbackPage.jsx';
+import { getTranslation, USER_AUTH_CHECK } from './actions/general';
 
 const AppComponent = (props) => {
   const {
     languageTracker,
+    checkAuth,
   } = props;
 
   React.useEffect(() => {
     languageTracker();
+    checkAuth();
   }, []);
 
   return (
@@ -21,6 +24,7 @@ const AppComponent = (props) => {
       <Header />
       <Router>
         <HomePage path="/" />
+        <CallbackPage path="/callback" />
       </Router>
       <Footer />
     </>
@@ -29,11 +33,13 @@ const AppComponent = (props) => {
 
 AppComponent.propTypes = {
   languageTracker: PropTypes.func.isRequired,
+  checkAuth: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     languageTracker: () => getTranslation()(dispatch),
+    checkAuth: () => dispatch({ type: USER_AUTH_CHECK }),
   };
 };
 

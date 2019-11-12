@@ -9,7 +9,6 @@ import I18n, { setTranslations } from 'redux-i18n';
 import { Provider } from 'react-redux';
 import App from '../imports/ui/App.jsx';
 import rootReducer from '../imports/ui/reducers';
-import translation from './translation';
 
 const middleware = [thunk];
 
@@ -31,7 +30,6 @@ const store = createStore(
   enhancer,
 );
 
-store.dispatch(setTranslations(translation));
 
 Meteor.startup(() => {
   render(

@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 export const links = {
+  logout: { url: '#', name: 'logout' },
   login: { url: '#', name: 'login' },
   account: { url: '#', name: 'account' },
   register: { url: '#', name: 'register' },
@@ -17,7 +18,7 @@ export const links = {
   privacy: { url: '#', name: 'privacy' },
   contacts: { url: '#', name: 'contacts' },
   legal: { url: '#', name: 'legal' },
-  home: { url: '#', name: 'home' },
+  home: { url: '/', name: 'home' },
   about_us: { url: '#', name: 'about_us' },
   latest_news: { url: '#', name: 'latest_news' },
   reviews: { url: '#', name: 'reviews' },

@@ -1,6 +1,7 @@
-{
+{ 
+  "logout": "Logout",
   "login": "Login",
-  "account": "Account",
+  "account": "My Account",
   "register": "Register",
   "arrivals": "New Arrivals",
   "popular": "Most Popular",

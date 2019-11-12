@@ -1,6 +1,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
+import { Accounts } from 'meteor/accounts-base';
+import { Random } from 'meteor/random';
 import {
   News, Banners, Reviews, Products, Languages, Posts,
 } from '../imports/api/schemas';
@@ -95,3 +97,20 @@ export const BannerLanguageUpdate = (firstHeaderEn, lang, firstHeader, secondHea
 
   Banners.update({ firstHeader: { en: firstHeaderEn } }, { $set: { ...banner } });
 };
+
+
+Accounts.onCreateUser((options, user) => {
+  let customizedUser = {
+    ...user,
+  };
+
+  customizedUser._id = Random.id();
+
+  // use user id to generate some data; 
+
+  if (options.profile) {
+    customizedUser.profile = options.profile;
+  }
+
+  return customizedUser;
+});

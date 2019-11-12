@@ -151,6 +151,7 @@ const LanguagesSchema = new SimpleSchema({
   },
 });
 
+
 News.attachSchema(NewsSchema);
 Reviews.attachSchema(ReviewsSchema);
 Products.attachSchema(ProductsSchema);
