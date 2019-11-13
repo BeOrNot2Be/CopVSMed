@@ -10,8 +10,8 @@ import {
 const runDebugModels = () => {
   News.remove({});
   if (News.find({}).count() < 3) {
-    InsertNews('Lorem ipsum dolor sit amet consectetur adipisicing elit', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP');
-    InsertNews('Lorem ipsum dolor sit amet consectetur adipisicing elit', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP');
+    InsertNews('Lorem ipsum dolor sit amet consectetur adipisicing elit', 'http://fashion27.com/wp-content/uploads/2019/02/Men-s-Casual-Running-Shoes-Fashion-Sneakers-Outdoor-Comfortable-Popular-Leisure-Shoes-Brand-High-Quality-Non-1.jpg');
+    InsertNews('Lorem ipsum dolor sit amet consectetur adipisicing elit', 'https://www.polar.com/sites/default/files/sc/running-index-intro-bg-desktop.jpg');
     InsertNews('Lorem ipsum dolor sit amet consectetur adipisicing elit', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP');
     InsertNews('Lorem ipsum dolor sit amet consectetur adipisicing elit', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVsKAUwlX2LnBi4WUtwyHS3F8EeR4JmYLlALSnl9EKAhbBxfP');
   }
@@ -44,90 +44,142 @@ const runDebugModels = () => {
   }
   Products.remove({});
   if (Products.find({}).count() < 8) {
-    let count = 8;
-    while (count >= 0) {
-      InsertProduct(
-        `CM v${count}`,
-        80,
-        0,
-        49436582336,
-        'man',
-        'https://images.unsplash.com/photo-1495443396064-16fd983acb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-      );
-      count -= 1;
-    }
+    InsertProduct(
+      'CM v1',
+      80,
+      0,
+      49436582336,
+      'man',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/shoes-7_h3texr.png',
+    );
+    InsertProduct(
+      'CM v23',
+      20,
+      0,
+      49436582336,
+      'woman',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/shoes-8_l6rmlq.png',
+    );
+    InsertProduct(
+      'CM v435',
+      30,
+      0,
+      49436582336,
+      'kids',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/shoes-6_g4s620.png',
+    );
+    InsertProduct(
+      'Nike Jordan',
+      80,
+      50,
+      49436582336,
+      'man',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617433/copVSMed/shoes-9_lrwbdi.png',
+    );
+    InsertProduct(
+      'CM v4872',
+      80,
+      20,
+      49436582336,
+      'man',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617433/copVSMed/shoes-12_iedlmf.png',
+    );
+    InsertProduct(
+      'CM vXXX',
+      60,
+      15,
+      49436582336,
+      'man/woman',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617433/copVSMed/shoes-10_wsznkp.png',
+    );
+    InsertProduct(
+      'CM vSMTH',
+      80,
+      0,
+      49436582336,
+      'woman',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617433/copVSMed/shoes-11_ushxgu.png',
+    );
+    InsertProduct(
+      'CM vNew Suoer',
+      66,
+      10,
+      49436582336,
+      'man',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617433/copVSMed/shoes-13_b8li26.png',
+    );
   }
   Posts.remove({});
   if (Posts.find({}).count() < 4) {
     InsertPosts(
       'test4',
-      'https://cdn-ep19.pressidium.com/wp-content/uploads/2018/07/Aspect-ratio-photography-ras-ul-had-beach-Oman-1.jpg',
-      'https://images.wallpaperscraft.com/image/bird_silhouette_vector_134154_1920x1080.jpg'
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-2_xjbi5k.png',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618026/copVSMed/cs-mens-hero-new-balance-102419_yrllvt.jpg',
     );
 
     TestUpdatePostImage(
       'test4',
-      'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618770/copVSMed/post-5_ywyg6v.png',
       2,
     );
 
     TestUpdatePostImage(
       'test4',
-      'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-2_xjbi5k.png',
       4,
     );
 
     InsertPosts(
       'test2',
-      'https://cdn-ep19.pressidium.com/wp-content/uploads/2018/07/Aspect-ratio-photography-ras-ul-had-beach-Oman-1.jpg',
-      'https://wallpaperplay.com/walls/full/a/9/9/3080.jpg'
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-3_anvtkc.png',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618287/copVSMed/912153-new-cool-shoes-wallpaper-hd-1920x1080-hd_nkudy5.jpg',
     );
 
     TestUpdatePostImage(
       'test2',
-      'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618770/copVSMed/post-5_ywyg6v.png',
       2,
     );
 
     TestUpdatePostImage(
       'test2',
-      'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-2_xjbi5k.png',
       4,
     );
 
     InsertPosts(
       'test1.1',
-      'http://digital-photography-school.com/wp-content/uploads/2012/10/image1.jpg',
-      'https://images.wallpaperscraft.com/image/astronaut_spacesuit_butterflies_121755_1920x1080.jpg'
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-3_anvtkc.png',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618302/copVSMed/download_icrrpm.jpg',
     );
 
     TestUpdatePostImage(
       'test1.1',
-      'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618770/copVSMed/post-5_ywyg6v.png',
       2,
     );
 
     TestUpdatePostImage(
       'test1.1',
-      'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-2_xjbi5k.png',
       4,
     );
 
     InsertPosts(
       'test1.2',
-      'https://cdn-ep19.pressidium.com/wp-content/uploads/2018/07/Aspect-ratio-photography-ras-ul-had-beach-Oman-1.jpg',
-      'https://images8.alphacoders.com/926/thumb-1920-926492.jpg'
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-4_hgaqsl.png',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618329/copVSMed/air-jordan-shoes-desktop-wallpapers-hd-wallpapers-desktop-images-download-windows-wallpapers-amazing-colourful-4k-picture-artwork-1920x1080_nseao0.jpg',
     );
 
     TestUpdatePostImage(
       'test1.2',
-      'https://cdn.tutsplus.com/photo/uploads/legacy/746_aspectratio/07.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573618770/copVSMed/post-5_ywyg6v.png',
       2,
     );
 
     TestUpdatePostImage(
       'test1.2',
-      'https://phlearn.com/wp-content/uploads/2019/03/dhruv-deshmukh-266273-unsplash-square.jpg',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1573617434/copVSMed/post-2_xjbi5k.png',
       4,
     );
   }
@@ -140,7 +192,7 @@ const runDebugModels = () => {
       'From $80.00',
       'Since this is our favorite sneaker, we’re bringing you 50 variants to suit everyone’s needs.',
       'Browse more',
-      'https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570005911/84247_PCHS_qrjynz.png',
+      'https://res.cloudinary.com/avilonproductioncdn/image/upload/c_scale,h_549/v1573619447/copVSMed/28530-3-nike-shoes-transparent_qozdw8.png',
     );
     BannerLanguageUpdate(
       'CM v1',

@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
     height: '0',
     margin: '25px 0px',
   },
+  mainContainer: {
+    backgroundColor: '#fff',
+    position: 'relative',
+  },
 }));
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -117,52 +121,54 @@ const PostCardsComponent = (props, context) => {
   return (
     <>
       <Hidden smDown className={classes.root}>
-        <Container>
-          <Row>
-            <Col md={6} className={classes.postImgCellBig}>
-              {loaded ? (
-                <Button variant="contained" href={`/posts/${posts[0].name[lang] || posts[0].name.en}`} className={classes.button}>
-                  <img className={classes.postImg} src={posts[0].img[4]} alt="" />
-                </Button>
-              ) : (
-                <Skeleton height={555} className={classes.card} />
-              )}
-            </Col>
-            <Col sm={6}>
-              <Container>
-                <Row>
-                  <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
-                    {loaded ? (
-                      <Button variant="contained" href={`/posts/${posts[1].name[lang] || posts[1].name.en}`} className={classes.button}>
-                        <img className={classes.postImg} src={posts[1].img[2]} alt="" />
-                      </Button>
-                    ) : (
-                      <Skeleton height={270} className={classes.card} />
-                    )}
-                  </Col>
-                  <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
-                    {loaded ? (
-                      <Button variant="contained" href={`/posts/${posts[2].name[lang] || posts[2].name.en}`} className={classes.button}>
-                        <img className={classes.postImg} src={posts[2].img[1]} alt="" />
-                      </Button>
-                    ) : (
-                      <Skeleton height={255} className={classes.card} />
-                    )}
-                  </Col>
-                  <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
-                    {loaded ? (
-                      <Button variant="contained" href={`/posts/${posts[3].name[lang] || posts[3].name.en}`} className={classes.button}>
-                        <img className={classes.postImg} src={posts[3].img[1]} alt="" />
-                      </Button>
-                    ) : (
-                      <Skeleton height={255} className={classes.card} />
-                    )}
-                  </Col>
-                </Row>
-              </Container>
-            </Col>
-          </Row>
-        </Container>
+        <div className={classes.mainContainer}>
+          <Container>
+            <Row>
+              <Col md={6} className={classes.postImgCellBig}>
+                {loaded ? (
+                  <Button variant="contained" href={`/posts/${posts[0].name[lang] || posts[0].name.en}`} className={classes.button}>
+                    <img className={classes.postImg} src={posts[0].img[4]} alt="" />
+                  </Button>
+                ) : (
+                  <Skeleton height={555} className={classes.card} />
+                )}
+              </Col>
+              <Col sm={6}>
+                <Container>
+                  <Row>
+                    <Col sm={12} className={`${classes.postImgCell} ${classes.postImgCellTop}`}>
+                      {loaded ? (
+                        <Button variant="contained" href={`/posts/${posts[1].name[lang] || posts[1].name.en}`} className={classes.button}>
+                          <img className={classes.postImg} src={posts[1].img[2]} alt="" />
+                        </Button>
+                      ) : (
+                        <Skeleton height={270} className={classes.card} />
+                      )}
+                    </Col>
+                    <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellLeft}`}>
+                      {loaded ? (
+                        <Button variant="contained" href={`/posts/${posts[2].name[lang] || posts[2].name.en}`} className={classes.button}>
+                          <img className={classes.postImg} src={posts[2].img[1]} alt="" />
+                        </Button>
+                      ) : (
+                        <Skeleton height={255} className={classes.card} />
+                      )}
+                    </Col>
+                    <Col sm={6} className={`${classes.postImgCell} ${classes.postImgCellRight}`}>
+                      {loaded ? (
+                        <Button variant="contained" href={`/posts/${posts[3].name[lang] || posts[3].name.en}`} className={classes.button}>
+                          <img className={classes.postImg} src={posts[3].img[1]} alt="" />
+                        </Button>
+                      ) : (
+                        <Skeleton height={255} className={classes.card} />
+                      )}
+                    </Col>
+                  </Row>
+                </Container>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </Hidden>
       <Hidden mdUp>
         <Typography className={`${classes.header} boldText`}>{t('posts')}</Typography>
