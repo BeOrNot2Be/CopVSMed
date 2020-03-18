@@ -1,42 +1,54 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Room, MailSharp, PhoneInTalk } from '@material-ui/icons';
-import {
-  Button, Container, Box, Grid, Avatar, ListItemAvatar,
-  ListItemText, ListItem, List,
-} from '@material-ui/core';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { links } from '../../text/links.js';
+/** @format */
 
-const useStyles = makeStyles((theme) => ({
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Room, MailSharp, PhoneInTalk } from "@material-ui/icons";
+import {
+  Button,
+  Container,
+  Box,
+  Grid,
+  Avatar,
+  ListItemAvatar,
+  ListItemText,
+  ListItem,
+  List
+} from "@material-ui/core";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
+import { links } from "../../text/links.js";
+
+const useStyles = makeStyles(theme => ({
   FooterIcon: {
-    borderRadius: '0px',
-    backgroundColor: '#ff7270',
+    borderRadius: "0px",
+    backgroundColor: "#ff7270"
   },
   primary: {
-    color: '#ff7270',
-    fontSize: '16px',
+    color: "#ff7270",
+    fontSize: "16px"
   },
   secondary: {
-    color: '#ffffff',
+    color: "#ffffff"
   },
   secondaryItem: {
-    paddingBottom: '0',
-    textAlign: 'left',
+    paddingBottom: "0",
+    textAlign: "left"
   },
   button: {
-    padding: '0',
-    margin: '0',
-    color: 'inherit',
-    fontFamily: 'inherit',
-    fontSize: '14px',
-    textAlign: 'left',
-    width: '100%',
-    justifyContent: 'left',
-  },
+    padding: "0",
+    margin: "0",
+    color: "inherit",
+    fontFamily: "inherit",
+    fontSize: "14px",
+    textAlign: "left",
+    width: "100%",
+    justifyContent: "left",
+    "&:hover": {
+      backgroundColor: "transparent"
+    }
+  }
 }));
-
 
 const FooterMapComponent = (props, context) => {
   const classes = useStyles();
@@ -59,7 +71,14 @@ const FooterMapComponent = (props, context) => {
                     <PhoneInTalk />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('call_us')} secondary="0 (1234) 567 890" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("call_us")}
+                  secondary="0 (1234) 567 890"
+                  secondaryTypographyProps={{
+                    className: `${classes.secondary} lightText `
+                  }}
+                />
               </ListItem>
               <ListItem>
                 <ListItemAvatar>
@@ -67,7 +86,14 @@ const FooterMapComponent = (props, context) => {
                     <MailSharp />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('email_us')} secondary="hello@sportshold.com" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("email_us")}
+                  secondary="hello@sportshold.com"
+                  secondaryTypographyProps={{
+                    className: `${classes.secondary} lightText `
+                  }}
+                />
               </ListItem>
               <ListItem>
                 <ListItemAvatar>
@@ -75,92 +101,320 @@ const FooterMapComponent = (props, context) => {
                     <Room />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('address')} secondary="40 Baria Sreet 133/2, NY, US" secondaryTypographyProps={{ className: `${classes.secondary} lightText ` }} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("address")}
+                  secondary="40 Baria Sreet 133/2, NY, US"
+                  secondaryTypographyProps={{
+                    className: `${classes.secondary} lightText `
+                  }}
+                />
               </ListItem>
             </List>
           </Grid>
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('navigation')} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("navigation")}
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.home.url} className={classes.button}>{t(links.home.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.home.url)}
+                      className={classes.button}
+                    >
+                      {t(links.home.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.about_us.url} className={classes.button}>{t(links.about_us.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.about_us.url)}
+                      className={classes.button}
+                    >
+                      {t(links.about_us.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.latest_news.url} className={classes.button}>{t(links.latest_news.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.latest_news.url)}
+                      className={classes.button}
+                    >
+                      {t(links.latest_news.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.reviews.url} className={classes.button}>{t(links.reviews.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.reviews.url)}
+                      className={classes.button}
+                    >
+                      {t(links.reviews.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.brands.url} className={classes.button}>{t(links.brands.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.brands.url)}
+                      className={classes.button}
+                    >
+                      {t(links.brands.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
             </List>
           </Grid>
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('categories')} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("categories")}
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.men.url} className={classes.button}>{t(links.men.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.men.url)}
+                      className={classes.button}
+                    >
+                      {t(links.men.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.women.url} className={classes.button}>{t(links.women.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.women.url)}
+                      className={classes.button}
+                    >
+                      {t(links.women.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.kids.url} className={classes.button}>{t(links.kids.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.kids.url)}
+                      className={classes.button}
+                    >
+                      {t(links.kids.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.baby.url} className={classes.button}>{t(links.baby.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.baby.url)}
+                      className={classes.button}
+                    >
+                      {t(links.baby.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.accessories.url} className={classes.button}>{t(links.accessories.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.accessories.url)}
+                      className={classes.button}
+                    >
+                      {t(links.accessories.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
             </List>
           </Grid>
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('sales')} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("sales")}
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.arrivals.url} className={classes.button}>{t(links.arrivals.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.arrivals.url)}
+                      className={classes.button}
+                    >
+                      {t(links.arrivals.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.popular.url} className={classes.button}>{t(links.popular.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.popular.url)}
+                      className={classes.button}
+                    >
+                      {t(links.popular.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.top_pics.url} className={classes.button}>{t(links.top_pics.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.top_pics.url)}
+                      className={classes.button}
+                    >
+                      {t(links.top_pics.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.outlet.url} className={classes.button}>{t(links.outlet.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.outlet.url)}
+                      className={classes.button}
+                    >
+                      {t(links.outlet.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
             </List>
           </Grid>
           <Grid item md={2} sm={6} xs={12}>
             <List>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.primary} lightboldText`} primary={t('support')} />
+                <ListItemText
+                  className={`${classes.primary} lightboldText`}
+                  primary={t("support")}
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.ship_delivery.url} className={classes.button}>{t(links.ship_delivery.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.ship_delivery.url)}
+                      className={classes.button}
+                    >
+                      {t(links.ship_delivery.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.return_policy.url} className={classes.button}>{t(links.return_policy.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.return_policy.url)}
+                      className={classes.button}
+                    >
+                      {t(links.return_policy.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.service_terms.url} className={classes.button}>{t(links.service_terms.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.service_terms.url)}
+                      className={classes.button}
+                    >
+                      {t(links.service_terms.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.privacy.url} className={classes.button}>{t(links.privacy.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.privacy.url)}
+                      className={classes.button}
+                    >
+                      {t(links.privacy.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
               <ListItem className={classes.secondaryItem}>
-                <ListItemText className={`${classes.secondary} lightText `} disableTypography secondary={<Button href={links.contacts.url} className={classes.button}>{t(links.contacts.name)}</Button>} />
+                <ListItemText
+                  className={`${classes.secondary} lightText `}
+                  disableTypography
+                  secondary={
+                    <Button
+                      onClick={() => navigate(links.contacts.url)}
+                      className={classes.button}
+                    >
+                      {t(links.contacts.name)}
+                    </Button>
+                  }
+                />
               </ListItem>
             </List>
           </Grid>
@@ -171,13 +425,9 @@ const FooterMapComponent = (props, context) => {
 };
 
 FooterMapComponent.contextTypes = {
-  t: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired
 };
 
-
-const FooterMap = connect(
-  null,
-  null,
-)(FooterMapComponent);
+const FooterMap = connect(null, null)(FooterMapComponent);
 
 export default FooterMap;

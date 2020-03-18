@@ -1,4 +1,4 @@
-{ 
+{
   "logout": "Logout",
   "login": "Login",
   "account": "My Account",
@@ -44,7 +44,7 @@
   "news": "Latest News",
   "posts": "Posts",
   "therms": "Therms",
-  "clothe": "Clothe",
+  "clothes": "Clothe",
   "help_button_header": "Looking for help?",
   "help_button_secondary": "Have any questions or need help with order? Let us know!",
   "help_button": "MAKE AN INQUIRY",

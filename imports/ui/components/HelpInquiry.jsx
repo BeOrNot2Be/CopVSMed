@@ -1,45 +1,56 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Container, Grid, Box, Button, Typography, Hidden,
-} from '@material-ui/core';
-import { MailSharp } from '@material-ui/icons';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { links } from '../text/links.js';
+/** @format */
 
-const useStyles = makeStyles((theme) => ({
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Container,
+  Grid,
+  Box,
+  Button,
+  Typography,
+  Hidden
+} from "@material-ui/core";
+import { MailSharp } from "@material-ui/icons";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
+import { links } from "../text/links.js";
+
+const useStyles = makeStyles(theme => ({
   helpInquiry: {
-    backgroundColor: '#ff7270',
+    backgroundColor: "#ff7270"
   },
   helpButton: {
-    backgroundColor: '#623232',
-    borderRadius: '0',
-    color: '#ffffff',
-    padding: '10px 16px',
-    width: '100%',
+    backgroundColor: "#623232",
+    borderRadius: "0",
+    color: "#ffffff",
+    padding: "10px 16px",
+    width: "100%",
+    "&:hover": {
+      backgroundColor: "rgba(98,50,50,0.7)"
+    }
   },
   HelpIcon: {
-    color: '#ffffff',
-    fontSize: '65px',
+    color: "#ffffff",
+    fontSize: "65px"
   },
   header: {
-    color: '#ffffff',
-    fontSize: '30px',
+    color: "#ffffff",
+    fontSize: "30px"
   },
   subHeader: {
-    color: '#ffffff',
+    color: "#ffffff"
   },
   container: {
-    paddingBottom: '60px',
-    paddingTop: '60px',
+    paddingBottom: "60px",
+    paddingTop: "60px"
   },
   helpButtonCell: {
-    textAlign: 'center',
+    textAlign: "center"
   },
   TextBox: {
-    paddingLeft: '32px!important',
-  },
+    paddingLeft: "32px!important"
+  }
 }));
 
 const HelpInquiryComponent = (props, context) => {
@@ -69,20 +80,29 @@ const HelpInquiryComponent = (props, context) => {
                 </Grid>
                 <Grid item md={7} sm={9} xs={9} className={classes.TextBox}>
                   <Typography className={`${classes.header} lightboldText`}>
-                    {t('help_button_header')}
+                    {t("help_button_header")}
                   </Typography>
                   <Typography className={`${classes.subHeader} lightText`}>
-                    {t('help_button_secondary')}
+                    {t("help_button_secondary")}
                   </Typography>
                 </Grid>
               </Grid>
             </Grid>
             <Hidden mdUp>
-              <Grid item sm={12} xs={12} style={{ height: '50px' }} />
+              <Grid item sm={12} xs={12} style={{ height: "50px" }} />
             </Hidden>
-            <Grid item md={3} sm={12} xs={12} className={classes.helpButtonCell}>
-              <Button href={links.brands.url} className={`${classes.helpButton} lightboldText`}>
-                {t('help_button')}
+            <Grid
+              item
+              md={3}
+              sm={12}
+              xs={12}
+              className={classes.helpButtonCell}
+            >
+              <Button
+                onClick={() => navigate(links.brands.url)}
+                className={`${classes.helpButton} lightboldText`}
+              >
+                {t("help_button")}
               </Button>
             </Grid>
           </Grid>
@@ -92,15 +112,10 @@ const HelpInquiryComponent = (props, context) => {
   );
 };
 
-
 HelpInquiryComponent.contextTypes = {
-  t: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired
 };
 
-
-const HelpInquiry = connect(
-  null,
-  null,
-)(HelpInquiryComponent);
+const HelpInquiry = connect(null, null)(HelpInquiryComponent);
 
 export default HelpInquiry;

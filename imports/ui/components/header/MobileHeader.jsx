@@ -1,79 +1,102 @@
-import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  AppBar, Toolbar, IconButton,
-  Drawer, List, Divider, ListItem, ListItemIcon, ListItemText,
-  ListItemAvatar, Collapse, Badge, Box, Avatar, Modal, Button,
-  Grid,
-} from '@material-ui/core';
-import {
-  Description, HomeRounded, Store, Help,
-  Storefront, Close, ExpandMore, ExpandLess,
-  Menu, AccountCircle, GTranslate,
-  ExitToApp,
-} from '@material-ui/icons';
-import { connect } from 'react-redux';
-import { setLanguage } from 'redux-i18n';
-import PropTypes from 'prop-types';
-import { USER_LOGIN, USER_LOGOUT } from '../../actions/general';
-import { links } from '../../text/links.js';
+/** @format */
 
+import React from "react";
+import { Meteor } from "meteor/meteor";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemAvatar,
+  Collapse,
+  Badge,
+  Box,
+  Avatar,
+  Modal,
+  Button,
+  Grid
+} from "@material-ui/core";
+import {
+  Description,
+  HomeRounded,
+  Store,
+  Help,
+  Storefront,
+  Close,
+  ExpandMore,
+  ExpandLess,
+  Menu,
+  AccountCircle,
+  GTranslate,
+  ExitToApp
+} from "@material-ui/icons";
+import { connect } from "react-redux";
+import { setLanguage } from "redux-i18n";
+import PropTypes from "prop-types";
+import { USER_LOGIN, USER_LOGOUT } from "../../actions/general";
+import { navigate } from "@reach/router";
+import { links } from "../../text/links.js";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   headerTop: {
-    backgroundColor: '#482423!important',
+    backgroundColor: "#482423!important"
   },
   fullList: {
-    width: '100vw',
-    backgroundColor: '#482423!important',
-    color: '#ffffff',
+    width: "100vw",
+    backgroundColor: "#482423!important",
+    color: "#ffffff"
   },
   brandName: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   closeButtonListItem: {
-    justifyContent: 'flex-end',
-    paddingTop: '10px',
-    paddingLeft: '0px',
-    paddingBottom: '0px',
-    paddingRight: '28px',
+    justifyContent: "flex-end",
+    paddingTop: "10px",
+    paddingLeft: "0px",
+    paddingBottom: "0px",
+    paddingRight: "28px"
   },
   icons: {
-    color: '#ffffff',
+    color: "#ffffff"
   },
   closeButton: {
-    padding: '0px',
+    padding: "0px"
   },
   AccountAlerts: {
-    backgroundColor: '#ff7270',
+    backgroundColor: "#ff7270"
   },
   paper: {
-    position: 'absolute',
-    width: 'calc(100% - 32px)',
+    position: "absolute",
+    width: "calc(100% - 32px)",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: '16px',
+    padding: "16px"
   },
   LangCloseIcon: {
-    color: '#482423',
+    color: "#482423"
   },
   LangCloseButton: {
-    float: 'right',
+    float: "right"
   },
   LangCode: {
-    fontSize: '22px',
-    color: '#482423',
+    fontSize: "22px",
+    color: "#482423"
   },
   LangCodes: {
-    paddingTop: '26px',
+    paddingTop: "26px"
   },
   LangModal: {
-    zIndex: '100000!important',
+    zIndex: "100000!important"
   },
   TopMenu: {
-    zIndex: '100000!important',
-  },
+    zIndex: "100000!important"
+  }
 }));
 
 function rand() {
@@ -86,19 +109,12 @@ function getModalStyle() {
 
   return {
     top: `${top}%`,
-    transform: `translate(0, -${left}%)`,
+    transform: `translate(0, -${left}%)`
   };
 }
 
 const MobileHeaderComponent = (props, context) => {
-  const {
-    changeLanguage,
-    langs,
-    user,
-    login,
-    openAccount,
-    logout,
-  } = props;
+  const { changeLanguage, langs, user, login, openAccount, logout } = props;
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [openStore, setOpenStore] = React.useState(false);
@@ -109,9 +125,9 @@ const MobileHeaderComponent = (props, context) => {
     top: false,
     left: false,
     bottom: false,
-    right: false,
+    right: false
   });
-  
+
   const handleClick = () => {
     setOpenStore(!openStore);
   };
@@ -129,12 +145,15 @@ const MobileHeaderComponent = (props, context) => {
   };
   Login Account work
   */
-  const toggleDrawer = (open) => event => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+  const toggleDrawer = open => event => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
 
-    setState({ ...state, ['top']: open });
+    setState({ ...state, ["top"]: open });
   };
 
   const [LangOpen, setLangOpen] = React.useState(false);
@@ -152,22 +171,30 @@ const MobileHeaderComponent = (props, context) => {
   const { t } = context;
 
   const fullList = () => (
-    <div
-      className={`${classes.fullList} lightText`}
-      role="presentation"
-    >
+    <div className={`${classes.fullList} lightText`} role="presentation">
       <List>
         <ListItem className={classes.closeButtonListItem}>
-          <IconButton aria-label="exit" className={classes.closeButton} onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+          <IconButton
+            aria-label="exit"
+            className={classes.closeButton}
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+          >
             <Close className={classes.icons} />
           </IconButton>
         </ListItem>
-        <ListItem button onClick={Object.keys(user).length ? openAccount : login}>
+        <ListItem
+          button
+          onClick={Object.keys(user).length ? openAccount : login}
+        >
           {Object.keys(user).length ? (
             <>
               <ListItemAvatar>
-                <Badge badgeContent={user.profile.messages} classes={{ badge: classes.AccountAlerts }}>
-                  { user.profile.img !== '' ? (
+                <Badge
+                  badgeContent={user.profile.messages}
+                  classes={{ badge: classes.AccountAlerts }}
+                >
+                  {user.profile.img !== "" ? (
                     <Avatar src={user.profile.img} alt={user.profile.name} />
                   ) : (
                     <AccountCircle className={classes.icons} />
@@ -181,81 +208,113 @@ const MobileHeaderComponent = (props, context) => {
               <ListItemAvatar>
                 <AccountCircle className={classes.icons} />
               </ListItemAvatar>
-              <ListItemText primary={`${t(links.login.name)} / ${links.register.name}`} />
+              <ListItemText
+                primary={`${t(links.login.name)} / ${links.register.name}`}
+              />
             </>
           )}
         </ListItem>
-        {Object.keys(user).length ? ( 
+        {Object.keys(user).length ? (
           <ListItem button onClick={logout}>
-            <ListItemIcon><ExitToApp className={classes.icons} /></ListItemIcon>
+            <ListItemIcon>
+              <ExitToApp className={classes.icons} />
+            </ListItemIcon>
             <ListItemText primary={t(links.logout.name)} />
           </ListItem>
-        ) : ''}
-        <ListItem button href={links.home.url}>
-          <ListItemIcon><HomeRounded className={classes.icons} /></ListItemIcon>
+        ) : (
+          ""
+        )}
+        <ListItem button onClick={() => navigate(links.home.url)}>
+          <ListItemIcon>
+            <HomeRounded className={classes.icons} />
+          </ListItemIcon>
           <ListItemText primary={t(links.home.name)} />
         </ListItem>
         <Divider />
         <ListItem button onClick={handleClick}>
-          <ListItemIcon><Store className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={t('clothe')} />
+          <ListItemIcon>
+            <Store className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary={t("clothes")} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openStore} timeout="auto" unmountOnExit>
           <List component="div">
-            <ListItem button href={links.men.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.men.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.men.name)} />
             </ListItem>
-            <ListItem button href={links.women.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.women.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.women.name)} />
             </ListItem>
-            <ListItem button href={links.kids.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.kids.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.kids.name)} />
             </ListItem>
-            <ListItem button href={links.sales.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.sales.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.sales.name)} />
             </ListItem>
           </List>
         </Collapse>
         <Divider />
-        <ListItem button href={links.brands.url}>
-          <ListItemIcon><Storefront className={classes.icons} /></ListItemIcon>
+        <ListItem button onClick={() => navigate(links.brands.url)}>
+          <ListItemIcon>
+            <Storefront className={classes.icons} />
+          </ListItemIcon>
           <ListItemText primary={t(links.brands.name)} />
         </ListItem>
         <Divider />
-        <ListItem button href={links.support.url}>
-          <ListItemIcon><Help className={classes.icons} /></ListItemIcon>
+        <ListItem button onClick={() => navigate(links.support.url)}>
+          <ListItemIcon>
+            <Help className={classes.icons} />
+          </ListItemIcon>
           <ListItemText primary={t(links.support.name)} />
         </ListItem>
         <Divider />
         <ListItem button onClick={() => setOpenTherms(!openTherms)}>
-          <ListItemIcon><Description className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={t('therms')} />
+          <ListItemIcon>
+            <Description className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary={t("therms")} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openTherms} timeout="auto" unmountOnExit>
           <List component="div">
-            <ListItem button href={links.delivery.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.delivery.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.delivery.name)} />
             </ListItem>
-            <ListItem button href={links.about_us.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.about_us.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.about_us.name)} />
             </ListItem>
-            <ListItem button href={links.legal.url}>
-              <ListItemIcon><div /></ListItemIcon>
+            <ListItem button onClick={() => navigate(links.legal.url)}>
+              <ListItemIcon>
+                <div />
+              </ListItemIcon>
               <ListItemText primary={t(links.legal.name)} />
             </ListItem>
           </List>
         </Collapse>
         <ListItem button onClick={LangHandleOpen}>
-          <ListItemIcon><GTranslate className={classes.icons} /></ListItemIcon>
-          <ListItemText primary={t('languages')} />
+          <ListItemIcon>
+            <GTranslate className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary={t("languages")} />
         </ListItem>
         <Modal
           aria-labelledby="lang-modal-title"
@@ -265,7 +324,10 @@ const MobileHeaderComponent = (props, context) => {
           className={classes.LangModal}
         >
           <div style={modalStyle} className={classes.paper}>
-            <Button onClick={LangHandleClose} className={classes.LangCloseButton}>
+            <Button
+              onClick={LangHandleClose}
+              className={classes.LangCloseButton}
+            >
               <Close className={classes.LangCloseIcon} />
             </Button>
             <Grid
@@ -277,7 +339,13 @@ const MobileHeaderComponent = (props, context) => {
             >
               {langs.map((lang, index) => (
                 <Grid item key={index}>
-                  <Button className={classes.LangCode} onClick={() => { changeLanguage(lang); LangHandleClose(); }}>
+                  <Button
+                    className={classes.LangCode}
+                    onClick={() => {
+                      changeLanguage(lang);
+                      LangHandleClose();
+                    }}
+                  >
                     {lang}
                   </Button>
                 </Grid>
@@ -293,12 +361,26 @@ const MobileHeaderComponent = (props, context) => {
     <AppBar position="static" className={classes.headerTop}>
       <Toolbar>
         <Box className={classes.brandName}>
-          <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
+          <img
+            src="https://res.cloudinary.com/dioqoihcx/image/upload/v1584495567/images/Logo_nlhva0_vhpdcj.png"
+            alt="smth"
+          />
         </Box>
-        <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+        <IconButton
+          onClick={toggleDrawer(true)}
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="menu"
+        >
           <Menu />
         </IconButton>
-        <Drawer anchor="top" open={state.top} className={classes.TopMenu} onClose={toggleDrawer(false)}>
+        <Drawer
+          anchor="top"
+          open={state.top}
+          className={classes.TopMenu}
+          onClose={toggleDrawer(false)}
+        >
           {fullList()}
         </Drawer>
       </Toolbar>
@@ -307,7 +389,7 @@ const MobileHeaderComponent = (props, context) => {
 };
 
 MobileHeaderComponent.contextTypes = {
-  t: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired
 };
 
 MobileHeaderComponent.propTypes = {
@@ -316,28 +398,28 @@ MobileHeaderComponent.propTypes = {
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  openAccount: PropTypes.func.isRequired,
+  openAccount: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     langs: state.general.langs,
-    user: Meteor.user() || {},
+    user: Meteor.user() || {}
   };
 };
 
-const mapActionsToProps = (dispatch) => {
+const mapActionsToProps = dispatch => {
   return {
-    changeLanguage: (lang) => dispatch(setLanguage(lang)),
+    changeLanguage: lang => dispatch(setLanguage(lang)),
     login: () => dispatch({ type: USER_LOGIN }),
     logout: () => dispatch({ type: USER_LOGOUT }),
-    openAccount: () => (links.account.url),
+    openAccount: () => links.account.url
   };
 };
 
 const MobileHeader = connect(
   mapStateToProps,
-  mapActionsToProps,
+  mapActionsToProps
 )(MobileHeaderComponent);
 
 export default MobileHeader;
