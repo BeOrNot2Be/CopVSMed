@@ -157,7 +157,7 @@ const runDebugModels = () => {
     InsertPosts(
       "YeezeBoost",
       "https://res.cloudinary.com/dioqoihcx/image/upload/v1584495552/images/posts%20images/post-3_anvtkc_zbxach.png",
-      "https://res.cloudinary.com/dioqoihcx/image/upload/v1584524092/images/posts%20images/post4_hhaos3.png"
+      "https://res.cloudinary.com/dioqoihcx/image/upload/v1584522437/images/posts%20images/post_e0iepz.png"
     );
 
     TestUpdatePostImage(
@@ -217,7 +217,7 @@ const runDebugModels = () => {
       "From $80.00",
       "Since this is our favorite sneaker, we’re bringing you 8 variants to suit everyone’s needs.",
       "Browse more",
-      "https://res.cloudinary.com/dioqoihcx/image/upload/v1584495553/images/banner%20images/28530-3-nike-shoes-transparent_qozdw8_yxn7s2.png"
+      "https://res.cloudinary.com/dioqoihcx/image/upload/c_scale,h_549/v1584495553/images/banner%20images/28530-3-nike-shoes-transparent_qozdw8_yxn7s2.png"
     );
     BannerLanguageUpdate(
       "Nike Zoom 1",

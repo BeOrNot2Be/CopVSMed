@@ -1,4 +1,5 @@
 /** @format */
+/* eslint-disable no-underscore-dangle */
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -57,7 +58,7 @@ const NewsPlateComponent = (props, context) => {
       style={{ backgroundImage: `url(${post.img})` }}
     >
       <CardContent className={classes.card}>
-        <CardActionArea onClick={() => navigate(`/news/${post.id}`)}>
+        <CardActionArea onClick={() => navigate(`/news/${post._id}`)}>
           <CardContent className={classes.post}>
             <Typography className={`${classes.newsDate} lightboldText`}>
               {`${t(post.date.slice(0, 3))}${post.date.slice(3)}`}
