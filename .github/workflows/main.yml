@@ -22,7 +22,7 @@ jobs:
 
     - uses: meteorengineer/setup-meteor@v1
       with:
-        meteor-release: '1.7.1'
+        meteor-release: '1.8.1'
     - run: meteor npm install
     - run: meteor npm test  
       
