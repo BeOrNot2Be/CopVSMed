@@ -1,13 +1,21 @@
+/** @format */
 /* eslint-disable prefer-const */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
-import { Accounts } from 'meteor/accounts-base';
-import { Random } from 'meteor/random';
-import {
-  News, Banners, Reviews, Products, Languages, Posts,
-} from '../imports/api/schemas';
 
-const langWrapper = (texts) => {
+// eslint-disable-next-line import/no-unresolved
+import { Accounts } from "meteor/accounts-base";
+// eslint-disable-next-line import/no-unresolved
+import { Random } from "meteor/random";
+import {
+  News,
+  Banners,
+  Reviews,
+  Products,
+  Languages,
+  Posts
+} from "../imports/api/schemas";
+
+const langWrapper = texts => {
   let wrappedTexts = {};
 
   for (let key of Object.keys(texts)) {
@@ -38,6 +46,7 @@ export const InsertReviews = (name, text, starsNum, img) => {
 };
 
 export const UpdatePostImage = (id, img, size) => {
+  // eslint-disable-next-line no-unused-vars
   const imgSize = `img.${size}`;
   Posts.update({ _id: id }, { $set: { imgSize: img } });
 };
@@ -59,12 +68,19 @@ export const InsertProduct = (name, price, sale, skuNum, gender, img) => {
     price,
     sale,
     skuNum,
-    ...langWrapper({ name, gender }),
+    ...langWrapper({ name, gender })
   };
   Products.insert(newProduct);
 };
 
-export const InsertBanner = (firstHeader, secondHeader, thirdHeader, desc, buttonText, img) => {
+export const InsertBanner = (
+  firstHeader,
+  secondHeader,
+  thirdHeader,
+  desc,
+  buttonText,
+  img
+) => {
   const newBanner = {
     img,
     ...langWrapper({
@@ -72,8 +88,8 @@ export const InsertBanner = (firstHeader, secondHeader, thirdHeader, desc, butto
       secondHeader,
       thirdHeader,
       desc,
-      buttonText,
-    }),
+      buttonText
+    })
   };
 
   Banners.insert(newBanner);
@@ -83,30 +99,41 @@ export const InsertLanguage = (sign, url) => {
   Languages.insert({ sign, url });
 };
 
-export const BannerLanguageUpdate = (firstHeaderEn, lang, firstHeader, secondHeader, thirdHeader, desc, buttonText) => {
+export const BannerLanguageUpdate = (
+  firstHeaderEn,
+  lang,
+  firstHeader,
+  secondHeader,
+  thirdHeader,
+  desc,
+  buttonText
+) => {
   let banner = Banners.findOne({ firstHeader: { en: firstHeaderEn } });
   const newLangTexts = {
     firstHeader,
     secondHeader,
     thirdHeader,
     desc,
-    buttonText,
+    buttonText
   };
 
   banner = newLangWrap(lang, newLangTexts, banner);
 
-  Banners.update({ firstHeader: { en: firstHeaderEn } }, { $set: { ...banner } });
+  Banners.update(
+    { firstHeader: { en: firstHeaderEn } },
+    { $set: { ...banner } }
+  );
 };
-
 
 Accounts.onCreateUser((options, user) => {
   let customizedUser = {
-    ...user,
+    ...user
   };
 
+  // eslint-disable-next-line no-underscore-dangle
   customizedUser._id = Random.id();
 
-  // use user id to generate some data; 
+  // use user id to generate some data;
 
   if (options.profile) {
     customizedUser.profile = options.profile;

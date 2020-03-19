@@ -1,11 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Container } from '@material-ui/core';
+/** @format */
 
-const useStyles = makeStyles((theme) => ({
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Container } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
   footerGap: {
-    border: '1px solid #795151',
-  },
+    border: "1px solid #795151"
+  }
 }));
 
 const GapBar = () => {

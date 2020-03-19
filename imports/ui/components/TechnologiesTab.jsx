@@ -1,26 +1,28 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Icon } from '@material-ui/core';
-import IconsList from './IconsList.jsx';
+/** @format */
 
-const useStyles = makeStyles((theme) => ({
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Icon } from "@material-ui/core";
+import IconsList from "./IconsList.jsx";
+
+const useStyles = makeStyles(theme => ({
   root: {
-    '& > svg': {
-      margin: theme.spacing(2),
-    },
+    "& > svg": {
+      margin: theme.spacing(2)
+    }
   },
   iconCell: {
-    textAlign: 'center',
+    textAlign: "center"
   },
   imageIcon: {
-    width: '100%',
-    height: 'auto',
+    width: "100%",
+    height: "auto"
   },
   iconRoot: {
-    textAlign: 'center',
-    width: '100%',
-    height: 'auto',
-  },
+    textAlign: "center",
+    width: "100%",
+    height: "auto"
+  }
 }));
 
 const TechnologiesTab = () => {
@@ -32,7 +34,7 @@ const TechnologiesTab = () => {
           <img className={classes.imageIcon} src="/icon/Adidas.svg" alt="" />
         </Icon>
       ),
-      text: '',
+      text: ""
     },
     {
       icon: (
@@ -40,7 +42,7 @@ const TechnologiesTab = () => {
           <img className={classes.imageIcon} src="/icon/NIKE-Full.svg" alt="" />
         </Icon>
       ),
-      text: '',
+      text: ""
     },
     {
       icon: (
@@ -48,7 +50,7 @@ const TechnologiesTab = () => {
           <img className={classes.imageIcon} src="/icon/Puma.svg" alt="" />
         </Icon>
       ),
-      text: '',
+      text: ""
     },
     {
       icon: (
@@ -56,15 +58,19 @@ const TechnologiesTab = () => {
           <img className={classes.imageIcon} src="/icon/Asics.svg" alt="" />
         </Icon>
       ),
-      text: '',
+      text: ""
     },
     {
       icon: (
         <Icon classes={{ root: classes.iconRoot }}>
-          <img className={classes.imageIcon} src="/icon/New-Balance.svg" alt="" />
+          <img
+            className={classes.imageIcon}
+            src="/icon/New-Balance.svg"
+            alt=""
+          />
         </Icon>
       ),
-      text: '',
+      text: ""
     },
     {
       icon: (
@@ -72,13 +78,11 @@ const TechnologiesTab = () => {
           <img className={classes.imageIcon} src="/icon/Fila.svg" alt="" />
         </Icon>
       ),
-      text: '',
-    },
+      text: ""
+    }
   ];
 
-  return (
-    <IconsList cells={techs} textClass="" />
-  );
+  return <IconsList cells={techs} textClass="" />;
 };
 
 export default TechnologiesTab;

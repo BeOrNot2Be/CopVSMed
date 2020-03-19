@@ -1,34 +1,30 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
+name: Build
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 10.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-    - run: npm ci
+      - uses: actions/checkout@v2
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - run: npm ci
 
-    - uses: meteorengineer/setup-meteor@v1
-      with:
-        meteor-release: '1.8.1'
-    - run: meteor npm install
-    - run: meteor npm test  
-      
-    - name: Comment on PR
-      uses: unsplash/comment-on-pr@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        msg: Pull commit checked. Well done ✔️
+      - uses: meteorengineer/setup-meteor@v1
+        with:
+          meteor-release: "1.8.1"
+      - run: meteor npm install
+      - run: meteor npm test
+
+      - name: Comment on PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: Pull commit checked. Well done ✔️
