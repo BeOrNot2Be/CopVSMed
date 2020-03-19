@@ -1,67 +1,65 @@
-import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Container, Grid, Box, Button, Menu, MenuItem,
-} from '@material-ui/core';
-import { ShoppingBasketRounded, GTranslate } from '@material-ui/icons';
-import { connect } from 'react-redux';
-import { setLanguage } from 'redux-i18n';
-import PropTypes from 'prop-types';
-import { links } from '../../text/links.js';
-import {
-  USER_LOGIN,
-  USER_LOGOUT
-} from '../../actions/general';
+/** @format */
 
-const useStyles = makeStyles((theme) => ({
+import React from "react";
+import { Meteor } from "meteor/meteor";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Container,
+  Grid,
+  Box,
+  Button,
+  Menu,
+  MenuItem
+} from "@material-ui/core";
+import { ShoppingBasketRounded, GTranslate } from "@material-ui/icons";
+import { connect } from "react-redux";
+import { setLanguage } from "redux-i18n";
+import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
+import { links } from "../../text/links.js";
+import { USER_LOGIN, USER_LOGOUT } from "../../actions/general";
+
+const useStyles = makeStyles(theme => ({
   headerTop: {
-    backgroundColor: '#482423!important',
+    backgroundColor: "#482423!important"
   },
   headerBottom: {
-    backgroundColor: '#633231',
+    backgroundColor: "#633231"
   },
   link: {
     margin: theme.spacing(1),
-    color: '#ffffff',
+    color: "#ffffff"
   },
   button: {},
   legalPages: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   brandName: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   headerNav: {
     paddingTop: theme.spacing(1.5),
-    paddingBottom: theme.spacing(1.5),
+    paddingBottom: theme.spacing(1.5)
   },
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   list: {
-    width: 250,
+    width: 250
   },
   fullList: {
-    width: '100wh',
+    width: "100wh"
   },
   registrationLink: {
-    backgroundColor: '#ff7270',
-  },
+    backgroundColor: "#ff7270"
+  }
 }));
 
 const DesktopHeaderComponent = (props, context) => {
-  const {
-    changeLanguage,
-    cart,
-    langs,
-    login,
-    logout,
-    user,
-  } = props;
+  const { changeLanguage, cart, langs, login, logout, user } = props;
   const classes = useStyles();
   const [LangButtonState, setLangButtonState] = React.useState(null);
 
@@ -89,22 +87,34 @@ const DesktopHeaderComponent = (props, context) => {
               <Grid item className={classes.legalPages}>
                 <Grid container spacing={4}>
                   <Grid item>
-                    <Button href={links.support.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.support.url)}
+                      className={classes.link}
+                    >
                       {t(links.support.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.delivery.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.delivery.url)}
+                      className={classes.link}
+                    >
                       {t(links.delivery.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.legal.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.legal.url)}
+                      className={classes.link}
+                    >
                       {t(links.legal.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.about_us.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.about_us.url)}
+                      className={classes.link}
+                    >
                       {t(links.about_us.name)}
                     </Button>
                   </Grid>
@@ -113,7 +123,12 @@ const DesktopHeaderComponent = (props, context) => {
               <Grid item>
                 <Grid container>
                   <Grid item>
-                    <Button aria-controls="lang-menu" aria-haspopup="true" onClick={LangButtonHandleClick} className={classes.link}>
+                    <Button
+                      aria-controls="lang-menu"
+                      aria-haspopup="true"
+                      onClick={LangButtonHandleClick}
+                      className={classes.link}
+                    >
                       <GTranslate />
                     </Button>
                     <Menu
@@ -124,7 +139,13 @@ const DesktopHeaderComponent = (props, context) => {
                       onClose={LangButtonHandleClose}
                     >
                       {langs.map((lang, index) => (
-                        <MenuItem key={index} onClick={() => { changeLanguage(lang); LangButtonHandleClose(); }}>
+                        <MenuItem
+                          key={index}
+                          onClick={() => {
+                            changeLanguage(lang);
+                            LangButtonHandleClose();
+                          }}
+                        >
                           {lang}
                         </MenuItem>
                       ))}
@@ -132,19 +153,18 @@ const DesktopHeaderComponent = (props, context) => {
                   </Grid>
                   <Grid item>
                     <Button className={classes.link}>
-                      <ShoppingBasketRounded style={{ marginRight: '5px' }} />
-                      {' '}
-                      {`${cart.sum}$`}
-                      {' '}
-                      {cart.items.length}
-                      {' '}
-                      {cart.items.length === 1 ? t('item') : t('items')}
+                      <ShoppingBasketRounded style={{ marginRight: "5px" }} />{" "}
+                      {`${cart.sum}$`} {cart.items.length}{" "}
+                      {cart.items.length === 1 ? t("item") : t("items")}
                     </Button>
                   </Grid>
-                  { Object.keys(user).length ? (
+                  {Object.keys(user).length ? (
                     <>
                       <Grid item className={classes.registrationLink}>
-                        <Button href={links.account.link} className={classes.link}>
+                        <Button
+                          onClick={() => navigate(links.account.link)}
+                          className={classes.link}
+                        >
                           {t(links.account.name)}
                         </Button>
                       </Grid>
@@ -167,7 +187,7 @@ const DesktopHeaderComponent = (props, context) => {
                         </Button>
                       </Grid>
                     </>
-                  ) }
+                  )}
                 </Grid>
               </Grid>
               <Grid />
@@ -186,37 +206,58 @@ const DesktopHeaderComponent = (props, context) => {
               className={classes.headerNav}
             >
               <Grid item className={classes.brandName}>
-                <img src="https://res.cloudinary.com/avilonproductioncdn/image/upload/v1570695248/Logo_nlhva0.png" alt="smth" />
+                <img
+                  src="https://res.cloudinary.com/dioqoihcx/image/upload/v1584495567/images/Logo_nlhva0_vhpdcj.png"
+                  alt="smth"
+                />
               </Grid>
               <Grid item>
                 <Grid container spacing={4}>
                   <Grid item>
-                    <Button href={links.home.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.home.url)}
+                      className={classes.link}
+                    >
                       {t(links.home.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.men.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.men.url)}
+                      className={classes.link}
+                    >
                       {t(links.men.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.women.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.women.url)}
+                      className={classes.link}
+                    >
                       {t(links.women.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.kids.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.kids.url)}
+                      className={classes.link}
+                    >
                       {t(links.kids.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.brands.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.brands.url)}
+                      className={classes.link}
+                    >
                       {t(links.brands.name)}
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button href={links.sales.url} className={classes.link}>
+                    <Button
+                      onClick={() => navigate(links.sales.url)}
+                      className={classes.link}
+                    >
                       {t(links.sales.name)}
                     </Button>
                   </Grid>
@@ -232,7 +273,7 @@ const DesktopHeaderComponent = (props, context) => {
 };
 
 DesktopHeaderComponent.contextTypes = {
-  t: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired
 };
 
 DesktopHeaderComponent.propTypes = {
@@ -241,28 +282,28 @@ DesktopHeaderComponent.propTypes = {
   login: PropTypes.func.isRequired,
   cart: PropTypes.any.isRequired,
   user: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     langs: state.general.langs,
     cart: state.general.cart,
-    user: Meteor.user() || {},
+    user: Meteor.user() || {}
   };
 };
 
-const mapActionsToProps = (dispatch) => {
+const mapActionsToProps = dispatch => {
   return {
-    changeLanguage: (lang) => dispatch(setLanguage(lang)),
+    changeLanguage: lang => dispatch(setLanguage(lang)),
     login: () => dispatch({ type: USER_LOGIN }),
-    logout: () => dispatch({ type: USER_LOGOUT }),
+    logout: () => dispatch({ type: USER_LOGOUT })
   };
 };
 
 const DesktopHeader = connect(
   mapStateToProps,
-  mapActionsToProps,
+  mapActionsToProps
 )(DesktopHeaderComponent);
 
 export default DesktopHeader;

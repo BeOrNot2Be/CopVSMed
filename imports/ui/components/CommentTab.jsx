@@ -1,29 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  Container, Typography, Box, Grid, Paper,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+/** @format */
 
+import React from "react";
+import PropTypes from "prop-types";
+import { Container, Typography, Box, Grid, Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
-  root: {
-  },
+  root: {},
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    padding: '16px',
-    borderRadius: '0',
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    padding: "16px",
+    borderRadius: "0"
   },
   ReviewText: {
-    color: '#ffffff',
-  },
+    color: "#ffffff"
+  }
 });
 
-const CommentTab = (props) => {
+const CommentTab = props => {
   const classes = useStyles();
-  const {
-    value, tabIndex, review, ...other
-  } = props;
+  const { value, tabIndex, review, ...other } = props;
 
   return (
     <Typography
@@ -55,12 +51,12 @@ const CommentTab = (props) => {
       </Box>
     </Typography>
   );
-}
+};
 
 CommentTab.propTypes = {
   review: PropTypes.string.isRequired,
   tabIndex: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired
 };
 
 export default CommentTab;

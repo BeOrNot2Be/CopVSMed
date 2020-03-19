@@ -1,18 +1,17 @@
-import React from 'react';
-import { Router } from '@reach/router';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Header from './components/header/Header.jsx';
-import Footer from './components/footer/Footer.jsx';
-import HomePage from './pages/Home.jsx';
-import CallbackPage from './pages/CallbackPage.jsx';
-import { getTranslation, USER_AUTH_CHECK } from './actions/general';
+/** @format */
 
-const AppComponent = (props) => {
-  const {
-    languageTracker,
-    checkAuth,
-  } = props;
+import React from "react";
+import { Router } from "@reach/router";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Header from "./components/header/Header.jsx";
+import Footer from "./components/footer/Footer.jsx";
+import HomePage from "./pages/Home.jsx";
+import CallbackPage from "./pages/CallbackPage.jsx";
+import { getTranslation, USER_AUTH_CHECK } from "./actions/general";
+
+const AppComponent = props => {
+  const { languageTracker, checkAuth } = props;
 
   React.useEffect(() => {
     languageTracker();
@@ -23,8 +22,8 @@ const AppComponent = (props) => {
     <>
       <Header />
       <Router>
-        <HomePage path="/" />
         <CallbackPage path="/callback" />
+        <HomePage path="/*" />
       </Router>
       <Footer />
     </>
@@ -33,19 +32,16 @@ const AppComponent = (props) => {
 
 AppComponent.propTypes = {
   languageTracker: PropTypes.func.isRequired,
-  checkAuth: PropTypes.func.isRequired,
+  checkAuth: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     languageTracker: () => getTranslation()(dispatch),
-    checkAuth: () => dispatch({ type: USER_AUTH_CHECK }),
+    checkAuth: () => dispatch({ type: USER_AUTH_CHECK })
   };
 };
 
-const App = connect(
-  null,
-  mapDispatchToProps,
-)(AppComponent);
+const App = connect(null, mapDispatchToProps)(AppComponent);
 
 export default App;

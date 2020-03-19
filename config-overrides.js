@@ -1,5 +1,6 @@
-const { useBabelRc, override } = require('customize-cra');
+/** @format */
+/* eslint-disable import/no-extraneous-dependencies */
 
-module.exports = override(
-  useBabelRc(),
-);
+const { useBabelRc, override } = require("customize-cra");
+
+module.exports = override(useBabelRc());

@@ -1,13 +1,12 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Hidden,
-} from '@material-ui/core';
-import MobileHeader from './MobileHeader.jsx';
-import DesktopHeader from './DesktopHeader.jsx';
+/** @format */
 
-const useStyles = makeStyles((theme) => ({
-}));
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Hidden } from "@material-ui/core";
+import MobileHeader from "./MobileHeader.jsx";
+import DesktopHeader from "./DesktopHeader.jsx";
+
+const useStyles = makeStyles(theme => ({}));
 
 const Header = () => {
   const classes = useStyles();
