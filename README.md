@@ -1,3 +1,6 @@
+> Abandoned this project; stopped all maintenance as of March 19, 2020
+
+
 <!-- @format -->
 
 # CopVSMed ![Build Status][badge:github-actions] ![Build Vulnerabilities][badge:repo-vulnerabilities] ![Build Dependencies][badge:dependencies] ![Build Maintainability][badge:maintainability]
